@@ -1,5 +1,7 @@
+// src/App.tsx
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import Layout from './components/Layout';
 
 import Home from './pages/home';
 import WhoWeAre from './pages/who-we-are';
@@ -16,22 +18,22 @@ import Connect from './pages/connect';
 export default function App() {
   return (
     <Router>
-      <Navbar />
-      <div className="pt-20">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/who-we-are" element={<WhoWeAre />} />
-          <Route path="/mission" element={<Mission />} />
-          <Route path="/vision" element={<Vision />} />
-          <Route path="/founder-story" element={<FounderStory />} />
-          <Route path="/support" element={<Support />} />
-          <Route path="/buried-by-the-system" element={<BuriedByTheSystem />} />
-          <Route path="/the-vault" element={<TheVault />} />
-          <Route path="/wall-of-truth" element={<WallOfTruth />} />
-          <Route path="/education-reform" element={<EducationReform />} />
-          <Route path="/connect" element={<Connect />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="who-we-are" element={<WhoWeAre />} />
+          <Route path="mission" element={<Mission />} />
+          <Route path="vision" element={<Vision />} />
+          <Route path="founder-story" element={<FounderStory />} />
+          <Route path="support" element={<Support />} />
+          <Route path="buried-by-the-system" element={<BuriedByTheSystem />} />
+          <Route path="the-vault" element={<TheVault />} />
+          <Route path="wall-of-truth" element={<WallOfTruth />} />
+          <Route path="education-reform" element={<EducationReform />} />
+          <Route path="connect" element={<Connect />} />
+        </Route>
+      </Routes>
     </Router>
   );
 }
+
