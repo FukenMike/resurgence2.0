@@ -1,38 +1,37 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 
-import Home from './pages/Home';
-import WhoWeAre from './pages/WhoWeAre';
-import Mission from './pages/Mission';
-import Vision from './pages/Vision';
-import FounderStory from './pages/FounderStory';
-import Donate from './pages/Donate';
-import BuriedByTheSystem from './pages/BuriedByTheSystem';
-import Publications from './pages/Publications';
-import WallOfTruth from './pages/WallOfTruth';
-import ApolloAlliance from './pages/ApolloAlliance';
-import Contact from './pages/Contact';
+import Home from './pages/home';
+import WhoWeAre from './pages/who-we-are';
+import Mission from './pages/mission';
+import Vision from './pages/vision';
+import FounderStory from './pages/founder-story';
+import Support from './pages/support';
+import BuriedByTheSystem from './pages/buried-by-the-system';
+import TheVault from './pages/the-vault';
+import WallOfTruth from './pages/wall-of-truth';
+import EducationReform from './pages/education-reform';
+import Connect from './pages/connect';
 
 export default function App() {
   return (
     <Router>
       <Navbar />
-      <div className="pt-20"> {/* Push content below the fixed navbar */}
+      <div className="pt-20">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/who-we-are" element={<WhoWeAre />} />
           <Route path="/mission" element={<Mission />} />
           <Route path="/vision" element={<Vision />} />
           <Route path="/founder-story" element={<FounderStory />} />
-          <Route path="/donate" element={<Donate />} />
+          <Route path="/support" element={<Support />} />
           <Route path="/buried-by-the-system" element={<BuriedByTheSystem />} />
-          <Route path="/publications" element={<Publications />} />
+          <Route path="/the-vault" element={<TheVault />} />
           <Route path="/wall-of-truth" element={<WallOfTruth />} />
-          <Route path="/apollo-alliance" element={<ApolloAlliance />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/education-reform" element={<EducationReform />} />
+          <Route path="/connect" element={<Connect />} />
         </Routes>
       </div>
     </Router>
   );
 }
-
