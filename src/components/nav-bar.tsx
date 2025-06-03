@@ -7,8 +7,12 @@ const navLinks = [
   { path: '/mission', label: 'Mission' },
   { path: '/vision', label: 'Vision' },
   { path: '/founder-story', label: 'Founder Story' },
-  { path: '/donate', label: 'Donate' },
-  { path: '/contact', label: 'Contact' },
+  { path: '/buried-by-the-system', label: 'Buried by the System' },
+  { path: '/education-reform', label: 'Education Reform' },
+  { path: '/the-vault', label: 'The Vault' },
+  { path: '/wall-of-truth', label: 'Wall of Truth' },
+  { path: '/support', label: 'Support' },
+  { path: '/connect', label: 'Connect' },
 ];
 
 export default function Navbar() {
@@ -20,7 +24,7 @@ export default function Navbar() {
         <Link to="/" className="text-2xl font-extrabold tracking-wide text-amber-500">
           The Father’s Alliance
         </Link>
-        <div className="flex gap-4 text-sm md:text-base flex-wrap justify-end">
+        <div className="flex gap-3 text-sm md:text-base flex-wrap justify-end">
           {navLinks.map(({ path, label }) => (
             <Link
               key={path}
