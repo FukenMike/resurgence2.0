@@ -1,4 +1,5 @@
-import React from "react";
+// src/pages/home.tsx
+
 import { Link } from "react-router-dom";
 
 export default function Home() {
@@ -6,14 +7,15 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-black text-white">
       {/* ------------ HERO SECTION ------------ */}
       <main className="flex-grow flex flex-col items-center justify-center text-center px-6 md:px-0">
-        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight">
-          We Are Rising
+        <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight relative inline-block animate-pulse">
+          <span className="text-amber-400 drop-shadow-[0_0_8px_#f59e0b]">We Are Rising</span>
         </h1>
         <p className="text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed">
           This isn’t just a website.  
           This is a spark.  
           A movement built from pain, purpose, and persistence.  
-          The system buried us. We didn’t stay dead.
+          We’ve been overlooked, shut out, written off.  
+          But this is where the story turns.
         </p>
         <div className="flex flex-wrap justify-center gap-4">
           <Link
@@ -40,4 +42,3 @@ export default function Home() {
     </div>
   );
 }
-
