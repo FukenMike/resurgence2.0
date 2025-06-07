@@ -25,9 +25,12 @@ export default function Connect() {
         <p className="break-all">thefathersalliance@proton.me</p>
       </div>
 
-      <p className="mb-4">
-        You can also message us through our official site, leave a comment on the Wall of Truth, or follow us on TikTok at
-        <span className="font-semibold"> @thefathersallianc</span> (yes, no “e” — TikTok username limit!).
+      <p className="mb-4 leading-relaxed">
+        You can also message us through the site, leave a comment on the{' '}
+        <a href="/wall-of-truth" className="text-amber-400 underline hover:text-amber-300">Wall of Truth</a>,  
+        or follow us on TikTok at{' '}
+        <span className="font-semibold break-all">@thefathersallianc</span>
+        <span className="text-sm italic"> (yes, no “e” — TikTok username limit!)</span>.
       </p>
 
       <p className="mt-8 text-lg font-semibold">
