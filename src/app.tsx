@@ -14,6 +14,7 @@ import TheVault from './pages/the-vault';
 import WallOfTruth from './pages/wall-of-truth';
 import EducationReform from './pages/education-reform';
 import Connect from './pages/connect';
+import PrivacyPolicy from './pages/privacy-policy'; // <-- ✅ Add this line
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
           <Route path="wall-of-truth" element={<WallOfTruth />} />
           <Route path="education-reform" element={<EducationReform />} />
           <Route path="connect" element={<Connect />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} /> {/* ✅ Add this route */}
         </Route>
       </Routes>
     </Router>
