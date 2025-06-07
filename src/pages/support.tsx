@@ -8,15 +8,8 @@ export default function Support() {
     zeffyScript.async = true;
     document.body.appendChild(zeffyScript);
 
-    // Load GoFundMe script
-    const gofundmeScript = document.createElement("script");
-    gofundmeScript.src = "https://www.gofundme.com/static/js/embed.js";
-    gofundmeScript.defer = true;
-    document.body.appendChild(gofundmeScript);
-
     return () => {
       document.body.removeChild(zeffyScript);
-      document.body.removeChild(gofundmeScript);
     };
   }, []);
 
@@ -52,20 +45,24 @@ export default function Support() {
       </ul>
 
       {/* 🔶 Zeffy Donate Button */}
-      <div className="my-10 flex justify-center">
+      <div className="my-10 flex justify-center flex-col gap-4 items-center">
         <button
           zeffy-form-link="https://www.zeffy.com/embed/donation-form/the-fathers-alliance-is-rising-join-us?modal=true"
           className="bg-amber-500 text-black px-6 py-3 rounded-md text-lg font-semibold hover:bg-amber-400 transition"
         >
           Donate via Zeffy (No Fees)
         </button>
-      </div>
 
-      {/* 🔷 GoFundMe Custom Widget */}
-      <div
-        className="gfm-embed my-12"
-        data-url="https://www.gofundme.com/f/TheFathersAllianceProject/widget/medium?sharesheet=fundraiser sidebar&attribution_id=sl:39b6cecd-9f0c-434c-85e7-0c345aab003d"
-      ></div>
+        {/* 🔷 GoFundMe Button */}
+        <a
+          href="https://gofund.me/64241eb3"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-400 transition"
+        >
+          Donate via GoFundMe
+        </a>
+      </div>
 
       {/* 🛍️ Zeffy Shop Embed */}
       <div className="my-12">
