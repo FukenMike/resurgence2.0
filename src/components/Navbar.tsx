@@ -65,7 +65,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-black px-6 pb-4 space-y-2">
+        <div className="lg:hidden bg-gray-900 border-t border-amber-500 shadow-md px-6 pb-4 space-y-2 transition-all duration-300">
           {navLinks.map((link) => (
             <Link
               key={link.name}
