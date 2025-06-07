@@ -20,7 +20,7 @@ export default function Navbar() {
   ];
 
   return (
-  <nav className="bg-black text-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-black !bg-black text-white shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold text-amber-500">
           The Father’s <span className="block sm:inline">Alliance</span>
@@ -45,7 +45,7 @@ export default function Navbar() {
           className="lg:hidden flex items-center focus:outline-none"
         >
           <svg
-            className="w-6 h-6 fill-current text-white"
+            className="w-6 h-6 fill-current text-amber-500"
             viewBox="0 0 24 24"
           >
             {isOpen ? (
@@ -65,7 +65,7 @@ export default function Navbar() {
 
       {/* Mobile Dropdown */}
       {isOpen && (
-        <div className="lg:hidden bg-gray-900 border-t border-amber-500 shadow-md px-6 pb-4 space-y-2 transition-all duration-300">
+        <div className="lg:hidden bg-black border-t border-amber-500 shadow-md px-6 pb-4 space-y-2 transition-all duration-300">
           {navLinks.map((link) => (
             <Link
               key={link.name}
