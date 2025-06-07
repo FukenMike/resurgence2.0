@@ -20,7 +20,7 @@ export default function Navbar() {
   ];
 
   return (
-   <nav className="bg-amber-500 text-black shadow-md fixed top-0 left-0 right-0 z-50">
+  <nav className="bg-slate-800 text-white shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="text-2xl font-bold text-amber-500">
           The Father’s <span className="block sm:inline">Alliance</span>
