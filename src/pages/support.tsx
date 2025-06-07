@@ -8,8 +8,15 @@ export default function Support() {
     zeffyScript.async = true;
     document.body.appendChild(zeffyScript);
 
+    // Load GoFundMe script
+    const gofundmeScript = document.createElement("script");
+    gofundmeScript.src = "https://www.gofundme.com/static/js/embed.js";
+    gofundmeScript.defer = true;
+    document.body.appendChild(gofundmeScript);
+
     return () => {
       document.body.removeChild(zeffyScript);
+      document.body.removeChild(gofundmeScript);
     };
   }, []);
 
@@ -54,17 +61,11 @@ export default function Support() {
         </button>
       </div>
 
-      {/* 🔷 GoFundMe Widget Embed */}
-      <div className="my-12">
-        <iframe
-          title="GoFundMe"
-          src="https://www.gofundme.com/f/TheFathersAllianceProject/widget/small"
-          width="100%"
-          height="312"
-          frameBorder="0"
-          scrolling="no"
-        ></iframe>
-      </div>
+      {/* 🔷 GoFundMe Custom Widget */}
+      <div
+        className="gfm-embed my-12"
+        data-url="https://www.gofundme.com/f/TheFathersAllianceProject/widget/medium?sharesheet=fundraiser sidebar&attribution_id=sl:39b6cecd-9f0c-434c-85e7-0c345aab003d"
+      ></div>
 
       {/* 🛍️ Zeffy Shop Embed */}
       <div className="my-12">
@@ -110,4 +111,3 @@ export default function Support() {
     </section>
   );
 }
-
