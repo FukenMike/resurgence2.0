@@ -21,7 +21,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-black !bg-black text-white shadow-md fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center relative">
         <div className="text-2xl font-bold text-amber-500">
           The Father’s <span className="block sm:inline">Alliance</span>
         </div>
@@ -60,23 +60,23 @@ export default function Navbar() {
             )}
           </svg>
         </button>
-      </div>
 
-      {/* Mobile Dropdown */}
-      {isOpen && (
-        <div className="lg:hidden bg-black border-t border-amber-500 shadow-md px-6 pb-4 space-y-2 transition-all duration-300">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className="block text-sm font-semibold text-white hover:text-amber-400 transition"
-              onClick={() => setIsOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
-        </div>
-      )}
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className="absolute right-0 top-16 w-56 bg-black border border-amber-500 rounded-md shadow-xl px-4 py-4 space-y-2 z-50">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.path}
+                className="block text-sm font-semibold text-white hover:text-amber-400 transition"
+                onClick={() => setIsOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        )}
+      </div>
     </nav>
   );
 }
