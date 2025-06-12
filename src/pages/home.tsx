@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center text-center px-6 md:px-0">
+    <div className="flex flex-col items-center justify-center text-center px-6 md:px-0 pt-[120px]">
       <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight relative inline-block animate-pulse">
-        <span className="text-amber-400 drop-shadow-[0_0_8px_#f59e0b]">We Are Rising</span>
+        <span className="text-amber-400 drop-shadow-[0_0_8px_#f59e0b]">
+          We Are Rising
+        </span>
       </h1>
 
-      <p className="text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed">
+      <p className="text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed whitespace-pre-line">
         Family law hasn’t evolved—but families have.
 
 Divorce. Custody. Support. CPS. The process is broken—outdated, biased, and blind to the truth behind closed doors. It punishes pain. Profits from separation. And almost never reflects what’s best for the child.
@@ -36,4 +38,3 @@ We. Are. Rising.
     </div>
   );
 }
-
