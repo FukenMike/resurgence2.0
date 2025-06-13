@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
 export default function Home() {
+  const buttonClass =
+    "inline-block px-6 py-3 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition";
+
   return (
     <div className="flex flex-col items-center justify-center text-center px-6 md:px-0 pt-[120px]">
       <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight relative inline-block animate-pulse">
@@ -22,18 +25,20 @@ We. Are. Rising.
       </p>
 
       <div className="flex flex-wrap justify-center gap-4">
-        <Link
-          to="/who-we-are"
-          className="px-6 py-3 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition"
-        >
+        <Link to="/who-we-are" className={buttonClass}>
           Learn Why We Exist
         </Link>
-        <Link
-          to="/mission"
-          className="px-6 py-3 border-2 border-amber-500 text-amber-500 font-semibold rounded-lg hover:bg-amber-500 hover:text-black transition"
-        >
+        <Link to="/mission" className={buttonClass}>
           Our Mission
         </Link>
+        <a
+          href="https://shop.thefathersalliance.org"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={buttonClass}
+        >
+          Visit the Store
+        </a>
       </div>
     </div>
   );
