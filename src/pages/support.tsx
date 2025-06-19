@@ -1,18 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 export default function Support() {
-  useEffect(() => {
-    // Load Zeffy script
-    const zeffyScript = document.createElement("script");
-    zeffyScript.src = "https://zeffy-scripts.s3.ca-central-1.amazonaws.com/embed-form-script.min.js";
-    zeffyScript.async = true;
-    document.body.appendChild(zeffyScript);
-
-    return () => {
-      document.body.removeChild(zeffyScript);
-    };
-  }, []);
-
   return (
     <section className="px-6 py-12 max-w-4xl mx-auto text-white">
       <h1 className="text-4xl font-bold mb-6 text-amber-400">Support the Movement</h1>
@@ -44,40 +32,29 @@ export default function Support() {
         <li>Spread the truth that no one else is willing to say</li>
       </ul>
 
-      {/* 🔶 Zeffy Donate Button */}
-      <div className="my-10 flex justify-center flex-col gap-4 items-center">
-        <button
-          zeffy-form-link="https://www.zeffy.com/embed/donation-form/the-fathers-alliance-is-rising-join-us?modal=true"
-          className="bg-amber-500 text-black px-6 py-3 rounded-md text-lg font-semibold hover:bg-amber-400 transition"
-        >
-          Donate via Zeffy (No Fees)
-        </button>
+      {/* 🔹 Quick Donate Button for Mobile Users */}
+      <a
+        href="https://www.zeffy.com/en/donation-form/the-fathers-alliance-is-rising-join-us"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-amber-500 text-black px-6 py-3 rounded-md text-lg font-semibold hover:bg-amber-400 transition block text-center my-6"
+      >
+        Quick Donate (opens new tab)
+      </a>
 
-        {/* 🔷 GoFundMe Button */}
-        <a
-          href="https://gofund.me/64241eb3"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-green-500 text-white px-6 py-3 rounded-md text-lg font-semibold hover:bg-green-400 transition"
-        >
-          Donate via GoFundMe
-        </a>
-      </div>
-
-      {/* 🛍️ Zeffy Shop Embed */}
+      {/* 🔶 Zeffy Donation Form Embed */}
       <div className="my-12">
-        <h2 className="text-2xl font-bold mb-4 text-amber-400">Visit Our Fundraising Shop</h2>
+        <h2 className="text-2xl font-bold mb-4 text-amber-400">Direct Donation Form</h2>
         <div
           style={{
             position: 'relative',
             overflow: 'hidden',
-            height: '500px',
+            height: '1200px',
             width: '100%',
-            paddingTop: '500px',
           }}
         >
           <iframe
-            title="Zeffy Fundraising Shop"
+            title="Donation form powered by Zeffy"
             style={{
               position: 'absolute',
               border: 0,
@@ -88,7 +65,7 @@ export default function Support() {
               width: '100%',
               height: '100%',
             }}
-            src="https://www.zeffy.com/embed/ticketing/the-fathers-alliances-fundraising-shop"
+            src="https://www.zeffy.com/embed/donation-form/the-fathers-alliance-is-rising-join-us"
             allow="payment-request"
             allowTransparency={true}
           ></iframe>
