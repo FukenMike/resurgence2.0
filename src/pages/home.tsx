@@ -12,17 +12,26 @@ export default function Home() {
         </span>
       </h1>
 
-      <p className="text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed whitespace-pre-line">
-        Family law hasn’t evolved—but families have.
+      <div className="text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed space-y-4">
+        <p>
+          Family law hasn’t evolved—but families have. Divorce. Custody.
+          Support. CPS. The process is broken—outdated, biased, and blind to the
+          truth behind closed doors. It punishes pain. Profits from separation.
+          And almost never reflects what’s best for the child.
+        </p>
 
-Divorce. Custody. Support. CPS. The process is broken—outdated, biased, and blind to the truth behind closed doors. It punishes pain. Profits from separation. And almost never reflects what’s best for the child.
+        <p>
+          Fathers. Mothers. Guardians—we all face the fallout. This alliance was
+          born from that fire. From courtrooms where voices are silenced,
+          stories ignored, and justice feels optional.
+        </p>
 
-Fathers. Mothers. Guardians—we all face the fallout. This alliance was born from that fire. From courtrooms where voices are silenced, stories ignored, and justice feels optional.
-
-We rise from that silence—not to beg for change, but to build it.
-
-We. Are. Rising.
-      </p>
+        <p>
+          We rise from that silence—not to beg for change, but to build it.
+          <br />
+          <strong>We. Are. Rising.</strong>
+        </p>
+      </div>
 
       <div className="flex flex-wrap justify-center gap-4">
         <Link to="/who-we-are" className={buttonClass}>
