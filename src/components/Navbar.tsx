@@ -1,4 +1,3 @@
-// src/components/Navbar.tsx
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -20,19 +19,20 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-black !bg-black text-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-steam-metal border-b-2 border-steam-copper text-steam-text font-heading shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center relative">
-        <div className="text-2xl font-bold text-amber-500">
+        {/* Logo / Title */}
+        <div className="text-2xl text-steam-copper tracking-wider uppercase">
           The Father’s <span className="block sm:inline">Alliance</span>
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex space-x-6 font-semibold text-sm">
+        <div className="hidden lg:flex space-x-6 text-sm tracking-wide">
           {navLinks.map((link) => (
             <Link
               key={link.name}
               to={link.path}
-              className="hover:text-amber-400 transition"
+              className="hover:text-steam-copper hover:border-b-2 hover:border-steam-copper transition duration-150 ease-in-out pb-1"
             >
               {link.name}
             </Link>
@@ -45,7 +45,7 @@ export default function Navbar() {
           className="lg:hidden flex items-center focus:outline-none"
         >
           <svg
-            className="w-6 h-6 text-amber-500"
+            className="w-6 h-6 text-steam-copper"
             fill="none"
             stroke="currentColor"
             strokeWidth="2"
@@ -63,12 +63,12 @@ export default function Navbar() {
 
         {/* Mobile Dropdown Menu */}
         {isOpen && (
-          <div className="absolute right-0 top-16 w-56 bg-black border border-amber-500 rounded-md shadow-xl px-4 py-4 space-y-2 z-50">
+          <div className="absolute right-0 top-16 w-56 bg-steam-metal border border-steam-copper rounded-md shadow-lg px-4 py-4 space-y-2 z-50">
             {navLinks.map((link) => (
               <Link
                 key={link.name}
                 to={link.path}
-                className="block text-sm font-semibold text-white hover:text-amber-400 transition"
+                className="block text-sm text-steam-text hover:text-steam-copper transition"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}
