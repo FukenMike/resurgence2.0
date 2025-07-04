@@ -33,7 +33,7 @@ export default function Home() {
         </p>
       </div>
 
-      <div className="flex flex-wrap justify-center gap-4">
+      <div className="flex flex-wrap justify-center gap-4 mb-12">
         <Link to="/who-we-are" className={buttonClass}>
           Learn Why We Exist
         </Link>
@@ -48,6 +48,35 @@ export default function Home() {
         >
           Visit the Store
         </a>
+      </div>
+
+      {/* 🔥 New Section: We’re Just Getting Started */}
+      <div className="max-w-3xl text-left bg-neutral-900 rounded-2xl shadow-lg p-6 md:p-10 border border-neutral-700 space-y-4">
+        <h2 className="text-3xl font-bold text-amber-400">
+          We're Just Getting Started
+        </h2>
+        <p className="text-lg leading-relaxed text-neutral-200">
+          The Father’s Alliance isn’t a service provider—not yet.
+          We’re building something bigger: a parallel system for families
+          buried by broken laws, biased courts, and bureaucratic silence.
+        </p>
+        <p className="text-lg leading-relaxed text-neutral-300">
+          What you see here is the beginning of that rebellion. No grants.
+          No handouts. No paid consultants. Just lived experience, raw truth,
+          and a refusal to be erased.
+        </p>
+        <p className="text-lg leading-relaxed text-neutral-400 italic">
+          If you’ve ever been silenced, ignored, or broken by the system—this was
+          built with you in mind. Not as charity. As a counterforce.
+        </p>
+        <p className="text-lg leading-relaxed text-neutral-300">
+          We’re not waiting for permission. We’re laying the bricks. Join us.
+        </p>
+        <div className="mt-6">
+          <Link to="/who-we-are" className={buttonClass}>
+            Join the Build
+          </Link>
+        </div>
       </div>
     </div>
   );
