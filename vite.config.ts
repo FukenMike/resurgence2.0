@@ -1,17 +1,21 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export default defineConfig({
-  base: './', // Keeps relative paths for Cloudflare Pages
+  base: './',
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'), // Makes imports easier: "@/components/Whatever"
+      '@': resolve(__dirname, './src'),
     },
   },
   build: {
-    outDir: 'dist', // Default output directory
-    sourcemap: true, // Helpful for debugging if something breaks
+    outDir: 'dist',
+    sourcemap: true,
   },
 });
