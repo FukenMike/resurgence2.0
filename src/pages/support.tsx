@@ -1,11 +1,11 @@
 // src/pages/support.tsx
 
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function Support() {
   return (
-    <Layout>
+    
       <section className="px-6 py-12 max-w-4xl mx-auto text-steam-text font-body">
         <h1 className="text-4xl font-heading font-bold mb-6 text-steam-copper">
           Support the Movement
@@ -86,6 +86,6 @@ export default function Support() {
           You just have to care enough to act.
         </p>
       </section>
-    </Layout>
+    
   );
 }

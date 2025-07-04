@@ -1,11 +1,11 @@
 // src/pages/founder-story.tsx
 
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function FounderStory() {
   return (
-    <Layout>
+    
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
         <h1 className="text-4xl font-bold mb-6 font-heading text-steam-copper">Who I Am</h1>
 
@@ -67,6 +67,6 @@ export default function FounderStory() {
           You’re not alone anymore.
         </p>
       </section>
-    </Layout>
+    
   );
 }

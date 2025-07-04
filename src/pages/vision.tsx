@@ -1,11 +1,11 @@
 // src/pages/vision.tsx
 
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function Vision() {
   return (
-    <Layout>
+    
       <section className="flex flex-col md:flex-row min-h-screen bg-steam-bg text-steam-text font-body">
         {/* Left Side – Current System */}
         <div className="w-full md:w-1/2 p-8 bg-steam-panel border-r border-steam-brass">
@@ -59,6 +59,6 @@ export default function Vision() {
           </ul>
         </div>
       </section>
-    </Layout>
+   
   );
 }

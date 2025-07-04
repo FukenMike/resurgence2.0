@@ -1,11 +1,11 @@
 // src/pages/the-vault.tsx
 
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function TheVault() {
   return (
-    <Layout>
+    
       <section className="px-6 py-12 bg-steam-bg text-steam-text text-center min-h-screen font-body">
         {/* Author Spotlight */}
         <div className="mb-12">
@@ -47,6 +47,6 @@ export default function TheVault() {
           </a>
         </div>
       </section>
-    </Layout>
+    
   );
 }

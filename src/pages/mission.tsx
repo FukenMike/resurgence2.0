@@ -1,11 +1,11 @@
 // src/pages/mission.tsx
 
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function Mission() {
   return (
-    <Layout>
+    
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
         <h1 className="text-4xl font-bold mb-6">Our Mission</h1>
 
@@ -87,6 +87,6 @@ export default function Mission() {
           And it’s about time they had someone in their corner.
         </p>
       </section>
-    </Layout>
+    
   );
 }

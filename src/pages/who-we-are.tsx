@@ -1,11 +1,11 @@
 // src/pages/who-we-are.tsx
 
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function WhoWeAre() {
   return (
-    <Layout>
+    
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
         <h1 className="text-4xl font-heading font-bold mb-6 text-steam-copper">Who We Are</h1>
 
@@ -66,6 +66,6 @@ export default function WhoWeAre() {
           <strong>We are rising.</strong>
         </p>
       </section>
-    </Layout>
+  
   );
 }

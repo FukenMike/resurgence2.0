@@ -1,10 +1,10 @@
 // src/pages/privacy-policy.tsx
 import React from 'react';
-import Layout from '../components/Layout';
+
 
 export default function PrivacyPolicy() {
   return (
-    <Layout>
+    
       <div className="max-w-4xl mx-auto px-4 py-16 text-steam-text bg-steam-bg min-h-screen font-body">
         <h1 className="text-3xl font-heading font-bold mb-6 text-steam-copper">Privacy Policy</h1>
         <p className="mb-4">Effective Date: June 7, 2025</p>
@@ -57,6 +57,6 @@ export default function PrivacyPolicy() {
           periodically.
         </p>
       </div>
-    </Layout>
+    
   );
 }
