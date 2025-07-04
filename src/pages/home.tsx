@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import Layout from "../components/Layout"; // make sure the path matches your file tree
+
 
 export default function Home() {
   const buttonClass =
     "inline-block px-6 py-3 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition";
 
   return (
-    <Layout>
+    
       <div className="flex flex-col items-center justify-center text-center px-6 md:px-0 pt-[120px]">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight relative inline-block animate-pulse">
           <span className="text-amber-400 drop-shadow-[0_0_8px_#f59e0b]">
@@ -81,6 +81,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-    </Layout>
+
   );
 }
