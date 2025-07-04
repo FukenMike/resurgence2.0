@@ -1,4 +1,7 @@
+// src/pages/wall-of-truth.tsx
+
 import React from "react";
+import Layout from "../components/Layout";
 
 const posts = [
   {
@@ -12,25 +15,27 @@ const posts = [
 
 export default function WallOfTruth() {
   return (
-    <div className="p-8 max-w-4xl mx-auto">
-      <h1 className="text-4xl font-bold mb-6 text-yellow-400">The Wall of Truth</h1>
-      <p className="mb-8 text-lg text-white">
-        Real voices. Unfiltered pain. Stories the system tried to silence — but we’re bringing them into the light.
-      </p>
-      <div className="space-y-6">
-        {posts.map((post, index) => (
-          <a
-            key={index}
-            href={post.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block p-4 border border-gray-700 rounded-lg hover:bg-gray-800 transition"
-          >
-            <h2 className="text-xl font-semibold text-orange-400">{post.title}</h2>
-            <p className="text-sm text-gray-300">By {post.author} — {post.date}</p>
-          </a>
-        ))}
+    <Layout>
+      <div className="p-8 max-w-4xl mx-auto text-white">
+        <h1 className="text-4xl font-heading font-bold mb-6 text-steam-copper">The Wall of Truth</h1>
+        <p className="mb-8 text-lg text-steam-text">
+          Real voices. Unfiltered pain. Stories the system tried to silence — but we’re bringing them into the light.
+        </p>
+        <div className="space-y-6">
+          {posts.map((post, index) => (
+            <a
+              key={index}
+              href={post.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-4 border border-steam-brass rounded-lg hover:bg-steam-panel transition"
+            >
+              <h2 className="text-xl font-semibold text-amber-400">{post.title}</h2>
+              <p className="text-sm text-steam-muted">By {post.author} — {post.date}</p>
+            </a>
+          ))}
+        </div>
       </div>
-    </div>
+    </Layout>
   );
 }
