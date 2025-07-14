@@ -7,7 +7,7 @@ export default function Footer() {
         <p className="text-center md:text-left">
           &copy; {new Date().getFullYear()} The Father’s Alliance. All rights reserved.
         </p>
-        <nav className="flex gap-4">
+        <nav className="flex gap-4 items-center">
           <Link to="/privacy-policy" className="hover:underline">
             Privacy Policy
           </Link>
@@ -16,6 +16,14 @@ export default function Footer() {
             className="hover:underline"
           >
             Contact
+          </a>
+          <a
+            href="https://allianceforum.thefathersalliance.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-yellow-500 text-black font-semibold px-3 py-1 rounded hover:bg-yellow-400 transition"
+          >
+            Join Alliance Underground
           </a>
         </nav>
       </div>
