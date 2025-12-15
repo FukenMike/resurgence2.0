@@ -17,14 +17,6 @@ export default function Footer() {
           >
             Contact
           </a>
-          <a
-            href="https://allianceforum.thefathersalliance.org"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-yellow-500 text-black font-semibold px-3 py-1 rounded hover:bg-yellow-400 transition"
-          >
-            Join Alliance Underground
-          </a>
         </nav>
       </div>
     </footer>
