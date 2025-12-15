@@ -7,7 +7,7 @@ export default function BuriedByTheSystem() {
   return (
    
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
-        <h1 className="text-4xl font-bold mb-6 font-heading text-steam-copper">
+        <h1 className="text-4xl font-bold mb-6 font-mono text-steam-copper">
           Buried by the System
         </h1>
 

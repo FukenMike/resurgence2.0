@@ -17,7 +17,7 @@ export default function WallOfTruth() {
   return (
     
       <div className="p-8 max-w-4xl mx-auto text-white">
-        <h1 className="text-4xl font-heading font-bold mb-6 text-steam-copper">The Wall of Truth</h1>
+        <h1 className="text-4xl font-mono font-bold mb-6 text-steam-copper">The Wall of Truth</h1>
         <p className="mb-8 text-lg text-steam-text">
           Real voices. Unfiltered pain. Stories the system tried to silence — but we’re bringing them into the light.
         </p>

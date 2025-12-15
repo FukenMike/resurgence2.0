@@ -11,7 +11,8 @@
   --color-amber-500: #f59e0b;
   --color-black: #000000;
   --color-white: #ffffff;
-  
-  --font-family-heading: "Share Tech Mono", monospace;
-  --font-family-body: "Libre Baskerville", serif;
+
+  /* Map project fonts to Tailwind v4 tokens */
+  --font-sans: "Libre Baskerville", serif;
+  --font-mono: "Share Tech Mono", monospace;
 }

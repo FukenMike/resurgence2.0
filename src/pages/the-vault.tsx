@@ -6,10 +6,10 @@ import React from 'react';
 export default function TheVault() {
   return (
     
-      <section className="px-6 py-12 bg-steam-bg text-steam-text text-center min-h-screen font-body">
+      <section className="px-6 py-12 bg-steam-bg text-steam-text text-center min-h-screen font-sans">
         {/* Author Spotlight */}
         <div className="mb-12">
-          <h2 className="text-3xl font-heading font-bold mb-4 text-steam-copper">✍️ Author Spotlight: Iam Riven</h2>
+          <h2 className="text-3xl font-mono font-bold mb-4 text-steam-copper">✍️ Author Spotlight: Iam Riven</h2>
           <p className="max-w-2xl mx-auto text-lg leading-relaxed text-steam-muted">
             <strong>Riven</strong> (adj.) — split or torn apart with force.
             <br /><br />
@@ -25,7 +25,7 @@ export default function TheVault() {
 
         {/* Featured Book */}
         <div className="my-12">
-          <h2 className="text-2xl font-heading font-bold mb-2 text-steam-copper">📘 Addiction: The Untold Truth</h2>
+          <h2 className="text-2xl font-mono font-bold mb-2 text-steam-copper">📘 Addiction: The Untold Truth</h2>
           <h3 className="text-lg font-semibold mb-4 text-steam-brass">By Iam Riven</h3>
           <img
             src="/images/addiction-book-cover.png"

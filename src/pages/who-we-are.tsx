@@ -7,7 +7,7 @@ export default function WhoWeAre() {
   return (
     
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
-        <h1 className="text-4xl font-heading font-bold mb-6 text-steam-copper">Who We Are</h1>
+        <h1 className="text-4xl font-mono font-bold mb-6 text-steam-copper">Who We Are</h1>
 
         <p className="mb-4">
           We don’t exist yet—not in the way they define existence.  

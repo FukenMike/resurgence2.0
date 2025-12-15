@@ -5,8 +5,8 @@ import React from 'react';
 export default function PrivacyPolicy() {
   return (
     
-      <div className="max-w-4xl mx-auto px-4 py-16 text-steam-text bg-steam-bg min-h-screen font-body">
-        <h1 className="text-3xl font-heading font-bold mb-6 text-steam-copper">Privacy Policy</h1>
+      <div className="max-w-4xl mx-auto px-4 py-16 text-steam-text bg-steam-bg min-h-screen font-sans">
+        <h1 className="text-3xl font-mono font-bold mb-6 text-steam-copper">Privacy Policy</h1>
         <p className="mb-4">Effective Date: June 7, 2025</p>
 
         <p className="mb-4">

@@ -6,8 +6,8 @@ import React from 'react';
 export default function Support() {
   return (
     
-      <section className="px-6 py-12 max-w-4xl mx-auto text-steam-text font-body">
-        <h1 className="text-4xl font-heading font-bold mb-6 text-steam-copper">
+      <section className="px-6 py-12 max-w-4xl mx-auto text-steam-text font-sans">
+        <h1 className="text-4xl font-mono font-bold mb-6 text-steam-copper">
           Support the Movement
         </h1>
 
@@ -48,7 +48,7 @@ export default function Support() {
         </a>
 
         <div className="my-12">
-          <h2 className="text-2xl font-heading font-bold mb-4 text-steam-copper">Direct Donation Form</h2>
+          <h2 className="text-2xl font-mono font-bold mb-4 text-steam-copper">Direct Donation Form</h2>
           <div
             style={{
               position: 'relative',

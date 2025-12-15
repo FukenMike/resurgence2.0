@@ -6,10 +6,10 @@ import React from 'react';
 export default function Vision() {
   return (
     
-      <section className="flex flex-col md:flex-row min-h-screen bg-steam-bg text-steam-text font-body">
+      <section className="flex flex-col md:flex-row min-h-screen bg-steam-bg text-steam-text font-sans">
         {/* Left Side – Current System */}
         <div className="w-full md:w-1/2 p-8 bg-steam-panel border-r border-steam-brass">
-          <h2 className="text-3xl font-heading font-bold mb-4 text-steam-copper">The Current System</h2>
+          <h2 className="text-3xl font-mono font-bold mb-4 text-steam-copper">The Current System</h2>
 
           <ul className="space-y-4 text-lg leading-relaxed list-disc list-inside text-steam-muted">
             <li>
@@ -35,7 +35,7 @@ export default function Vision() {
 
         {/* Right Side – Future We're Building */}
         <div className="w-full md:w-1/2 p-8 bg-steam-panel">
-          <h2 className="text-3xl font-heading font-bold mb-4 text-steam-copper">The Future We’re Building</h2>
+          <h2 className="text-3xl font-mono font-bold mb-4 text-steam-copper">The Future We’re Building</h2>
 
           <ul className="space-y-4 text-lg leading-relaxed list-disc list-inside text-steam-muted">
             <li>

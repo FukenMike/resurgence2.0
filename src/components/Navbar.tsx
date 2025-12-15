@@ -19,10 +19,10 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-steam-metal border-b-2 border-steam-copper text-steam-text font-heading shadow-md fixed top-0 left-0 right-0 z-50">
+    <nav className="bg-steam-metal border-b-2 border-steam-copper text-steam-text font-mono shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center relative">
         {/* Logo / Title */}
-        <div className="text-2xl text-steam-copper tracking-wider uppercase">
+        <div className="text-2xl text-steam-copper tracking-wider uppercase font-mono">
           The Father’s <span className="block sm:inline">Alliance</span>
         </div>
 

@@ -7,7 +7,7 @@ export default function Connect() {
   return (
 
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
-        <h1 className="text-4xl font-bold mb-6 font-heading text-steam-copper">Let’s Connect</h1>
+        <h1 className="text-4xl font-bold mb-6 font-mono text-steam-copper">Let’s Connect</h1>
 
         <p className="mb-4">
           The Father’s Alliance is still rising—still becoming. This isn’t some polished nonprofit with a switchboard and a team of reps.

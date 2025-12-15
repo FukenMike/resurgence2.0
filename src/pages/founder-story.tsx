@@ -7,7 +7,7 @@ export default function FounderStory() {
   return (
     
       <section className="px-6 py-12 max-w-4xl mx-auto text-white">
-        <h1 className="text-4xl font-bold mb-6 font-heading text-steam-copper">Who I Am</h1>
+        <h1 className="text-4xl font-bold mb-6 font-mono text-steam-copper">Who I Am</h1>
 
         <p className="mb-4">
           Hey. My name is Michael, and I’m the founder of The Father’s Alliance.
