@@ -15,4 +15,17 @@
   /* Map project fonts to Tailwind v4 tokens */
   --font-sans: "Libre Baskerville", serif;
   --font-mono: "Share Tech Mono", monospace;
+
+  /* Also expose project-specific font tokens to support existing utilities */
+  --font-heading: "Share Tech Mono", monospace;
+  --font-body: "Libre Baskerville", serif;
+}
+
+/* Provide utilities expected by components (Tailwind v4 custom utilities) */
+@utility font-heading {
+  font-family: var(--font-heading);
+}
+
+@utility font-body {
+  font-family: var(--font-body);
 }
