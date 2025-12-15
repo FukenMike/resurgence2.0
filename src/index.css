@@ -1,3 +1,17 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-steam-bg: #0F0E0E;
+  --color-steam-metal: #1F1F1F;
+  --color-steam-copper: #B87333;
+  --color-steam-brass: #DAA520;
+  --color-steam-text: #F5F0E1;
+  --color-steam-shadow: #302A24;
+  --color-amber-400: #fbbf24;
+  --color-amber-500: #f59e0b;
+  --color-black: #000000;
+  --color-white: #ffffff;
+  
+  --font-family-heading: "Share Tech Mono", monospace;
+  --font-family-body: "Libre Baskerville", serif;
+}
