@@ -3,52 +3,90 @@ import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [exploreOpen, setExploreOpen] = useState(false)
 
-  const navLinks = [
-    { name: 'Home', path: '/home' },
+  const exploreLinks = [
     { name: 'Who We Are', path: '/who-we-are' },
     { name: 'Mission', path: '/mission' },
     { name: 'Vision', path: '/vision' },
     { name: 'Founder Story', path: '/founder-story' },
     { name: 'Buried by the System', path: '/buried-by-the-system' },
-    { name: 'Education Reform', path: '/education-reform' },
-    { name: 'The Vault', path: '/the-vault' },
     { name: 'Wall of Truth', path: '/wall-of-truth' },
     { name: 'Support', path: '/support' },
     { name: 'Connect', path: '/connect' },
   ]
 
+  const handleExploreClick = (e) => {
+    e.preventDefault()
+    setExploreOpen(!exploreOpen)
+  }
+
   return (
     <nav className="bg-steam-metal border-b-2 border-steam-copper text-steam-text font-heading shadow-md fixed top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center relative">
         {/* Logo / Title */}
-        <div className="text-2xl text-steam-copper tracking-wider uppercase">
-          The Father’s <span className="block sm:inline">Alliance</span>
-        </div>
+        <Link to="/experience" className="text-2xl text-steam-copper tracking-wider uppercase hover:text-steam-brass transition">
+          The Father's <span className="block sm:inline">Alliance</span>
+        </Link>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex space-x-6 text-sm tracking-wide items-center">
+        <div className="hidden lg:flex space-x-8 text-sm tracking-wide items-center">
           <Link
             to="/experience"
             className="inline-block px-4 py-2 bg-amber-500 text-black font-semibold rounded-md hover:bg-amber-400 transition"
           >
-            Enter the Experience
+            Experience
           </Link>
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.path}
-              className="hover:text-steam-copper hover:border-b-2 hover:border-steam-copper transition duration-150 ease-in-out pb-1"
+          
+          {/* Explore Dropdown */}
+          <div className="relative group">
+            <button
+              onClick={handleExploreClick}
+              onMouseEnter={() => setExploreOpen(true)}
+              onMouseLeave={() => setExploreOpen(false)}
+              className="flex items-center space-x-1 text-steam-text hover:text-steam-copper transition pb-1"
+              aria-haspopup="true"
+              aria-expanded={exploreOpen}
             >
-              {link.name}
-            </Link>
-          ))}
+              <span>Explore</span>
+              <svg
+                className={`w-4 h-4 transition-transform ${exploreOpen ? 'rotate-180' : ''}`}
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path d="M19 14l-7 7m0 0l-7-7m7 7V3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </button>
+
+            {/* Dropdown Menu */}
+            {exploreOpen && (
+              <div
+                className="absolute left-0 mt-0 w-48 bg-steam-panel border border-steam-copper rounded-md shadow-lg py-2 z-50"
+                onMouseLeave={() => setExploreOpen(false)}
+              >
+                {exploreLinks.map((link) => (
+                  <Link
+                    key={link.name}
+                    to={link.path}
+                    className="block px-4 py-2 text-sm text-steam-text hover:bg-steam-metal hover:text-steam-copper transition"
+                    onClick={() => setExploreOpen(false)}
+                  >
+                    {link.name}
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Hamburger Icon */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="lg:hidden flex items-center focus:outline-none"
+          className="lg:hidden flex items-center focus:outline-none focus:ring-2 focus:ring-steam-copper rounded p-1"
+          aria-label="Toggle menu"
+          aria-expanded={isOpen}
         >
           <svg
             className="w-6 h-6 text-steam-copper"
@@ -67,26 +105,57 @@ export default function Navbar() {
           </svg>
         </button>
 
-        {/* Mobile Dropdown Menu */}
+        {/* Mobile Menu */}
         {isOpen && (
-          <div className="absolute right-0 top-16 w-56 bg-steam-metal border border-steam-copper rounded-md shadow-lg px-4 py-4 space-y-2 z-50">
+          <div className="absolute right-0 top-16 w-56 bg-steam-panel border border-steam-copper rounded-md shadow-lg z-50">
+            {/* Mobile Experience Link */}
             <Link
               to="/experience"
-              className="block text-sm text-black bg-amber-500 hover:bg-amber-400 font-semibold rounded-md px-3 py-2 transition"
+              className="block text-sm text-black bg-amber-500 hover:bg-amber-400 font-semibold px-4 py-3 transition border-b border-steam-copper"
               onClick={() => setIsOpen(false)}
             >
-              Enter the Experience
+              Experience
             </Link>
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                to={link.path}
-                className="block text-sm text-steam-text hover:text-steam-copper transition"
-                onClick={() => setIsOpen(false)}
+
+            {/* Mobile Explore Section */}
+            <div className="border-b border-steam-copper">
+              <button
+                onClick={() => setExploreOpen(!exploreOpen)}
+                className="w-full text-left px-4 py-3 text-sm text-steam-text hover:bg-steam-metal transition flex items-center justify-between"
+                aria-haspopup="true"
+                aria-expanded={exploreOpen}
               >
-                {link.name}
-              </Link>
-            ))}
+                <span>Explore</span>
+                <svg
+                  className={`w-4 h-4 transition-transform ${exploreOpen ? 'rotate-180' : ''}`}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M19 14l-7 7m0 0l-7-7m7 7V3" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+
+              {/* Mobile Explore Links */}
+              {exploreOpen && (
+                <div className="bg-steam-metal">
+                  {exploreLinks.map((link) => (
+                    <Link
+                      key={link.name}
+                      to={link.path}
+                      className="block px-6 py-2 text-sm text-steam-text hover:text-steam-copper transition"
+                      onClick={() => {
+                        setIsOpen(false)
+                        setExploreOpen(false)
+                      }}
+                    >
+                      {link.name}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
         )}
       </div>
