@@ -7,19 +7,33 @@ import StoryEvidence from '../components/story/StoryEvidence';
 import StoryMedia from '../components/story/StoryMedia';
 import ArtifactSlot from '../components/story/ArtifactSlot';
 import StoryArtifact from '../components/story/StoryArtifact';
+import StoryProgress from '../components/story/StoryProgress';
 import { Link } from 'react-router-dom';
 
 export default function Experience() {
+  const sections = [
+    { id: 'awakening', label: 'Awakening' },
+    { id: 'fracture', label: 'The Fracture' },
+    { id: 'cost', label: 'The Cost' },
+    { id: 'pattern', label: 'The Pattern' },
+    { id: 'voices', label: 'The Voices' },
+    { id: 'response', label: 'The Response' },
+  ];
+
   return (
     <div className="bg-steam-bg text-steam-text font-body">
+      <StoryProgress sections={sections} />
       {/* SECTION 1 — AWAKENING */}
+      <div data-section-id="awakening">
       <StorySection variant="default" className="text-center">
         <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight relative inline-block animate-pulse">
           <span className="text-amber-400 drop-shadow-[0_0_8px_#f59e0b]">We Are Rising</span>
         </h1>
       </StorySection>
+      </div>
 
       {/* SECTION 2 — THE FRACTURE */}
+      <div data-section-id="fracture">
       <StorySection variant="panel">
         <StoryBeat emphasis="strong">
           <p>
@@ -42,8 +56,10 @@ export default function Experience() {
           </p>
         </StoryBeat>
       </StorySection>
+      </div>
 
       {/* SECTION 3 — THE COST */}
+      <div data-section-id="cost">
       <StorySection variant="default">
         <h2 className="text-3xl font-heading font-bold mb-4 text-steam-copper">Buried by the System</h2>
         <StoryBeat>
@@ -93,8 +109,10 @@ export default function Experience() {
           </div>
         </StoryArtifact> */}
       </StorySection>
+      </div>
 
       {/* SECTION 4 — THE PATTERN */}
+      <div data-section-id="pattern">
       <StorySection variant="panel">
         <div className="grid md:grid-cols-2 gap-6">
           <div className="p-6 bg-steam-bg border border-steam-brass rounded-xl">
@@ -139,8 +157,10 @@ export default function Experience() {
           source="[Source]"
         /> */}
       </StorySection>
+      </div>
 
       {/* SECTION 5 — THE VOICES */}
+      <div data-section-id="voices">
       <StorySection variant="default">
         <h2 className="text-3xl font-heading font-bold mb-4 text-steam-copper">The Voices</h2>
         <p className="mb-4">Real stories. Unfiltered truth.</p>
@@ -159,8 +179,10 @@ export default function Experience() {
           </Link>
         </div>
       </StorySection>
+      </div>
 
       {/* SECTION 6 — THE RESPONSE */}
+      <div data-section-id="response">
       <StorySection variant="panel" className="text-center">
         <StoryBeat emphasis="strong">
           <p>
@@ -176,6 +198,7 @@ export default function Experience() {
           </Link>
         </div>
       </StorySection>
+      </div>
     </div>
   );
 }
