@@ -7,6 +7,7 @@ export default function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const exploreLinks = [
+    { name: 'Home', path: '/home' },
     { name: 'Who We Are', path: '/who-we-are' },
     { name: 'Mission', path: '/mission' },
     { name: 'Vision', path: '/vision' },
