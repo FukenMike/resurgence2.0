@@ -33,7 +33,7 @@ export default function Home() {
           We rise from that silence—not to beg for reform, but to expose the
           machinery that feeds on desperation and to build what it refuses to.
           <br />
-          <strong>We. Are. Rising.</strong>
+          <strong className="fire-ignite">We. Are. Rising.</strong>
         </p>
       </div>
 
