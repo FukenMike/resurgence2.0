@@ -6,6 +6,7 @@ import StoryQuote from '../components/story/StoryQuote';
 import StoryEvidence from '../components/story/StoryEvidence';
 import StoryMedia from '../components/story/StoryMedia';
 import ArtifactSlot from '../components/story/ArtifactSlot';
+import StoryArtifact from '../components/story/StoryArtifact';
 import { Link } from 'react-router-dom';
 
 export default function Experience() {
@@ -78,7 +79,20 @@ export default function Experience() {
           <p className="text-sm italic">
             This structural gap affects thousands of families navigating multi-state custody disputes.
           </p>
-        </StoryEvidence>      </StorySection>
+        </StoryEvidence>
+        
+        {/* Placeholder artifact: Real court documents, timeline visualization, or testimony video will go here */}
+        {/* <StoryArtifact
+          title="Case Timeline Evidence"
+          description="Visual documentation of custody order vs. system delays"
+          source="[Court records / DHR correspondence / Timeline visualization]"
+        >
+          <div className="text-center text-steam-muted py-8">
+            [Future: Timeline graphic showing judge's custody order → ICPC delay → children in limbo]
+            [Or: Redacted court documents / Photo evidence / Video testimony]
+          </div>
+        </StoryArtifact> */}
+      </StorySection>
 
       {/* SECTION 4 — THE PATTERN */}
       <StorySection variant="panel">
