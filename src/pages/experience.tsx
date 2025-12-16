@@ -3,6 +3,8 @@ import StorySection from '../components/story/StorySection';
 import StoryBeat from '../components/story/StoryBeat';
 import StoryBreak from '../components/story/StoryBreak';
 import StoryQuote from '../components/story/StoryQuote';
+import StoryEvidence from '../components/story/StoryEvidence';
+import StoryMedia from '../components/story/StoryMedia';
 import { Link } from 'react-router-dom';
 
 export default function Experience() {
@@ -62,8 +64,20 @@ export default function Experience() {
         <StoryBreak />
         <StoryQuote>
           My family wasn’t failed by one bad decision. We were buried by the system itself.
-        </StoryQuote>
-      </StorySection>
+        </StoryQuote>        
+        {/* Optional evidence: Context for the ICPC claim */}
+        <StoryEvidence
+          variant="stat"
+          title="Interstate Compact on the Placement of Children (ICPC)"
+          source="Child Welfare Information Gateway"
+        >
+          <p>
+            The ICPC is designed to protect children moved across state lines in child welfare cases. However, delays in the process can leave children in state custody indefinitely while paperwork is processed—even when a parent has a court order for custody in the destination state.
+          </p>
+          <p className="text-sm italic">
+            This structural gap affects thousands of families navigating multi-state custody disputes.
+          </p>
+        </StoryEvidence>      </StorySection>
 
       {/* SECTION 4 — THE PATTERN */}
       <StorySection variant="panel">
@@ -97,6 +111,16 @@ export default function Experience() {
             </ul>
           </div>
         </div>
+        
+        <StoryBreak />
+        
+        {/* Optional media: Future placeholder for video testimony or data viz */}
+        {/* <StoryMedia
+          type="video"
+          src=""
+          alt="Testimony or pattern visualization (placeholder)"
+          caption="[Future: Video testimony or interactive data showing custody disparities]"
+        /> */}
       </StorySection>
 
       {/* SECTION 5 — THE VOICES */}
