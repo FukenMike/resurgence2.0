@@ -9,6 +9,7 @@ import ArtifactSlot from '../components/story/ArtifactSlot';
 import StoryArtifact from '../components/story/StoryArtifact';
 import StoryProgress from '../components/story/StoryProgress';
 import ContrastPanel from '../components/story/ContrastPanel';
+import WitnessFragment from '../components/story/WitnessFragment';
 import { Link } from 'react-router-dom';
 
 export default function Experience() {
@@ -180,6 +181,25 @@ export default function Experience() {
       <StorySection variant="default">
         <h2 className="text-3xl font-heading font-bold mb-4 text-steam-copper">The Voices</h2>
         <p className="mb-4">Real stories. Unfiltered truth.</p>
+        
+        <div className="space-y-6 mb-8">
+          <WitnessFragment
+            quote="They told me I had six months to prove I could be a father. Six months to find housing, stable income, complete evaluations. But they never told me where to start or who would help me get there."
+            context="Father, GA"
+            tone="pain"
+          />
+          <WitnessFragment
+            quote="I followed every rule. Showed up to every hearing. Passed every drug test. But when DHR filed their paperwork, none of it mattered. My custody order became meaningless overnight."
+            context="Father, AL"
+            tone="anger"
+          />
+          <WitnessFragment
+            quote="I don't want revenge. I don't want to fight anymore. I just want my kids to know I never stopped trying to bring them home."
+            context="Father, GA"
+            tone="resolve"
+          />
+        </div>
+        
         <div className="space-y-4">
           <a
             href="https://walloftruth.hashnode.dev/how-the-system-buried-my-fatherhood-the-truth-they-tried-to-seal-away"
