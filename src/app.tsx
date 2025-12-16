@@ -1,9 +1,10 @@
 // src/App.tsx
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 
 import Home from './pages/home';
+import Experience from './pages/experience';
 import WhoWeAre from './pages/who-we-are';
 import Mission from './pages/mission';
 import Vision from './pages/vision';
@@ -21,7 +22,11 @@ export default function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
+          {/* Redirect root to the new narrative experience */}
+          <Route index element={<Navigate to="/experience" replace />} />
+          {/* Keep Home routable as secondary */}
+          <Route path="home" element={<Home />} />
+          <Route path="experience" element={<Experience />} />
           <Route path="who-we-are" element={<WhoWeAre />} />
           <Route path="mission" element={<Mission />} />
           <Route path="vision" element={<Vision />} />

@@ -5,7 +5,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
 
   const navLinks = [
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/home' },
     { name: 'Who We Are', path: '/who-we-are' },
     { name: 'Mission', path: '/mission' },
     { name: 'Vision', path: '/vision' },
@@ -27,7 +27,13 @@ export default function Navbar() {
         </div>
 
         {/* Desktop Nav */}
-        <div className="hidden lg:flex space-x-6 text-sm tracking-wide">
+        <div className="hidden lg:flex space-x-6 text-sm tracking-wide items-center">
+          <Link
+            to="/experience"
+            className="inline-block px-4 py-2 bg-amber-500 text-black font-semibold rounded-md hover:bg-amber-400 transition"
+          >
+            Enter the Experience
+          </Link>
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -64,6 +70,13 @@ export default function Navbar() {
         {/* Mobile Dropdown Menu */}
         {isOpen && (
           <div className="absolute right-0 top-16 w-56 bg-steam-metal border border-steam-copper rounded-md shadow-lg px-4 py-4 space-y-2 z-50">
+            <Link
+              to="/experience"
+              className="block text-sm text-black bg-amber-500 hover:bg-amber-400 font-semibold rounded-md px-3 py-2 transition"
+              onClick={() => setIsOpen(false)}
+            >
+              Enter the Experience
+            </Link>
             {navLinks.map((link) => (
               <Link
                 key={link.name}
