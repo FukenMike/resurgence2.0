@@ -5,6 +5,7 @@ import StoryBreak from '../components/story/StoryBreak';
 import StoryQuote from '../components/story/StoryQuote';
 import StoryEvidence from '../components/story/StoryEvidence';
 import StoryMedia from '../components/story/StoryMedia';
+import ArtifactSlot from '../components/story/ArtifactSlot';
 import { Link } from 'react-router-dom';
 
 export default function Experience() {
@@ -114,12 +115,14 @@ export default function Experience() {
         
         <StoryBreak />
         
-        {/* Optional media: Future placeholder for video testimony or data viz */}
-        {/* <StoryMedia
-          type="video"
+        {/* Optional artifact slot: Supports document, image, video, or iframe */}
+        {/* Example stub (uncomment and fill src to activate):
+        <ArtifactSlot
+          type="iframe"
           src=""
-          alt="Testimony or pattern visualization (placeholder)"
-          caption="[Future: Video testimony or interactive data showing custody disparities]"
+          alt="Custody statistics or policy reference"
+          caption="[Future: Interactive data showing custody award disparities]"
+          source="[Source]"
         /> */}
       </StorySection>
 
