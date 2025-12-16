@@ -10,6 +10,7 @@ import StoryArtifact from '../components/story/StoryArtifact';
 import StoryProgress from '../components/story/StoryProgress';
 import ContrastPanel from '../components/story/ContrastPanel';
 import WitnessFragment from '../components/story/WitnessFragment';
+import QuietChoice from '../components/story/QuietChoice';
 import { Link } from 'react-router-dom';
 
 export default function Experience() {
@@ -233,6 +234,10 @@ export default function Experience() {
             Stand With Us
           </Link>
         </div>
+        <QuietChoice
+          statement="Not every moment asks for action."
+          subtext="It's okay to pause."
+        />
       </StorySection>
       </div>
     </div>
