@@ -15,19 +15,23 @@ export default function Home() {
       <div className="text-xl md:text-2xl max-w-2xl mb-8 leading-relaxed space-y-4">
         <p>
           Family law hasn’t evolved—but families have. Divorce. Custody.
-          Support. CPS. The process is broken—outdated, biased, and blind to the
-          truth behind closed doors. It punishes pain. Profits from separation.
+          Support. CPS. What’s called a “system” is a maze—outdated, biased,
+          and sealed off from the truth behind closed doors. It doesn’t resolve
+          crisis. It manages it. It punishes pain. Profits from separation.
           And almost never reflects what’s best for the child.
         </p>
 
         <p>
-          Fathers. Mothers. Guardians—we all face the fallout. This alliance was
-          born from that fire. From courtrooms where voices are silenced,
-          stories ignored, and justice feels optional.
+          What started as a fight for fathers exposed something much larger.
+          Mothers. Guardians. Families on the brink—we all face the fallout.
+          This alliance was born from that fire. From courtrooms where voices
+          are silenced, survival is criminalized, and justice feels optional
+          if you can’t afford it.
         </p>
 
         <p>
-          We rise from that silence—not to beg for change, but to build it.
+          We rise from that silence—not to beg for reform, but to expose the
+          machinery that feeds on desperation and to build what it refuses to.
           <br />
           <strong>We. Are. Rising.</strong>
         </p>
