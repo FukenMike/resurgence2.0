@@ -38,7 +38,7 @@ export default function Experience() {
       <StorySection variant="panel">
         <StoryBeat emphasis="strong">
           <p>
-            We don't exist yet—not in the way they define existence. We're a flicker in the dark. An idea. A spark that hasn't caught fire—<em>yet</em>.
+            We don’t exist yet—not in the way they define existence. We’re a flicker in the dark. An idea. A spark that hasn’t caught fire—<em>yet</em>.
           </p>
         </StoryBeat>
         <StoryBreak />
@@ -71,18 +71,18 @@ export default function Experience() {
         <StoryBreak />
         <StoryBeat>
           <p>
-            I wasn't warned. I wasn't helped. I wasn't given support to stabilize or reunify my family. I was pushed out and punished for not navigating a system that was never designed to help me in the first place.
+            I wasn’t warned. I wasn’t helped. I wasn’t given support to stabilize or reunify my family. I was pushed out and punished for not navigating a system that was never designed to help me in the first place.
           </p>
         </StoryBeat>
         <StoryBreak />
         <StoryBeat>
           <p>
-            Even after a judge ruled in my favor, DHR refused to return my children. My custody order meant nothing. All because the Interstate Compact on the Placement of Children (ICPC) process hadn't been started. Alabama wouldn't release them, and Georgia wouldn't initiate it—leaving my children stuck in limbo.
+            Even after a judge ruled in my favor, DHR refused to return my children. My custody order meant nothing. All because the Interstate Compact on the Placement of Children (ICPC) process hadn’t been started. Alabama wouldn’t release them, and Georgia wouldn’t initiate it—leaving my children stuck in limbo.
           </p>
         </StoryBeat>
         <StoryBreak />
         <StoryQuote>
-          My family wasn't failed by one bad decision. We were buried by the system itself.
+          My family wasn’t failed by one bad decision. We were buried by the system itself.
         </StoryQuote>        
         {/* Optional evidence: Context for the ICPC claim */}
         <StoryEvidence
@@ -115,51 +115,36 @@ export default function Experience() {
       {/* SECTION 4 — THE PATTERN */}
       <div data-section-id="pattern">
       <StorySection variant="panel">
-        <ContrastPanel
-          leftTitle="What the System Claims"
-          rightTitle="What Families Experience"
-          leftContent={
-            <>
-              <p className="mb-4">
-                <strong>The courts are fair.</strong> Everyone gets due process. Judges weigh both sides objectively before making decisions.
-              </p>
-              <p className="mb-4">
-                <strong>Child support is about the child.</strong> It ensures kids are cared for, and the system is designed to help families, not punish them.
-              </p>
-              <p className="mb-4">
-                <strong>DHR protects children.</strong> Their job is to keep families together when possible and to act in the child's best interest.
-              </p>
-              <p className="mb-4">
-                <strong>Parents have rights.</strong> Custody orders are binding. If a judge grants custody, that decision stands—period.
-              </p>
-              <p className="mb-4">
-                <strong>The system supports struggling parents.</strong> There are programs, resources, and caseworkers available to help parents get back on their feet.
-              </p>
-            </>
-          }
-          rightContent={
-            <>
-              <p className="mb-4">
-                <strong>Fathers are filtered out by default.</strong> Only 18.3% of custody cases result in fathers getting primary custody. Gender bias is built into the system—not written into law, but embedded in practice.
-              </p>
-              <p className="mb-4">
-                <strong>Child support is a trap.</strong> It stacks interest even when you're unemployed, homeless, or incarcerated. Miss a payment? You're labeled a "deadbeat," barred from licenses, jailed, and still expected to pay.
-              </p>
-              <p className="mb-4">
-                <strong>DHR can override custody orders.</strong> Even when a judge grants custody, DHR can block reunification using dependency filings. Your court order becomes meaningless while the state decides if you're "ready."
-              </p>
-              <p className="mb-4">
-                <strong>Custody orders can be ignored.</strong> If a dependency case is active, your custody order doesn't matter. Agencies across state lines refuse to act until bureaucratic processes—like ICPC—are complete. Your kids stay in limbo. You stay powerless.
-              </p>
-              <p className="mb-4">
-                <strong>Support is conditional and punitive.</strong> To qualify for help, you must prove you're broken enough—but not too broken. You must have documentation, appointments, evaluations, background checks, and wait months (or years) for housing aid that may never come.
-              </p>
-              <p className="mb-4">
-                <strong>The shame never ends.</strong> Every setback is treated as personal failure. Every delay is treated as your fault. The system doesn't help you stand—it watches you fall and then punishes you for not getting up fast enough.
-              </p>
-            </>
-          }
-        />
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className="p-6 bg-steam-bg border border-steam-brass rounded-xl">
+            <h3 className="text-2xl font-heading font-bold mb-4 text-steam-copper">The Current System</h3>
+            <ul className="space-y-3 list-disc list-inside text-steam-text">
+              <li>
+                Fathers are granted custody only <span className="font-bold text-white">18.3%</span> of the time.
+              </li>
+              <li>
+                Public housing waitlists can take anywhere from <span className="font-bold text-white">6 months to 6 years</span>.
+              </li>
+              <li>
+                CPS/DHR can override custody orders based on dependency filings.
+              </li>
+            </ul>
+          </div>
+          <div className="p-6 bg-steam-bg border border-steam-copper rounded-xl">
+            <h3 className="text-2xl font-heading font-bold mb-4 text-steam-copper">The Future We’re Building</h3>
+            <ul className="space-y-3 list-disc list-inside text-steam-text">
+              <li>
+                A restructured family court model that values shared parenting and truth over conflict.
+              </li>
+              <li>
+                Emergency aid that keeps families housed and stable—<em>before</em> the damage is done.
+              </li>
+              <li>
+                Support without shame. Healing without hoops. Advocacy without red tape.
+              </li>
+            </ul>
+          </div>
+        </div>
         
         <StoryBreak />
         
@@ -202,7 +187,7 @@ export default function Experience() {
       <StorySection variant="panel" className="text-center">
         <StoryBeat emphasis="strong">
           <p>
-            You don't have to be perfect to show up. You just have to care. Let's build something better—together.
+            You don’t have to be perfect to show up. You just have to care. Let’s build something better—together.
           </p>
         </StoryBeat>
         <div className="flex flex-wrap justify-center gap-4 mt-8">
