@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [exploreOpen, setExploreOpen] = useState(false)
+  const menuRef = useRef<HTMLDivElement>(null)
 
   const exploreLinks = [
     { name: 'Who We Are', path: '/who-we-are' },
@@ -20,6 +21,18 @@ export default function Navbar() {
     e.preventDefault()
     setExploreOpen(!exploreOpen)
   }
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickAway = (e: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+        setExploreOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickAway)
+    return () => document.removeEventListener('mousedown', handleClickAway)
+  }, [])
 
   return (
     <nav className="bg-steam-metal border-b-2 border-steam-copper text-steam-text font-heading shadow-md fixed top-0 left-0 right-0 z-50">
@@ -39,11 +52,9 @@ export default function Navbar() {
           </Link>
           
           {/* Explore Dropdown */}
-          <div className="relative group">
+          <div className="relative" ref={menuRef}>
             <button
               onClick={handleExploreClick}
-              onMouseEnter={() => setExploreOpen(true)}
-              onMouseLeave={() => setExploreOpen(false)}
               className="flex items-center space-x-1 text-steam-text hover:text-steam-copper transition pb-1"
               aria-haspopup="true"
               aria-expanded={exploreOpen}
@@ -62,10 +73,7 @@ export default function Navbar() {
 
             {/* Dropdown Menu */}
             {exploreOpen && (
-              <div
-                className="absolute left-0 mt-0 w-48 bg-steam-panel border border-steam-copper rounded-md shadow-lg py-2 z-50"
-                onMouseLeave={() => setExploreOpen(false)}
-              >
+              <div className="absolute left-0 mt-0 w-48 bg-steam-panel border border-steam-copper rounded-md shadow-lg py-2 z-50">
                 {exploreLinks.map((link) => (
                   <Link
                     key={link.name}
