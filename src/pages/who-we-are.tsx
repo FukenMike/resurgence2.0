@@ -16,7 +16,7 @@ export default function WhoWeAre() {
 
       <p className="mb-4">
         We are not overlooked. We are <strong>filtered out</strong> by design.
-        We are fathers buried under bureaucracy— Flagged, disqualified, shut out
+        We are fathers—parents—people—buried under bureaucracy. Flagged, disqualified, shut out
         of support systems not built for us.
       </p>
 
@@ -57,7 +57,7 @@ export default function WhoWeAre() {
       <p className="mt-8 text-2xl font-bold text-amber-400">
         We are not a whisper anymore.
         <br />
-        <strong>We are rising.</strong>
+        <strong>We are rising—whether they're ready or not.</strong>
       </p>
     </section>
   )
