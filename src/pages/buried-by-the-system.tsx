@@ -10,43 +10,62 @@ export default function BuriedByTheSystem() {
       </h1>
 
       <p className="mb-4">
-        I was granted full custody of my children by a judge—but the system
-        overruled it. Not because I was unfit. Not because of any crime. But
-        because DHR had already filed a dependency case during my divorce. They
-        seized control of everything—my family, my freedom, my future.
+        I didn’t lose my children because I was found unfit.
+        I lost them because the system collided with itself—and chose procedure over people.
+
+        In April 2024, a divorce court granted me temporary sole legal and physical custody of my children. That order was clear. It was issued while a Department of Human Resources (DHR) investigation was still open, with the expectation that custody would stabilize once the investigation concluded.
+
+        That never happened.
+
+        Instead, a separate dependency process overtook the custody order entirely.
+
+        Before any final determination was made, a safety plan was imposed. My children were moved out of their home—not because of an adjudicated finding, but as a precaution. First to a third party. Then to another. Within weeks, Lee County DHR sought and obtained a shelter care order. On April 27, 2024, legal and physical custody was vested in DHR.
+
+        From that moment on, the custody order no longer mattered.
       </p>
 
       <p className="mb-4">
-        I wasn’t warned. I wasn’t helped. I wasn’t given support to stabilize or
-        reunify my family. I was pushed out and punished for not navigating a
-        system that was never designed to help me in the first place.
+        No criminal conviction triggered the removal.
+        No termination of parental rights occurred.
+        There was no final ruling that I was incapable of parenting my children.
+
+        What followed was not reunification—it was containment.
+
+        DHR imposed a series of requirements: drug testing, evaluations, counseling, income verification, housing stability. I complied. The other parent complied. Individualized Service Plans were created, revised, and extended. But there was no reunification date. No clear endpoint. Only rolling compliance.
       </p>
 
       <p className="mb-4">
-        Even after a judge ruled in my favor, DHR refused to return my children.
-        My custody order meant nothing. All because the Interstate Compact on
-        the Placement of Children (ICPC) process hadn’t been started. Alabama
-        wouldn’t release them, and Georgia wouldn’t initiate it—leaving my
-        children stuck in limbo.
+        When interstate placement became necessary, the system stalled again.
+
+        Because I lived in Georgia and the children were in Alabama custody, reunification required an Interstate Compact on the Placement of Children (ICPC) evaluation. Alabama DHR was responsible for initiating the process. Georgia was responsible for completing it.
+
+        Neither side moved with urgency.
+
+        Alabama would not release custody without ICPC approval.
+        Georgia could not complete an evaluation without a proper initiation.
+        The court acknowledged the process—but set no deadline and enforced no resolution.
+
+        My children were trapped in the gap.
       </p>
 
       <p className="mb-4">
-        The system that claims to protect children used paperwork and red tape
-        to tear mine away from me. I’m not the only one. Fathers across the
-        country are losing their children—not to abuse or neglect, but to
-        bureaucracy. To loopholes. To agencies that operate without oversight,
-        accountability, or urgency.
+        Months passed. Custody remained with DHR by default, not by decision. Foster care became the holding pattern. One child was flagged for therapeutic foster placement. Fees were assessed. Visitation was restricted and controlled by the same agency holding custody.
+
+        This is how families disappear in the system.
+
+        Not through termination.
+        Not through trial.
+        But through overlapping jurisdictions, endless requirements, and procedural inertia that no parent can outrun—especially without money, influence, or legal leverage.
       </p>
 
       <p className="mb-4 font-semibold italic text-steam-brass">
-        My family wasn’t failed by one bad decision. We were buried by the
-        system itself.
+        My family wasn’t destroyed by a single ruling.
+        We were buried under process.
       </p>
 
       <p className="mt-8 text-lg font-semibold text-steam-copper">
-        This page isn’t just my story—it’s a warning. And a call to action. If
-        it can happen to me, it can happen to anyone. We need reform. We need
-        accountability. And we need it now.
+        And this isn’t rare.
+        It’s structural.
       </p>
     </section>
   )
