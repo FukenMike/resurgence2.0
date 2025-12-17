@@ -70,7 +70,7 @@ export default function Experience() {
         <StoryBreak />
         <StoryBeat>
           <p>
-            We are not overlooked. We are <strong>filtered out</strong> by design. We are fathers buried under bureaucracy— Flagged, disqualified, shut out of support systems not built for us.
+            We are not overlooked. We are <strong>filtered out</strong> by design. We are fathers—parents—people—buried under bureaucracy. Flagged, disqualified, shut out of support systems not built for us.
           </p>
         </StoryBeat>
         <StoryBreak />
