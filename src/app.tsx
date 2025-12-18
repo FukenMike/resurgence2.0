@@ -32,7 +32,7 @@ export default function App() {
           <Route path="vision" element={<Vision />} />
           <Route path="founder-story" element={<FounderStory />} />
           <Route path="support" element={<Support />} />
-          <Route path="buried-by-the-system" element={<BuriedByTheSystem />} />
+          <Route path="buried-by-the-system" element={<Navigate to="/experience#cost" replace />} />
           <Route path="the-vault" element={<TheVault />} />
           <Route path="wall-of-truth" element={<WallOfTruth />} />
           <Route path="education-reform" element={<EducationReform />} />

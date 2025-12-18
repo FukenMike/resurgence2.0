@@ -19,6 +19,7 @@ export default function Experience() {
     { id: 'fracture', label: 'The Fracture' },
     { id: 'cost', label: 'The Cost' },
     { id: 'pattern', label: 'The Pattern' },
+    { id: 'mission', label: 'The Mission' },
     { id: 'voices', label: 'The Voices' },
     { id: 'response', label: 'The Response' },
   ];
