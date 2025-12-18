@@ -10,54 +10,51 @@ export default function WhoWeAre() {
       </h1>
 
       <p className="mb-4">
-        We don’t exist yet—not in the way they define existence. We’re a flicker
-        in the dark. An idea. A spark that hasn’t caught fire—<em>yet</em>.
+        The Father's Alliance is an advocacy and documentation platform examining how families are filtered, stalled, and separated by systems that claim to protect children.
       </p>
 
       <p className="mb-4">
-        We are not overlooked. We are <strong>filtered out</strong> by design.
-        We are fathers—parents—people—buried under bureaucracy. Flagged, disqualified, shut out
-        of support systems not built for us.
+        We began by listening to fathers—not because fathers are uniquely harmed, but because they were among the first to notice a pattern no one wanted named.
       </p>
 
       <p className="mb-4">
-        We are not missing—we are <strong>excluded</strong>.
+        What emerged was not a gender issue. It was a structural one.
       </p>
 
       <p className="mb-4">
-        The Father’s Alliance is born from that truth. From custody battles
-        where children become property. From courtrooms that reward conflict.
-        From systems that turn love into liability.
+        Across jurisdictions, families experiencing poverty, instability, disability, or non-conformity are processed through systems that claim to protect children while quietly prioritizing compliance, funding incentives, and risk avoidance over preservation and support.
       </p>
 
       <p className="mb-4">
-        They talk about helping families. But families like mine are left out
-        every time.
+        Fathers were simply early casualties. So were mothers. So were grandparents. So were guardians, kinship caregivers, and families already stretched thin.
+      </p>
+
+      <p className="mb-4 font-semibold text-steam-brass">
+        What We Do
       </p>
 
       <p className="mb-4">
-        There’s no help when you’re a father doing it alone. No gas cards. No
-        housing support. No margin for mistakes.
+        We document systemic filtering and institutional incentives. We translate opaque processes into plain language. We preserve testimony before it's dismissed as anecdotal. We connect personal harm to structural design.
+      </p>
+
+      <p className="mb-4 font-semibold text-steam-brass">
+        What We Are Not
       </p>
 
       <p className="mb-4">
-        We’re expected to carry it all— And blamed when we collapse under the
-        weight.
+        We are not a legal service, a political party, a grievance forum, or a charity selling hope. We are an advocacy and narrative accountability platform.
+      </p>
+
+      <p className="mb-4 font-semibold text-steam-brass">
+        Why the Name Still Matters
       </p>
 
       <p className="mb-4">
-        So we forged something new. A presence. A pulse. A counterforce.
+        The name remains because fathers were the signal—not the scope. They noticed first because they were removed first.
       </p>
 
-      <p className="mb-4">
-        This is rebellion. This is restoration. This is the heartbeat of every
-        father they tried to write out of the story.
-      </p>
-
-      <p className="mt-8 text-2xl font-bold text-amber-400">
-        We are not a whisper anymore.
-        <br />
-        <strong>We are rising—whether they're ready or not.</strong>
+      <p className="mt-8 text-lg font-semibold text-steam-copper">
+        The pattern is larger than any one group. The work is about all of us.
       </p>
     </section>
   )
