@@ -201,6 +201,86 @@ export default function Experience() {
       </StorySection>
       </div>
 
+      {/* SECTION 4.5 — THE MISSION */}
+      <div data-section-id="mission">
+      <StorySection variant="default">
+        <h2 className="text-3xl font-heading font-bold mb-6 text-steam-copper">Why The Father's Alliance Exists</h2>
+        
+        <StoryBeat>
+          <p>
+            What began as a fight for fathers exposed a much larger truth.
+          </p>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <StoryBeat>
+          <p>
+            This system does not target men alone. It targets poverty, instability, and vulnerability—then punishes families for struggling inside conditions it helped create.
+          </p>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <StoryBeat>
+          <p>
+            Mothers. Fathers. Guardians. Grandparents. If you lack money, leverage, or legal insulation, you are expendable.
+          </p>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <StoryBeat emphasis="strong">
+          <p>
+            The Father's Alliance exists because reform from inside this system has failed.
+          </p>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <StoryBeat>
+          <p>
+            We are not here to manage outcomes or negotiate favors. We are here to expose the machinery, document the damage, and build alternatives where the system refuses to change.
+          </p>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <h3 className="text-2xl font-heading font-bold mb-6 text-steam-brass">Our Mission</h3>
+
+        <StoryBeat emphasis="strong">
+          <p>
+            To break the cycle—not by asking permission, but by refusing silence.
+          </p>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <StoryBeat>
+          <p>
+            We exist to:
+          </p>
+          <ul className="list-disc list-inside space-y-2 mt-4 text-lg">
+            <li>Document how families are captured, stalled, and erased by process</li>
+            <li>Give voice to those written off as "cases" instead of people</li>
+            <li>Expose structural incentives that reward separation over support</li>
+            <li>Build parallel paths to stability that do not rely on punishment, compliance, or shame</li>
+          </ul>
+        </StoryBeat>
+
+        <StoryBreak />
+
+        <StoryBeat>
+          <p>
+            This is not about fatherhood alone. It is about survival in a system that mistakes control for care.
+          </p>
+          <p className="mt-4">
+            And it is about time someone said it out loud.
+          </p>
+        </StoryBeat>
+      </StorySection>
+      </div>
+
       {/* SECTION 5 — THE VOICES */}
       <div data-section-id="voices">
       <StorySection variant="default">
