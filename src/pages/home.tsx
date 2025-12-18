@@ -5,7 +5,7 @@ export default function Home() {
     "inline-block px-6 py-3 bg-amber-500 text-black font-semibold rounded-lg hover:bg-amber-400 transition";
 
   return (
-    <div className="flex flex-col items-center justify-center text-center px-6 md:px-0 pt-[120px]">
+    <div className="flex flex-col items-center justify-center text-center px-6 md:px-0 pt-30">
       <h1 className="text-5xl md:text-6xl font-extrabold mb-6 tracking-tight relative inline-block animate-pulse">
         <span className="text-amber-400 drop-shadow-[0_0_8px_#f59e0b]">
           We Are Rising
