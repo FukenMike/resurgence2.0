@@ -11,7 +11,6 @@ import Support from './pages/support';
 import BuriedByTheSystem from './pages/buried-by-the-system';
 import TheVault from './pages/the-vault';
 import WallOfTruth from './pages/wall-of-truth';
-import EducationReform from './pages/education-reform';
 import Connect from './pages/connect';
 import PrivacyPolicy from './pages/privacy-policy';
 
@@ -33,7 +32,6 @@ export default function App() {
           <Route path="buried-by-the-system" element={<Navigate to="/experience#cost" replace />} />
           <Route path="the-vault" element={<TheVault />} />
           <Route path="wall-of-truth" element={<WallOfTruth />} />
-          <Route path="education-reform" element={<EducationReform />} />
           <Route path="connect" element={<Connect />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />
         </Route>

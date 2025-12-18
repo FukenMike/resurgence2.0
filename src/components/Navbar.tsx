@@ -12,7 +12,7 @@ export default function Navbar() {
     { name: 'Mission', path: '/mission' },
     { name: 'Vision', path: '/vision' },
     { name: 'Founder Story', path: '/founder-story' },
-    { name: 'Buried by the System', path: '/buried-by-the-system' },
+    { name: 'Buried by the System', path: '/experience#cost' },
     { name: 'Wall of Truth', path: '/wall-of-truth' },
     { name: 'Support', path: '/support' },
     { name: 'Connect', path: '/connect' },
