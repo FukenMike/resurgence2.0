@@ -7,18 +7,22 @@ export default function Navbar() {
   const menuRef = useRef<HTMLDivElement>(null)
 
   const exploreLinks = [
-    { name: 'Home', path: '/home' },
-    { name: 'Who We Are', path: '/who-we-are' },
-    { name: 'Mission', path: '/mission' },
-    { name: 'Vision', path: '/vision' },
-    { name: 'Founder Story', path: '/founder-story' },
-    { name: 'Buried by the System', path: '/experience#cost' },
+    // Anchors keep navigation aligned to the single canonical spine
+    { name: 'Signal', path: '/experience#signal' },
+    { name: 'Pattern', path: '/experience#pattern' },
+    { name: 'Cost', path: '/experience#cost' },
+    { name: 'Mission', path: '/experience#mission' },
+    { name: 'Voices', path: '/experience#voices' },
+    { name: 'Truth', path: '/experience#truth' },
+    { name: 'Next Steps', path: '/experience#next' },
+    // Standalone utility routes remain direct
     { name: 'Wall of Truth', path: '/wall-of-truth' },
     { name: 'Support', path: '/support' },
     { name: 'Connect', path: '/connect' },
+    { name: 'The Vault', path: '/the-vault' },
   ]
 
-  const handleExploreClick = (e) => {
+  const handleExploreClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
     setExploreOpen(!exploreOpen)
   }
