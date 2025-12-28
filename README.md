@@ -1,8 +1,21 @@
-# Fresh Start
+# The Father’s Alliance Site
 
-This repository was reset on 2025-12-28 for a clean slate. All previous content and history have been removed.
+React + Vite + TypeScript + Tailwind single-page site with React Router v6.
 
-## Next steps
-- Initialize your project structure (e.g., `npm create vite@latest`, or any stack you prefer).
-- Add a new `.gitignore` suitable for your tooling.
-- Commit the new baseline when ready.
+## Scripts
+- `npm run dev` – start dev server
+- `npm run build` – production build
+- `npm run preview` – preview build
+- `npm run lint` – lint
+
+## Structure
+- `src/content/siteCopy.ts` – all page copy
+- `src/components` – shared UI (Navbar, Footer, Layout, Card, Button)
+- `src/pages` – routed pages
+
+## Getting started
+1) `npm install`
+2) `npm run dev`
+
+## Deployment
+`npm run build` produces `dist/` ready to host on any static provider.
