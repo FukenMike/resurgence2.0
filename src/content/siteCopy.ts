@@ -37,7 +37,34 @@ export const programsCopy = {
   headline: 'Service Initiatives & Pilot Programs',
   body: 'Our programs are designed to address the practical, day-to-day hurdles that prevent family stability.',
   programs: [
-    'The Navigation Pilot (Active)',
+    {
+      title: 'Mobility Stabilization Program (MSP)',
+      status: 'Active',
+      oneLiner: 'A structured support program designed to reduce missed appointments, compliance failures, and instability caused by transportation and access barriers.',
+      whatWeDo: [
+        'Assess mobility barriers impacting appointments, services, and requirements',
+        'Create a personalized mobility plan with primary and backup options',
+        'Map appointments into realistic time windows with contingency routing',
+        'Track disruptions (missed rides, cancellations, delays) with proof-ready logs',
+        'Coordinate referrals to transportation-related nonprofit and community resources',
+      ],
+      deliverables: [
+        'Personalized Mobility Stabilization Plan',
+        'Appointment Routing & Backup Map',
+        'Transportation Incident Log (printable + digital)',
+        'Weekly Schedule & Compliance Tracker',
+      ],
+      goodFit: [
+        'Transportation barriers are causing missed or late appointments',
+        'You rely on inconsistent rides, public transit, or third-party help',
+        'You need documentation that shows consistent effort and planning',
+      ],
+      notThis: [
+        'We do not provide guaranteed rides or vehicle repairs',
+        'We do not replace existing transportation programs',
+        'We do not provide legal advocacy or court representation',
+      ],
+    },
     'Stable Grounds Housing Initiative (Planned)',
     'Transit Link (Pilot)',
     'Administrative Literacy Workshops',
