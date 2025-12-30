@@ -9,6 +9,7 @@ import Resources from './pages/resources';
 import GetInvolved from './pages/get-involved';
 import Transparency from './pages/transparency';
 import NotFound from './pages/not-found';
+import ProgramMobilityStabilization from './pages/program-mobility-stabilization';
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route index element={<Home />} />
           <Route path="who-we-serve" element={<WhoWeServe />} />
           <Route path="programs" element={<Programs />} />
+          <Route path="programs/mobility-stabilization" element={<ProgramMobilityStabilization />} />
           <Route path="how-we-help" element={<HowWeHelp />} />
           <Route path="about" element={<About />} />
           <Route path="resources" element={<Resources />} />

@@ -39,35 +39,29 @@ export const programsCopy = {
   programs: [
     {
       title: 'Mobility Stabilization Program (MSP)',
-      status: 'Active',
-      oneLiner: 'A structured support program designed to reduce missed appointments, compliance failures, and instability caused by transportation and access barriers.',
-      whatWeDo: [
-        'Assess mobility barriers impacting appointments, services, and requirements',
-        'Create a personalized mobility plan with primary and backup options',
-        'Map appointments into realistic time windows with contingency routing',
-        'Track disruptions (missed rides, cancellations, delays) with proof-ready logs',
-        'Coordinate referrals to transportation-related nonprofit and community resources',
-      ],
-      deliverables: [
-        'Personalized Mobility Stabilization Plan',
-        'Appointment Routing & Backup Map',
-        'Transportation Incident Log (printable + digital)',
-        'Weekly Schedule & Compliance Tracker',
-      ],
-      goodFit: [
-        'Transportation barriers are causing missed or late appointments',
-        'You rely on inconsistent rides, public transit, or third-party help',
-        'You need documentation that shows consistent effort and planning',
-      ],
-      notThis: [
-        'We do not provide guaranteed rides or vehicle repairs',
-        'We do not replace existing transportation programs',
-        'We do not provide legal advocacy or court representation',
-      ],
+      status: 'In Development',
+      href: '/programs/mobility-stabilization',
+      summary:
+        'A vehicle-repair assistance program framework designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
     },
-    'Stable Grounds Housing Initiative (Planned)',
-    'Transit Link (Pilot)',
-    'Administrative Literacy Workshops',
+    {
+      title: 'Stable Grounds Housing Initiative',
+      status: 'Planned',
+      href: '/programs/stable-grounds',
+      summary: 'Housing stability support focused on readiness, documentation, and navigating provider requirements.',
+    },
+    {
+      title: 'Transit Link',
+      status: 'Pilot',
+      href: '/programs/transit-link',
+      summary: 'Coordinated transit planning and backup routing to reduce missed appointments and compliance risks.',
+    },
+    {
+      title: 'Administrative Literacy Workshops',
+      status: 'Workshop Series',
+      href: '/programs/administrative-literacy',
+      summary: 'Short, repeatable workshops that teach forms, documentation, and communication essentials.',
+    },
   ],
 }
 
