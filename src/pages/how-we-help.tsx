@@ -17,8 +17,8 @@ export default function HowWeHelp() {
 
       <section className="grid gap-4 md:grid-cols-4">
         {howWeHelpCopy.process.map((step, index) => (
-          <Card key={step} eyebrow={`Step ${index + 1}`} title={step}>
-            <p className="text-slate-600">Structured guidance that keeps every requirement organized and on time.</p>
+          <Card key={step.title} eyebrow={`Step ${index + 1}`} title={step.title}>
+            <p className="text-slate-600">{step.description}</p>
           </Card>
         ))}
       </section>

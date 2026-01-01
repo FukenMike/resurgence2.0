@@ -10,32 +10,33 @@ export const navLinks = [
 ]
 
 export const homeCopy = {
-  headline: 'Supporting Stability. Strengthening Families.',
+  headline: 'Stability Support That Keeps Families Moving Forward.',
   subheadline:
-    'The Father’s Alliance provides fathers and families with the navigation and resources necessary to manage complex administrative systems and maintain household stability.',
+    'The Father’s Alliance provides supplemental, practical support to help households stay stable when traditional assistance is delayed, unavailable, or exhausted—so a temporary setback doesn’t become a long-term crisis.',
   mission:
-    'To empower fathers and families by providing professional navigation services, resource coordination, and administrative support to overcome systemic barriers and foster long-term stability.',
+    'To preserve household stability and independence through timely, practical support—covering critical gaps, reducing avoidable crises, and connecting families to forward pathways when they’re ready.',
   vision:
-    'A community where every family has the tools and support needed to successfully navigate administrative challenges and maintain a secure, engaged presence in their children’s lives.',
+    'A country where families can access fast, dignified stability support that helps them stay housed, stay mobile, and keep moving toward self-sufficiency.',
   coreValues: [
-    'Integrity: We operate with transparency and hold ourselves accountable to the families we serve.',
-    'Dignity: We treat every individual with respect, acknowledging the complexities of their unique situation.',
-    'Collaboration: We work alongside existing systems and community partners to find sustainable solutions.',
-    'Neutrality: Our focus remains on service delivery and child well-being, independent of political or social rhetoric.',
+    'Stewardship: We protect resources, make disciplined decisions, and document outcomes with care.',
+    'Dignity: We help without shame, judgment, or unnecessary barriers.',
+    'Reliability: We act quickly, communicate clearly, and follow through.',
+    'Collaboration: We partner with community providers to keep support practical and sustainable.',
+    'Neutrality: We focus on stability outcomes—not rhetoric, blame, or politics.',
   ],
-  pillars: ['Navigation Support', 'Resource Coordination', 'Steady Partnership'],
+  pillars: ['Stability Support', 'Rapid Response', 'Forward Pathways'],
 }
 
 export const whoWeServeCopy = {
-  headline: 'Serving Families in Transition',
+  headline: 'Serving Households Under Real-World Pressure',
   body:
-    'The Father’s Alliance is dedicated to supporting fathers and family units who are currently navigating multi-agency involvement or experiencing socioeconomic instability.',
-  focusAreas: ['Fathers in Transition', 'Systems-Involved Families', 'Vulnerable Populations'],
+    'We serve fathers, caregivers, and families facing a stability threat—rent, utilities, transportation, or sudden financial strain—especially when traditional resources are delayed, unavailable, or already out of funding.',
+  focusAreas: ['Fathers & Caregivers', 'Working Families Under Strain', 'Households Shut Out of Traditional Aid'],
 }
 
 export const programsCopy = {
-  headline: 'Service Initiatives & Pilot Programs',
-  body: 'Our programs are designed to address the practical, day-to-day hurdles that prevent family stability.',
+  headline: 'Stability Programs & Pilots',
+  body: 'Our programs focus on real-life pressure points that can knock a household off track—before they become crises.',
   programs: [
     {
       title: 'Mobility Stabilization Program (MSP)',
@@ -45,44 +46,62 @@ export const programsCopy = {
         'A vehicle-repair assistance program framework designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
     },
     {
-      title: 'Stable Grounds Housing Initiative',
+      title: 'Household Stability Micro-Assistance',
+      status: 'Designing',
+      href: '',
+      summary:
+        'Targeted short-term support for rent gaps, utility continuity, and emergency expenses when other resources are delayed or unavailable.',
+    },
+    {
+      title: 'Forward Pathways Bridge',
       status: 'Planned',
-      href: '/programs/stable-grounds',
-      summary: 'Housing stability support focused on readiness, documentation, and navigating provider requirements.',
-    },
-    {
-      title: 'Transit Link',
-      status: 'Pilot',
-      href: '/programs/transit-link',
-      summary: 'Coordinated transit planning and backup routing to reduce missed appointments and compliance risks.',
-    },
-    {
-      title: 'Administrative Literacy Workshops',
-      status: 'Workshop Series',
-      href: '/programs/administrative-literacy',
-      summary: 'Short, repeatable workshops that teach forms, documentation, and communication essentials.',
+      href: '',
+      summary:
+        'A structured bridge into workforce and education pathways (including Vocational Rehabilitation where eligible), focused on removing short-term barriers that block progress.',
     },
   ],
 }
 
 export const howWeHelpCopy = {
-  headline: 'A Professional Approach to Navigation',
+  headline: 'How Support Works',
   body:
-    'We do not offer legal advice or advocacy; instead, we focus on administrative empowerment. We help families help themselves by clarifying the “how” of system compliance.',
-  process: ['Intake and Assessment', 'Resource Mapping', 'Action Planning', 'Ongoing Support'],
+    'We focus on stability outcomes. We do not provide legal advice; we provide practical support, clear next steps, and (when available) targeted assistance that prevents avoidable crisis escalation.',
+  process: [
+    {
+      title: 'Request & Intake',
+      description: 'A simple intake to understand the pressure point and what help has already been attempted.',
+    },
+    {
+      title: 'Stability Check',
+      description: 'We identify the smallest intervention that keeps the household stable and moving forward.',
+    },
+    {
+      title: 'Support Deployment',
+      description: 'When assistance is available, we deploy it quickly and responsibly—preferably vendor-direct.',
+    },
+    {
+      title: 'Forward Path',
+      description: 'We connect families to longer-term options (workforce, training, benefits) once stability is restored.',
+    },
+  ],
 }
 
 export const aboutCopy = {
-  headline: 'Built on Accountability',
+  headline: 'Built for Practical Impact',
   body:
-    'The Father’s Alliance was founded on the belief that when fathers are supported, children thrive. We recognize that the systems designed to help families can often be difficult to navigate without a professional partner.',
+    'The Father’s Alliance exists for the moments when a household is one problem away from falling behind—especially when traditional assistance is delayed, unavailable, or already out of funding. We focus on stabilizing families so they can stay independent and keep moving forward.',
   philosophy:
-    'We believe in the power of “Quiet Support.” By focusing on compliance, professionalism, and reliability, we help fathers demonstrate their commitment to their families in a way that is recognized by the systems serving them.',
+    'We believe in “quiet support” that protects dignity. We aim for fast, responsible, real-world help—paired with clear pathways toward long-term stability and self-sufficiency.',
 }
 
 export const resourcesCopy = {
   headline: 'Tools for Stability',
-  items: ['Document Checklist', 'Communication Templates', 'Service Directory', 'Calendar Tools'],
+  items: [
+    'Stability Planning Checklist',
+    'Communication Templates',
+    'Resource Directory (coming soon)',
+    'Household Budget Triage (coming soon)',
+  ],
 }
 
 export const getInvolvedCopy = {

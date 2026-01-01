@@ -12,7 +12,7 @@ export default function Home() {
     <div className="flex flex-col gap-10">
       <section className="grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-center">
         <div className="space-y-4">
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600">Navigation for families</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600">Supplemental stability support</p>
           <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">{homeCopy.headline}</h1>
           <p className="max-w-2xl text-lg text-slate-600">{homeCopy.subheadline}</p>
           <div className="flex flex-wrap gap-3">

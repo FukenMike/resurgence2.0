@@ -20,7 +20,7 @@ export default function About() {
           <p className="text-slate-600">{aboutCopy.philosophy}</p>
         </Card>
         <Card title="Accountability first">
-          <p className="text-slate-600">We measure success by reliability: on-time paperwork, clear communication, and steady presence for children.</p>
+          <p className="text-slate-600">We measure success by stability outcomes: evictions avoided, shutoffs prevented, transportation restored, and barriers removed—paired with disciplined documentation and responsible stewardship of every dollar.</p>
         </Card>
       </section>
     </div>
