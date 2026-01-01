@@ -7,9 +7,9 @@ export default function Footer() {
       <div className="container flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
         <div>
           <div className="text-lg font-semibold text-slate-900">The Father’s Alliance</div>
-          <p className="mt-1 text-sm text-slate-500">Administrative navigation for fathers and families.</p>
+          <p className="mt-1 text-sm text-slate-500">Supporting stability. Strengthening families.</p>
         </div>
-        <div className="flex flex-wrap gap-3 text-sm text-slate-600">
+        <div className="hidden flex-wrap gap-3 text-sm text-slate-600 md:flex">
           {navLinks.map(({ label, path }) => (
             <Link key={path} to={path} className="hover:text-slate-900">
               {label}
