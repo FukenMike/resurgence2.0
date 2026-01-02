@@ -1,0 +1,17 @@
+# Robots.txt for The Father's Alliance
+# Allow public pages to be indexed; protect any admin or internal paths
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /internal/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /node_modules/
+Disallow: /dist/
+
+# Sitemaps
+Sitemap: https://thefathersalliance.org/sitemap.xml
+
+# Respect crawl delay to avoid excessive server load
+Crawl-delay: 1

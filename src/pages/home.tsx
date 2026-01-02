@@ -2,10 +2,19 @@ import { useEffect } from 'react';
 import Card from '../components/Card';
 import { homeCopy } from '../content/siteCopy';
 import { Link } from 'react-router-dom';
+import { updatePageMeta, getOrganizationSchema, getWebsiteSchema, injectStructuredData } from '../utils/seo';
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'Home | The Father’s Alliance';
+    updatePageMeta({
+      title: "The Father's Alliance - Stability Support That Keeps Families Moving Forward",
+      description:
+        'Supplemental, practical stability support for households when traditional assistance is delayed, unavailable, or exhausted. Helping families stay housed, mobile, and moving forward.',
+      path: '/',
+    });
+    // Inject organization and website schema
+    injectStructuredData(getOrganizationSchema(), 'org-schema');
+    injectStructuredData(getWebsiteSchema(), 'website-schema');
   }, []);
 
   return (

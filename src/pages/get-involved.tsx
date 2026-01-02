@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
 import { getInvolvedCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function GetInvolved() {
   useEffect(() => {
-    document.title = 'Get Involved | The Father’s Alliance';
+    updatePageMeta({
+      title: "Get Involved - Partner With The Father's Alliance",
+      description:
+        'Join our network focused on stability. Explore professional partnerships, volunteer opportunities, and corporate giving options.',
+      path: '/get-involved',
+    });
   }, []);
 
   return (

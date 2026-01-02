@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
 import { whoWeServeCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function WhoWeServe() {
   useEffect(() => {
-    document.title = 'Who We Serve | The Father’s Alliance';
+    updatePageMeta({
+      title: "Who We Serve - The Father's Alliance",
+      description:
+        "The Father's Alliance serves fathers, caregivers, and families facing stability threats including rent, utilities, transportation, or sudden financial strain.",
+      path: '/who-we-serve',
+    });
   }, []);
 
   return (

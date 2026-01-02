@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
 import { howWeHelpCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function HowWeHelp() {
   useEffect(() => {
-    document.title = 'How We Help | The Father’s Alliance';
+    updatePageMeta({
+      title: "How Support Works - The Father's Alliance",
+      description:
+        'Our support process: intake and assessment, stability identification, rapid deployment of assistance, and connection to longer-term pathways.',
+      path: '/how-we-help',
+    });
   }, []);
 
   return (

@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
 import { transparencyCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function Transparency() {
   useEffect(() => {
-    document.title = 'Transparency | The Father’s Alliance';
+    updatePageMeta({
+      title: "Governance and Accountability - Transparency - The Father's Alliance",
+      description:
+        "The Father's Alliance holds itself to the highest standards of financial and operational transparency. Learn about our governance and nonprofit registration status.",
+      path: '/transparency',
+    });
   }, []);
 
   return (

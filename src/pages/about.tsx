@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
 import { aboutCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function About() {
   useEffect(() => {
-    document.title = 'About | The Father’s Alliance';
+    updatePageMeta({
+      title: "About The Father's Alliance - Our Mission and Philosophy",
+      description:
+        "The Father's Alliance exists for the moments when a household is one problem away from falling behind. We focus on stabilizing families through practical, dignified support.",
+      path: '/about',
+    });
   }, []);
 
   return (

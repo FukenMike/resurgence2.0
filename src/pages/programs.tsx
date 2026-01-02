@@ -2,10 +2,16 @@ import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import { programsCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function Programs() {
   useEffect(() => {
-    document.title = 'Our Programs | The Father’s Alliance';
+    updatePageMeta({
+      title: "Stability Programs and Pilots - The Father's Alliance",
+      description:
+        'Our programs focus on real-life pressure points that can knock a household off track. Includes Mobility Stabilization, Household Micro-Assistance, and Forward Pathways Bridge.',
+      path: '/programs',
+    });
   }, []);
 
   return (

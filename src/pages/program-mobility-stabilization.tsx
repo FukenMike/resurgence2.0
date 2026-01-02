@@ -1,9 +1,15 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
+import { updatePageMeta } from '../utils/seo';
 
 export default function ProgramMobilityStabilization() {
   useEffect(() => {
-    document.title = 'Mobility Stabilization Program (MSP) | The Father’s Alliance';
+    updatePageMeta({
+      title: "Mobility Stabilization Program (MSP) - The Father's Alliance",
+      description:
+        'Vehicle-repair assistance program designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
+      path: '/programs/mobility-stabilization',
+    });
   }, []);
 
   return (

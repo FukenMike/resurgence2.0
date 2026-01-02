@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
 import { resourcesCopy } from '../content/siteCopy';
+import { updatePageMeta } from '../utils/seo';
 
 export default function Resources() {
   useEffect(() => {
-    document.title = 'Resources | The Father’s Alliance';
+    updatePageMeta({
+      title: "Tools for Stability - Resources - The Father's Alliance",
+      description:
+        'Practical tools and resources for stability planning, communication, and budgeting. Simple, accessible guidance for families navigating household stability.',
+      path: '/resources',
+    });
   }, []);
 
   return (
