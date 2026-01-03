@@ -16,6 +16,15 @@ export default function Footer() {
             </Link>
           ))}
         </div>
+        <div className="flex flex-wrap gap-3 text-xs text-slate-500">
+          <Link to="/privacy-policy" className="hover:text-slate-800">
+            Privacy Policy
+          </Link>
+          <span aria-hidden>|</span>
+          <Link to="/terms-of-service" className="hover:text-slate-800">
+            Terms of Service
+          </Link>
+        </div>
       </div>
     </footer>
   );

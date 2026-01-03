@@ -10,6 +10,8 @@ import GetInvolved from './pages/get-involved';
 import Transparency from './pages/transparency';
 import NotFound from './pages/not-found';
 import ProgramMobilityStabilization from './pages/program-mobility-stabilization';
+import PrivacyPolicy from './pages/privacy-policy';
+import TermsOfService from './pages/terms-of-service';
 
 export default function App() {
   return (
@@ -25,6 +27,8 @@ export default function App() {
           <Route path="resources" element={<Resources />} />
           <Route path="get-involved" element={<GetInvolved />} />
           <Route path="transparency" element={<Transparency />} />
+          <Route path="privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="terms-of-service" element={<TermsOfService />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
