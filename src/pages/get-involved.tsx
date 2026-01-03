@@ -28,6 +28,46 @@ export default function GetInvolved() {
           </Card>
         ))}
       </section>
-    </div>
+      <section id="support-our-work" className="space-y-4">
+        <div className="space-y-3">
+          <h2 className="text-2xl font-semibold text-slate-900">Support Our Work</h2>
+          <p className="max-w-3xl text-slate-600">
+            Donations support infrastructure, verification processes, and program development that help us provide timely, practical stability support. Your contribution helps keep families housed, mobile, and moving forward.
+          </p>
+        </div>
+
+        <div className="card-surface max-w-2xl space-y-4 p-6 md:p-8">
+          <div className="space-y-2">
+            <h3 className="text-lg font-semibold text-slate-900">Make a Donation</h3>
+            <p className="text-sm text-slate-600">
+              Your support helps us respond quickly when traditional assistance is delayed, unavailable, or exhausted.
+            </p>
+          </div>
+
+          {/* TODO: Replace this placeholder button with Stripe Payment Link or embedded checkout */}
+          {/* Stripe integration placeholder - button will be replaced with actual payment mechanism */}
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => {
+                // TODO: This placeholder will be replaced with Stripe payment link/checkout
+                console.warn('Stripe integration pending');
+              }}
+              className="rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-sky-700"
+              aria-label="Donate to support our work"
+            >
+              Donate
+            </button>
+            <span className="text-xs text-slate-500">Secure donation processing</span>
+          </div>
+
+          <p className="text-xs text-slate-500">
+            Donations are generally non-refundable unless required by law. Questions? Contact{' '}
+            <a href="mailto:support@thefathersalliance.org" className="text-sky-700 hover:underline">
+              support@thefathersalliance.org
+            </a>
+            .
+          </p>
+        </div>
+      </section>    </div>
   );
 }
