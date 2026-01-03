@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import Layout from '../components/Layout';
 import { VerificationBadge } from '../components/resources/VerificationBadge';
 import { OutcomeButtons } from '../components/resources/OutcomeButtons';
 import { AdminNoteForm } from '../components/resources/AdminNoteForm';
@@ -13,6 +12,8 @@ import { updatePageMeta } from '../utils/seo';
  * Displays complete information about a specific resource
  * 
  * TODO: Replace getResourceBySlug with API call to /api/resources/:slug
++ * 
++ * Note: Layout wrapper removed - already applied at route level via <Outlet />
  */
 export function ResourceDetail() {
   const { slug } = useParams<{ slug: string }>();
@@ -37,6 +38,7 @@ export function ResourceDetail() {
   const relatedResources = getResourcesByCategory(resource.category)
     .filter((r) => r.id !== resource.id)
     .slice(0, 3);
+  // Fix: Removed <Layout> wrapper - Layout is already applied at route level
 
   const getCostBadge = (cost: string) => {
     const badges = {
@@ -48,8 +50,7 @@ export function ResourceDetail() {
   };
 
   return (
-    <Layout>
-      <div className="max-w-5xl mx-auto px-4 py-12">
+    <div className="max-w-5xl mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav className="mb-6 text-sm">
           <Link to="/resources" className="text-blue-600 hover:text-blue-700">
@@ -234,6 +235,5 @@ export function ResourceDetail() {
           </section>
         )}
       </div>
-    </Layout>
   );
 }

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
 import { ResourceCard } from '../components/resources/ResourceCard';
 import { resources, type ResourceCategory } from '../data/resources.seed';
 import type { Resource } from '../data/resources.seed';
@@ -11,6 +10,8 @@ import { updatePageMeta } from '../utils/seo';
  * 
  * TODO: Replace local filtering with API calls when backend is ready
  * TODO: Add pagination for larger datasets
++ * 
++ * Note: Layout wrapper removed - already applied at route level via <Outlet />
  */
 export function ResourcesDirectory() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -42,6 +43,8 @@ export function ResourcesDirectory() {
     'Education & Training',
     'Emergency Services',
   ];
+  // Fix: Removed <Layout> wrapper - Layout is already applied at route level
+  // The double-wrap was causing a blank page because the inner Layout has no <Outlet />
 
   const states = Array.from(new Set(resources.map((r) => r.serviceArea.state))).sort();
 
@@ -110,8 +113,7 @@ export function ResourcesDirectory() {
   ].reduce((sum, val) => sum + val, 0);
 
   return (
-    <Layout>
-      <div className="max-w-7xl mx-auto px-4 py-12">
+    <div className="max-w-7xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Resource Directory</h1>
@@ -283,6 +285,5 @@ export function ResourcesDirectory() {
           </div>
         )}
       </div>
-    </Layout>
   );
 }
