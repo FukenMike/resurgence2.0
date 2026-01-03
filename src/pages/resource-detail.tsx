@@ -24,7 +24,7 @@ export function ResourceDetail() {
       updatePageMeta({
         title: `${resource.name} | Resource Directory`,
         description: resource.description,
-        path: `/resources/${resource.slug}`,
+        path: `/resources/directory/${resource.slug}`,
       });
     }
   }, [resource]);
@@ -53,7 +53,7 @@ export function ResourceDetail() {
     <div className="max-w-5xl mx-auto px-4 py-12">
         {/* Breadcrumb */}
         <nav className="mb-6 text-sm">
-          <Link to="/resources" className="text-blue-600 hover:text-blue-700">
+          <Link to="/resources/directory" className="text-blue-600 hover:text-blue-700">
             ← Back to Resource Directory
           </Link>
         </nav>

@@ -26,9 +26,10 @@ export default function App() {
           <Route path="programs/mobility-stabilization" element={<ProgramMobilityStabilization />} />
           <Route path="how-we-help" element={<HowWeHelp />} />
           <Route path="about" element={<About />} />
-          <Route path="resources" element={<ResourcesDirectory />} />
-          <Route path="resources/:slug" element={<ResourceDetail />} />
-          <Route path="resources-tools" element={<ResourcesTools />} />
+          {/* /resources restored to original tools layout; directory lives under /resources/directory */}
+          <Route path="resources" element={<ResourcesTools />} />
+          <Route path="resources/directory" element={<ResourcesDirectory />} />
+          <Route path="resources/directory/:slug" element={<ResourceDetail />} />
           <Route path="get-involved" element={<GetInvolved />} />
           <Route path="transparency" element={<Transparency />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />

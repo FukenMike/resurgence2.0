@@ -47,7 +47,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
 
   return (
     <Link
-      to={`/resources/${resource.slug}`}
+      to={`/resources/directory/${resource.slug}`}
       className="block bg-white border border-gray-200 rounded-lg p-5 hover:shadow-lg hover:border-gray-300 transition-all"
     >
       <div className="flex items-start justify-between gap-3 mb-3">
