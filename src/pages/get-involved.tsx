@@ -47,7 +47,7 @@ export default function GetInvolved() {
           {/* Stripe donation link - opens in new tab for secure payment processing */}
           <div className="flex items-center gap-3">
             <a
-              href="https://donate.stripe.com/cNi6oIbYM6s2boseUV"
+              href="https://donate.stripe.com/cNi6oIbYM6s2boseqdgIo00"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-sky-700"
