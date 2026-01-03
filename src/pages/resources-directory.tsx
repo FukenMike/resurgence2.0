@@ -25,7 +25,7 @@ export function ResourcesDirectory() {
   useEffect(() => {
     updatePageMeta({
       title: 'Resource Directory | The Father\'s Alliance',
-      description: 'Find verified resources including legal aid, housing assistance, mental health support, employment services, and more for fathers in California.',
+      description: 'Find verified organizations and programs offering support across a range of needs including legal services, housing, mental health, employment, and more in California.',
       path: '/resources/directory',
     });
   }, []);
@@ -118,8 +118,8 @@ export function ResourcesDirectory() {
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-3">Resource Directory</h1>
           <p className="text-lg text-gray-700">
-            Find verified resources to support your journey as a father. All listings are reviewed for accuracy and 
-            include community feedback to help you make informed decisions.
+            Find verified organizations and programs offering support across a range of needs. Listings are reviewed for accuracy and 
+            include community-reported outcomes to help people make informed decisions during times of need.
           </p>
         </div>
 
