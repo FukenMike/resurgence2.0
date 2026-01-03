@@ -44,19 +44,17 @@ export default function GetInvolved() {
             </p>
           </div>
 
-          {/* TODO: Replace this placeholder button with Stripe Payment Link or embedded checkout */}
-          {/* Stripe integration placeholder - button will be replaced with actual payment mechanism */}
+          {/* Stripe donation link - opens in new tab for secure payment processing */}
           <div className="flex items-center gap-3">
-            <button
-              onClick={() => {
-                // TODO: This placeholder will be replaced with Stripe payment link/checkout
-                console.warn('Stripe integration pending');
-              }}
+            <a
+              href="https://donate.stripe.com/cNi6oIbYM6s2boseUV"
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-sky-700"
               aria-label="Donate to support our work"
             >
               Donate
-            </button>
+            </a>
             <span className="text-xs text-slate-500">Secure donation processing</span>
           </div>
 
