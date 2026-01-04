@@ -41,6 +41,19 @@ export function ResourceDetail() {
 
         // Parse JSON fields
         const parsedResource = parseResourceJsonFields(resourceData);
+        
+        // Debug mode - can be enabled to verify data in component
+        const DEBUG_DETAIL_PAGE = false;
+        if (DEBUG_DETAIL_PAGE) {
+          console.log('[ResourceDetail] Loaded resource:', {
+            title: parsedResource.title,
+            hasOrganization: !!parsedResource.organization,
+            organization: parsedResource.organization,
+            serviceAreasCount: parsedResource.service_areas?.length || 0,
+            serviceAreas: parsedResource.service_areas,
+          });
+        }
+        
         setResource(parsedResource);
 
         // Load related resources by category (same category, excluding current)
@@ -261,75 +274,104 @@ export function ResourceDetail() {
         </section>
       )}
 
-      {/* Contact Information */}
-      <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Contact Information</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {resource.organization?.phone && (
-            <div>
-              <div className="text-sm font-medium text-gray-500 mb-1">Phone</div>
-              <a href={`tel:${resource.organization.phone}`} className="text-blue-600 hover:text-blue-700">
-                {resource.organization.phone}
-              </a>
-            </div>
-          )}
-          {resource.organization?.email && (
-            <div>
-              <div className="text-sm font-medium text-gray-500 mb-1">Email</div>
-              <a href={`mailto:${resource.organization.email}`} className="text-blue-600 hover:text-blue-700">
-                {resource.organization.email}
-              </a>
-            </div>
-          )}
-          {resource.organization?.website && (
-            <div>
-              <div className="text-sm font-medium text-gray-500 mb-1">Website</div>
-              <a
-                href={resource.organization.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 hover:text-blue-700"
-              >
-                Visit Website →
-              </a>
-            </div>
-          )}
-          {resource.hours && (
-            <div>
-              <div className="text-sm font-medium text-gray-500 mb-1">Hours</div>
-              <div className="text-gray-700">{resource.hours}</div>
-            </div>
-          )}
-          {resource.service_areas && resource.service_areas.length > 0 && (
-            <div>
-              <div className="text-sm font-medium text-gray-500 mb-1">Service Areas</div>
-              <div className="text-gray-700">
-                {resource.service_areas
-                  .map((sa) => {
-                    const parts = [];
-                    if (sa.coverage === 'national') return 'National Coverage';
-                    if (sa.zip) parts.push(`ZIP: ${sa.zip}`);
-                    if (sa.city_name) parts.push(sa.city_name);
-                    if (sa.state_code) parts.push(sa.state_code);
-                    return parts.join(', ');
-                  })
-                  .filter(Boolean)
-                  .slice(0, 3)
-                  .join('; ')}
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
       {/* Organization Info */}
       {resource.organization && (
         <section className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Organization</h2>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">{resource.organization.name}</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-3">{resource.organization.name}</h3>
           {resource.organization.description && (
-            <p className="text-gray-700 mb-3">{resource.organization.description}</p>
+            <p className="text-gray-700 mb-4">{resource.organization.description}</p>
           )}
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+            {resource.organization.phone && (
+              <div>
+                <div className="text-sm font-medium text-gray-500 mb-1">Phone</div>
+                <a href={`tel:${resource.organization.phone}`} className="text-blue-600 hover:text-blue-700 font-medium">
+                  {resource.organization.phone}
+                </a>
+              </div>
+            )}
+            {resource.organization.email && (
+              <div>
+                <div className="text-sm font-medium text-gray-500 mb-1">Email</div>
+                <a href={`mailto:${resource.organization.email}`} className="text-blue-600 hover:text-blue-700 font-medium break-all">
+                  {resource.organization.email}
+                </a>
+              </div>
+            )}
+            {resource.organization.website && (
+              <div>
+                <div className="text-sm font-medium text-gray-500 mb-1">Website</div>
+                <a
+                  href={resource.organization.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
+                >
+                  Visit Website
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+            )}
+            {resource.hours && (
+              <div>
+                <div className="text-sm font-medium text-gray-500 mb-1">Hours</div>
+                <div className="text-gray-700">{resource.hours}</div>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Service Areas / Coverage */}
+      {resource.service_areas && resource.service_areas.length > 0 ? (
+        <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Service Areas & Coverage</h2>
+          <div className="space-y-3">
+            {resource.service_areas.map((sa, index) => {
+              let displayText = '';
+              let icon = '📍';
+              
+              if (sa.coverage === 'national') {
+                displayText = 'National Coverage';
+                icon = '🌎';
+              } else if (sa.coverage === 'state' && sa.state_code) {
+                displayText = `Statewide: ${sa.state_code}`;
+                icon = '🗺️';
+              } else if (sa.coverage === 'city' && sa.city_name) {
+                displayText = `${sa.city_name}${sa.state_code ? `, ${sa.state_code}` : ''}`;
+                icon = '🏙️';
+              } else if (sa.coverage === 'zip' && sa.zip) {
+                displayText = `ZIP Code: ${sa.zip}`;
+                icon = '📮';
+              } else if (sa.coverage === 'county' && sa.county_fips) {
+                displayText = `County: ${sa.county_fips}${sa.state_code ? ` (${sa.state_code})` : ''}`;
+                icon = '🏛️';
+              } else {
+                // Fallback for incomplete data
+                const parts = [];
+                if (sa.city_name) parts.push(sa.city_name);
+                if (sa.state_code) parts.push(sa.state_code);
+                if (sa.zip) parts.push(`ZIP: ${sa.zip}`);
+                displayText = parts.join(', ') || 'Coverage area';
+              }
+              
+              return (
+                <div key={index} className="flex items-start gap-3 text-gray-700">
+                  <span className="text-xl">{icon}</span>
+                  <span>{displayText}</span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      ) : (
+        <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Service Areas & Coverage</h2>
+          <p className="text-gray-600 italic">Coverage not listed yet.</p>
         </section>
       )}
 

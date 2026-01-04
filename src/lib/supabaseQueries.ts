@@ -100,11 +100,28 @@ export async function fetchResourceBySlug(slug: string): Promise<Resource | null
 
   if (!resource) return null;
 
-  return {
+  // Debug mode - can be enabled to verify data shape
+  const DEBUG_RESOURCE_FETCH = false;
+  if (DEBUG_RESOURCE_FETCH) {
+    console.log('[fetchResourceBySlug] Raw Supabase response:', resource);
+  }
+
+  const normalized = {
     ...resource,
     organization: Array.isArray(resource.organizations) ? resource.organizations[0] : resource.organizations,
-    service_areas: resource.resource_service_areas,
+    service_areas: resource.resource_service_areas || [],
   } as Resource;
+
+  if (DEBUG_RESOURCE_FETCH) {
+    console.log('[fetchResourceBySlug] Normalized resource:', {
+      hasOrganization: !!normalized.organization,
+      organizationData: normalized.organization,
+      serviceAreasCount: normalized.service_areas?.length || 0,
+      serviceAreas: normalized.service_areas,
+    });
+  }
+
+  return normalized;
 }
 
 /**
