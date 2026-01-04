@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import type { Resource } from '../../data/resources.seed';
+import type { Resource } from '../../lib/types';
 import { VerificationBadge } from './VerificationBadge';
 
 interface ResourceCardProps {
@@ -45,6 +45,28 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     return colors[category] || 'bg-gray-100 text-gray-800';
   };
 
+  // Get service area display
+  const getServiceAreaDisplay = (): string => {
+    if (!resource.service_areas || resource.service_areas.length === 0) {
+      return 'Coverage area not specified';
+    }
+
+    const sa = resource.service_areas[0];
+    if (sa.coverage === 'national') {
+      return 'National Coverage';
+    }
+    if (sa.city_name) {
+      return `${sa.city_name}${sa.state_code ? ', ' + sa.state_code : ''}`;
+    }
+    if (sa.state_code) {
+      return sa.state_code;
+    }
+    if (sa.zip) {
+      return `ZIP: ${sa.zip}`;
+    }
+    return 'Coverage area';
+  };
+
   return (
     <Link
       to={`/resources/directory/${resource.slug}`}
@@ -52,11 +74,11 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <h3 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-          {resource.name}
+          {resource.title}
         </h3>
         <VerificationBadge
-          status={resource.verificationStatus}
-          lastVerified={resource.lastVerified}
+          status={resource.verification}
+          lastVerified={resource.last_verified_at}
           compact
         />
       </div>
@@ -72,28 +94,18 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         )}
       </div>
 
-      <p className="text-gray-700 mb-3 line-clamp-2">{resource.description}</p>
+      <p className="text-gray-700 mb-3 line-clamp-2">{resource.summary}</p>
 
-      <div className="flex flex-wrap gap-2 mb-3">
-        {resource.tags.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            className="inline-block px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded"
-          >
-            {tag}
-          </span>
-        ))}
-        {resource.tags.length > 3 && (
-          <span className="inline-block px-2 py-1 text-gray-500 text-xs">
-            +{resource.tags.length - 3} more
-          </span>
-        )}
-      </div>
+      {/* Organization name if available */}
+      {resource.organization && (
+        <div className="mb-2 text-sm text-gray-600">
+          <span className="font-medium">By: {resource.organization.name}</span>
+        </div>
+      )}
 
       <div className="flex items-center justify-between text-sm text-gray-600 pt-3 border-t border-gray-200">
         <div>
-          <span className="font-medium">{resource.serviceArea.city || resource.serviceArea.county}</span>
-          {resource.serviceArea.state && <span>, {resource.serviceArea.state}</span>}
+          <span className="font-medium">{getServiceAreaDisplay()}</span>
         </div>
         {outcomeSummary && outcomeSummary.total > 0 && (
           <div className="flex items-center gap-1 text-xs">

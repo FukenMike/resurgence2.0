@@ -1,103 +1,91 @@
 import React, { useEffect, useState } from 'react';
 import { ResourceCard } from '../components/resources/ResourceCard';
-import { resources, type ResourceCategory } from '../data/resources.seed';
-import type { Resource } from '../data/resources.seed';
 import { updatePageMeta } from '../utils/seo';
+import { fetchAllResources, filterResources, getUniqueCategoriesFromResources } from '../lib/supabaseQueries';
+import { hasValidSupabaseConfig } from '../lib/supabaseClient';
+import type { Resource } from '../lib/types';
 
 /**
  * Resource Directory listing page
  * Displays searchable, filterable directory of resources for fathers
  * 
- * TODO: Replace local filtering with API calls when backend is ready
- * TODO: Add pagination for larger datasets
-+ * 
-+ * Note: Layout wrapper removed - already applied at route level via <Outlet />
+ * Fetches resources from Supabase with filtering by:
+ * - Text search (title, summary, org name)
+ * - Category, cost, access, verification
+ * - Optional location filter by ZIP code
  */
 export function ResourcesDirectory() {
+  const [allResources, setAllResources] = useState<Resource[]>([]);
+  const [filteredResources, setFilteredResources] = useState<Resource[]>([]);
+  const [categories, setCategories] = useState<string[]>([]);
+  
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<ResourceCategory | 'All'>('All');
-  const [selectedState, setSelectedState] = useState<string>('All');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedZip, setSelectedZip] = useState<string>('');
   const [selectedCost, setSelectedCost] = useState<'free' | 'paid' | 'sliding-scale' | 'All'>('All');
   const [selectedAccess, setSelectedAccess] = useState<string>('All');
   const [selectedVerification, setSelectedVerification] = useState<'verified' | 'stale' | 'unverified' | 'All'>('All');
-  const [filteredResources, setFilteredResources] = useState<Resource[]>(resources);
+  
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [zipcodeLocationCache, setZipcodeLocationCache] = useState<Map<string, any>>(new Map());
 
+  // Load resources from Supabase on mount
   useEffect(() => {
+    const loadResources = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const data = await fetchAllResources();
+        setAllResources(data);
+        const uniqueCategories = getUniqueCategoriesFromResources(data);
+        setCategories(uniqueCategories);
+      } catch (err) {
+        console.error('Failed to load resources:', err);
+        setError('Failed to load resources. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadResources();
+    
     updatePageMeta({
       title: 'Resource Directory | The Father\'s Alliance',
-      description: 'Find verified organizations and programs offering support across a range of needs including legal services, housing, mental health, employment, and more in California.',
+      description: 'Find verified organizations and programs offering support across a range of needs including legal services, housing, mental health, employment, and more.',
       path: '/resources/directory',
     });
   }, []);
 
-  // Extract unique values for filters
-  const categories: ResourceCategory[] = [
-    'Legal Services',
-    'Housing Assistance',
-    'Mental Health',
-    'Employment Services',
-    'Food & Basic Needs',
-    'Healthcare',
-    'Transportation',
-    'Child Support',
-    'Education & Training',
-    'Emergency Services',
-  ];
-  // Fix: Removed <Layout> wrapper - Layout is already applied at route level
-  // The double-wrap was causing a blank page because the inner Layout has no <Outlet />
-
-  const states = Array.from(new Set(resources.map((r) => r.serviceArea.state))).sort();
-
-  const accessTypes = ['Walk-in', 'Appointment', 'Referral', 'Online'];
-
   // Filter resources based on all criteria
   useEffect(() => {
-    let filtered = resources;
+    const applyFilters = async () => {
+      try {
+        const filtered = await filterResources(
+          allResources,
+          {
+            searchQuery,
+            category: selectedCategory,
+            cost: selectedCost,
+            access: selectedAccess,
+            verification: selectedVerification,
+            zip: selectedZip,
+          },
+          zipcodeLocationCache
+        );
+        setFilteredResources(filtered);
+      } catch (err) {
+        console.error('Failed to filter resources:', err);
+      }
+    };
 
-    // Search filter
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(
-        (r) =>
-          r.name.toLowerCase().includes(query) ||
-          r.description.toLowerCase().includes(query) ||
-          r.tags.some((tag) => tag.toLowerCase().includes(query)) ||
-          r.whatTheyProvide.some((service) => service.toLowerCase().includes(query))
-      );
-    }
-
-    // Category filter
-    if (selectedCategory !== 'All') {
-      filtered = filtered.filter((r) => r.category === selectedCategory);
-    }
-
-    // State filter
-    if (selectedState !== 'All') {
-      filtered = filtered.filter((r) => r.serviceArea.state === selectedState);
-    }
-
-    // Cost filter
-    if (selectedCost !== 'All') {
-      filtered = filtered.filter((r) => r.cost === selectedCost);
-    }
-
-    // Access type filter
-    if (selectedAccess !== 'All') {
-      filtered = filtered.filter((r) => r.accessType.includes(selectedAccess as any));
-    }
-
-    // Verification filter
-    if (selectedVerification !== 'All') {
-      filtered = filtered.filter((r) => r.verificationStatus === selectedVerification);
-    }
-
-    setFilteredResources(filtered);
-  }, [searchQuery, selectedCategory, selectedState, selectedCost, selectedAccess, selectedVerification]);
+    applyFilters();
+  }, [searchQuery, selectedCategory, selectedZip, selectedCost, selectedAccess, selectedVerification, allResources]);
 
   const handleResetFilters = () => {
     setSearchQuery('');
     setSelectedCategory('All');
-    setSelectedState('All');
+    setSelectedZip('');
     setSelectedCost('All');
     setSelectedAccess('All');
     setSelectedVerification('All');
@@ -106,11 +94,27 @@ export function ResourcesDirectory() {
   const activeFilterCount = [
     searchQuery.trim() ? 1 : 0,
     selectedCategory !== 'All' ? 1 : 0,
-    selectedState !== 'All' ? 1 : 0,
+    selectedZip.trim() ? 1 : 0,
     selectedCost !== 'All' ? 1 : 0,
     selectedAccess !== 'All' ? 1 : 0,
     selectedVerification !== 'All' ? 1 : 0,
   ].reduce((sum, val) => sum + val, 0);
+
+  const accessTypes = ['Walk-in', 'Appointment', 'Referral', 'Online'];
+
+  // Runtime guard for missing Supabase config
+  if (!hasValidSupabaseConfig) {
+    return (
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-red-900 mb-2">Configuration Error</h2>
+          <p className="text-red-700">
+            Supabase environment variables are not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file and restart the development server.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
@@ -123,6 +127,13 @@ export function ResourcesDirectory() {
           </p>
         </div>
 
+        {/* Error State */}
+        {error && (
+          <div className="mb-8 bg-red-50 border border-red-200 rounded-lg p-4">
+            <p className="text-red-700">{error}</p>
+          </div>
+        )}
+
         {/* Search and Filters */}
         <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
           {/* Search Bar */}
@@ -133,15 +144,16 @@ export function ResourcesDirectory() {
             <input
               id="search"
               type="text"
-              placeholder="Search by name, description, or tags..."
+              placeholder="Search by name, description, or organization..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              disabled={loading}
             />
           </div>
 
           {/* Filters Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4 mb-4">
             {/* Category Filter */}
             <div>
               <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-2">
@@ -150,8 +162,9 @@ export function ResourcesDirectory() {
               <select
                 id="category"
                 value={selectedCategory}
-                onChange={(e) => setSelectedCategory(e.target.value as ResourceCategory | 'All')}
+                onChange={(e) => setSelectedCategory(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={loading}
               >
                 <option value="All">All Categories</option>
                 {categories.map((cat) => (
@@ -162,24 +175,20 @@ export function ResourcesDirectory() {
               </select>
             </div>
 
-            {/* Location Filter */}
+            {/* ZIP Code Filter */}
             <div>
-              <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-2">
-                State
+              <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-2">
+                ZIP Code
               </label>
-              <select
-                id="state"
-                value={selectedState}
-                onChange={(e) => setSelectedState(e.target.value)}
+              <input
+                id="zip"
+                type="text"
+                placeholder="Enter ZIP code"
+                value={selectedZip}
+                onChange={(e) => setSelectedZip(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="All">All States</option>
-                {states.map((state) => (
-                  <option key={state} value={state}>
-                    {state}
-                  </option>
-                ))}
-              </select>
+                disabled={loading}
+              />
             </div>
 
             {/* Cost Filter */}
@@ -192,6 +201,7 @@ export function ResourcesDirectory() {
                 value={selectedCost}
                 onChange={(e) => setSelectedCost(e.target.value as any)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={loading}
               >
                 <option value="All">Any Cost</option>
                 <option value="free">Free</option>
@@ -210,6 +220,7 @@ export function ResourcesDirectory() {
                 value={selectedAccess}
                 onChange={(e) => setSelectedAccess(e.target.value)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={loading}
               >
                 <option value="All">Any Access Type</option>
                 {accessTypes.map((type) => (
@@ -230,6 +241,7 @@ export function ResourcesDirectory() {
                 value={selectedVerification}
                 onChange={(e) => setSelectedVerification(e.target.value as any)}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={loading}
               >
                 <option value="All">All Status</option>
                 <option value="verified">Verified</option>
@@ -237,39 +249,56 @@ export function ResourcesDirectory() {
                 <option value="unverified">Unverified</option>
               </select>
             </div>
+
+            {/* Reset Button */}
+            <div className="flex items-end">
+              <button
+                onClick={handleResetFilters}
+                className="w-full px-3 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 font-medium transition-colors"
+                disabled={loading || activeFilterCount === 0}
+              >
+                Reset
+              </button>
+            </div>
           </div>
 
-          {/* Active Filters & Reset */}
+          {/* Active Filters Info */}
           {activeFilterCount > 0 && (
-            <div className="flex items-center justify-between pt-4 border-t border-gray-200">
+            <div className="pt-4 border-t border-gray-200">
               <span className="text-sm text-gray-600">
                 {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} active
               </span>
-              <button
-                onClick={handleResetFilters}
-                className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-              >
-                Reset All Filters
-              </button>
             </div>
           )}
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="flex justify-center items-center py-12">
+            <div className="flex flex-col items-center">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+              <p className="text-gray-600">Loading resources...</p>
+            </div>
+          </div>
+        )}
+
         {/* Results Count */}
-        <div className="mb-6">
-          <p className="text-gray-700">
-            Showing <strong>{filteredResources.length}</strong> of <strong>{resources.length}</strong> resources
-          </p>
-        </div>
+        {!loading && (
+          <div className="mb-6">
+            <p className="text-gray-700">
+              Showing <strong>{filteredResources.length}</strong> of <strong>{allResources.length}</strong> resources
+            </p>
+          </div>
+        )}
 
         {/* Results List */}
-        {filteredResources.length > 0 ? (
+        {!loading && filteredResources.length > 0 ? (
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {filteredResources.map((resource) => (
               <ResourceCard key={resource.id} resource={resource} />
             ))}
           </div>
-        ) : (
+        ) : !loading ? (
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-12 text-center">
             <div className="text-4xl mb-4">🔍</div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">No Resources Found</h3>
@@ -283,7 +312,7 @@ export function ResourcesDirectory() {
               Reset All Filters
             </button>
           </div>
-        )}
+        ) : null}
       </div>
   );
 }

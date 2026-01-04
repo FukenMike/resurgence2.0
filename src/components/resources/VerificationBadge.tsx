@@ -1,9 +1,9 @@
 import React from 'react';
-import type { VerificationStatus } from '../../data/resources.seed';
+import type { VerificationStatus } from '../../lib/types';
 
 interface VerificationBadgeProps {
   status: VerificationStatus;
-  lastVerified: string;
+  lastVerified?: string;
   compact?: boolean;
 }
 
@@ -12,9 +12,11 @@ interface VerificationBadgeProps {
  * Shows Verified (green), Stale (yellow), or Unverified (gray)
  */
 export function VerificationBadge({ status, lastVerified, compact = false }: VerificationBadgeProps) {
-  const verifiedDate = new Date(lastVerified);
+  const verifiedDate = lastVerified ? new Date(lastVerified) : null;
   const now = new Date();
-  const daysSinceVerification = Math.floor((now.getTime() - verifiedDate.getTime()) / (1000 * 60 * 60 * 24));
+  const daysSinceVerification = verifiedDate
+    ? Math.floor((now.getTime() - verifiedDate.getTime()) / (1000 * 60 * 60 * 24))
+    : null;
 
   const getStatusConfig = () => {
     switch (status) {
@@ -48,7 +50,7 @@ export function VerificationBadge({ status, lastVerified, compact = false }: Ver
     return (
       <span
         className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium ${config.bgColor} ${config.textColor}`}
-        title={`Last verified: ${verifiedDate.toLocaleDateString()}`}
+        title={verifiedDate ? `Last verified: ${verifiedDate.toLocaleDateString()}` : 'Verification status unknown'}
       >
         <span>{config.icon}</span>
         <span>{config.label}</span>
@@ -63,8 +65,14 @@ export function VerificationBadge({ status, lastVerified, compact = false }: Ver
         <span>{config.label}</span>
       </div>
       <div className={`text-xs ${config.textColor} opacity-80`}>
-        Last verified: {verifiedDate.toLocaleDateString()}
-        {status === 'stale' && ` (${daysSinceVerification} days ago)`}
+        {verifiedDate ? (
+          <>
+            Last verified: {verifiedDate.toLocaleDateString()}
+            {status === 'stale' && ` (${daysSinceVerification} days ago)`}
+          </>
+        ) : (
+          'Verification date unknown'
+        )}
       </div>
     </div>
   );
