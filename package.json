@@ -7,7 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "supabase:status": "supabase status",
+    "supabase:link": "supabase link --project-ref $SUPABASE_PROJECT_REF",
+    "supabase:pull": "supabase db pull",
+    "supabase:push": "supabase db push",
+    "supabase:gen-types": "supabase gen types typescript --schema public --project-id $SUPABASE_PROJECT_REF > src/lib/supabase/types.gen.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.89.0",

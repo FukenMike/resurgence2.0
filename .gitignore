@@ -11,3 +11,20 @@ yarn-error.log*
 # Editor
 .vscode/
 .DS_Store
+
+# Env files (keep .env.example)
+.env
+.env.*
+!.env.example
+
+# Supabase local artifacts
+supabase/.temp/
+supabase/.branches/
+supabase/.logs/
+supabase/.cache/
+supabase/.env
+supabase/.env.*
+supabase/docker/.env
+
+# Generated types (optional)
+src/lib/supabase/types.gen.ts

@@ -1,0 +1,22 @@
+# Supabase CLI configuration
+# See: https://supabase.com/docs/guides/cli/config
+
+project_id = "kkavyqtcvobrzlcztbpj"
+
+[project]
+# The default schema(s) to manage
+schemas = ["public"]
+
+[api]
+enabled = true
+port = 54322
+schema = "public,storage,graphql_public"
+extra_search_path = ["public"]
+
+[db]
+# Local database port
+port = 54323
+
+[migrations]
+# Directory for SQL migrations
+dir = "supabase/migrations"
