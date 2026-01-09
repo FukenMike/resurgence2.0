@@ -7,7 +7,7 @@ import { ResourceCard } from '../components/resources/ResourceCard';
 import { fetchResourceBySlug, fetchAllResources, parseResourceJsonFields } from '../lib/supabaseQueries';
 import { hasValidSupabaseConfig } from '../lib/supabaseClient';
 import { updatePageMeta } from '../utils/seo';
-import type { Resource } from '../lib/types';
+import type { Resource, AccessType } from '../lib/types';
 import { formatCostType, formatAccessType } from '../lib/types';
 
 /**
@@ -96,13 +96,13 @@ export function ResourceDetail() {
     return badges[cost] || 'bg-gray-50 text-gray-700 border-gray-200';
   };
 
-  const formatAccessTypes = (accessData: any): string[] => {
+  const formatAccessTypes = (accessData: AccessType | AccessType[] | null | undefined): AccessType[] => {
     // Access is now a single enum value (AccessType), not an array
     if (typeof accessData === 'string') {
-      return [accessData];
+      return [accessData as AccessType];
     }
     // Fallback for legacy data that might still have arrays
-    if (Array.isArray(accessData)) return accessData;
+    if (Array.isArray(accessData)) return accessData as AccessType[];
     return [];
   };
 
