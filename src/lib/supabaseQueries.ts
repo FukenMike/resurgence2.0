@@ -198,16 +198,9 @@ export async function filterResources(
     filtered = filtered.filter((r) => r.cost === options.cost);
   }
 
-  // Access filter (parse JSON access field)
+  // Access filter (single ENUM value comparison)
   if (options.access && options.access !== 'All') {
-    filtered = filtered.filter((r) => {
-      try {
-        const accessTypes = typeof r.access === 'string' ? JSON.parse(r.access) : r.access;
-        return Array.isArray(accessTypes) && accessTypes.includes(options.access);
-      } catch {
-        return false;
-      }
-    });
+    filtered = filtered.filter((r) => r.access === options.access);
   }
 
   // Verification filter
@@ -274,11 +267,11 @@ export function getUniqueCategoriesFromResources(resources: Resource[]): string[
 
 /**
  * Parse JSON fields that are stored as strings in the database
+ * Note: access is now a single ENUM value, not JSON
  */
 export function parseResourceJsonFields(resource: Resource): Resource {
   return {
     ...resource,
-    access: typeof resource.access === 'string' ? JSON.parse(resource.access) : resource.access,
     eligibility: resource.eligibility
       ? typeof resource.eligibility === 'string'
         ? JSON.parse(resource.eligibility)

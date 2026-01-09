@@ -3,7 +3,8 @@ import { ResourceCard } from '../components/resources/ResourceCard';
 import { updatePageMeta } from '../utils/seo';
 import { fetchAllResources, filterResources, getUniqueCategoriesFromResources } from '../lib/supabaseQueries';
 import { hasValidSupabaseConfig } from '../lib/supabaseClient';
-import type { Resource } from '../lib/types';
+import type { Resource, AccessType, CostType } from '../lib/types';
+import { formatAccessType } from '../lib/types';
 
 /**
  * Resource Directory listing page
@@ -22,8 +23,8 @@ export function ResourcesDirectory() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedZip, setSelectedZip] = useState<string>('');
-  const [selectedCost, setSelectedCost] = useState<'free' | 'paid' | 'sliding-scale' | 'All'>('All');
-  const [selectedAccess, setSelectedAccess] = useState<string>('All');
+  const [selectedCost, setSelectedCost] = useState<CostType | 'All'>('All');
+  const [selectedAccess, setSelectedAccess] = useState<AccessType | 'All'>('All');
   const [selectedVerification, setSelectedVerification] = useState<'verified' | 'stale' | 'unverified' | 'All'>('All');
   
   const [loading, setLoading] = useState(true);
@@ -100,7 +101,7 @@ export function ResourcesDirectory() {
     selectedVerification !== 'All' ? 1 : 0,
   ].reduce((sum, val) => sum + val, 0);
 
-  const accessTypes = ['Walk-in', 'Appointment', 'Referral', 'Online'];
+  const accessTypes: AccessType[] = ['walk_in', 'appointment', 'referral', 'online'];
 
   // Runtime guard for missing Supabase config
   if (!hasValidSupabaseConfig) {
@@ -199,13 +200,13 @@ export function ResourcesDirectory() {
               <select
                 id="cost"
                 value={selectedCost}
-                onChange={(e) => setSelectedCost(e.target.value as any)}
+                onChange={(e) => setSelectedCost(e.target.value as CostType | 'All')}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="All">Any Cost</option>
                 <option value="free">Free</option>
-                <option value="sliding-scale">Sliding Scale</option>
+                <option value="sliding">Sliding Scale</option>
                 <option value="paid">Paid</option>
               </select>
             </div>
@@ -218,14 +219,14 @@ export function ResourcesDirectory() {
               <select
                 id="access"
                 value={selectedAccess}
-                onChange={(e) => setSelectedAccess(e.target.value)}
+                onChange={(e) => setSelectedAccess(e.target.value as AccessType | 'All')}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 disabled={loading}
               >
                 <option value="All">Any Access Type</option>
                 {accessTypes.map((type) => (
                   <option key={type} value={type}>
-                    {type}
+                    {formatAccessType(type)}
                   </option>
                 ))}
               </select>

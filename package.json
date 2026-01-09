@@ -14,7 +14,8 @@
     "supabase:link": "supabase link --project-ref $SUPABASE_PROJECT_REF",
     "supabase:pull": "supabase db pull",
     "supabase:push": "supabase db push",
-    "supabase:gen-types": "supabase gen types typescript --schema public --project-id $SUPABASE_PROJECT_REF > src/lib/supabase/types.gen.ts"
+    "supabase:gen-types": "supabase gen types typescript --schema public --project-id $SUPABASE_PROJECT_REF > src/lib/supabase/types.gen.ts",
+    "audit:supabase:resources": "tsx scripts/auditSupabaseResources.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.89.0",
@@ -30,6 +31,7 @@
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",
+    "tsx": "^4.21.0",
     "typescript": "^5.7.2",
     "vite": "^6.0.3"
   }

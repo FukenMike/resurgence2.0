@@ -4,9 +4,44 @@
  */
 
 export type VerificationStatus = 'verified' | 'stale' | 'unverified';
-export type AccessType = 'Walk-in' | 'Appointment' | 'Referral' | 'Online';
-export type CostType = 'free' | 'paid' | 'sliding-scale';
+export type AccessType = 'walk_in' | 'appointment' | 'referral' | 'online' | 'unknown';
+export type CostType = 'free' | 'sliding' | 'paid' | 'unknown';
+export type ResourceStatus = 'active' | 'paused' | 'retired';
+export type ResourceCategory = 'housing' | 'food' | 'transportation' | 'legal' | 'healthcare' | 'mental_health' | 'employment' | 'education' | 'child_support' | 'emergency';
 export type ServiceAreaCoverage = 'national' | 'state' | 'county' | 'city' | 'zip';
+
+/**
+ * Helper function to convert DB enum values to display labels
+ */
+export function formatAccessType(access: AccessType): string {
+  const labels: Record<AccessType, string> = {
+    walk_in: 'Walk-in',
+    appointment: 'Appointment',
+    referral: 'Referral',
+    online: 'Online',
+    unknown: 'Unknown',
+  };
+  return labels[access] || access;
+}
+
+export function formatCostType(cost: CostType): string {
+  const labels: Record<CostType, string> = {
+    free: 'Free',
+    sliding: 'Sliding Scale',
+    paid: 'Paid',
+    unknown: 'Unknown',
+  };
+  return labels[cost] || cost;
+}
+
+export function formatResourceStatus(status: ResourceStatus): string {
+  const labels: Record<ResourceStatus, string> = {
+    active: 'Active',
+    paused: 'Paused',
+    retired: 'Retired',
+  };
+  return labels[status] || status;
+}
 
 export interface Organization {
   id: string;
@@ -30,16 +65,16 @@ export interface Resource {
   id: string;
   slug: string;
   title: string;
-  category: string;
+  category: ResourceCategory;
   summary: string;
   details?: string;
   cost: CostType;
-  access: string; // JSON field with access types
-  eligibility?: string; // JSON field
-  how_to_apply?: string; // JSON field
-  requirements?: string; // JSON field
+  access: AccessType; // Single ENUM value from DB
+  eligibility?: string; // TEXT field in DB
+  how_to_apply?: string; // JSONB field in DB
+  requirements?: string; // JSONB field in DB
   hours?: string;
-  status: 'active' | 'inactive' | 'archived';
+  status: ResourceStatus;
   verification: VerificationStatus;
   last_verified_at?: string;
   org_id: string;

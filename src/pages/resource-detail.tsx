@@ -8,6 +8,7 @@ import { fetchResourceBySlug, fetchAllResources, parseResourceJsonFields } from 
 import { hasValidSupabaseConfig } from '../lib/supabaseClient';
 import { updatePageMeta } from '../utils/seo';
 import type { Resource } from '../lib/types';
+import { formatCostType, formatAccessType } from '../lib/types';
 
 /**
  * Resource detail page
@@ -90,21 +91,18 @@ export function ResourceDetail() {
     const badges: Record<string, string> = {
       free: 'bg-green-50 text-green-700 border-green-200',
       paid: 'bg-blue-50 text-blue-700 border-blue-200',
-      'sliding-scale': 'bg-purple-50 text-purple-700 border-purple-200',
+      sliding: 'bg-purple-50 text-purple-700 border-purple-200',
     };
     return badges[cost] || 'bg-gray-50 text-gray-700 border-gray-200';
   };
 
   const formatAccessTypes = (accessData: any): string[] => {
-    if (Array.isArray(accessData)) return accessData;
+    // Access is now a single enum value (AccessType), not an array
     if (typeof accessData === 'string') {
-      try {
-        const parsed = JSON.parse(accessData);
-        return Array.isArray(parsed) ? parsed : [accessData];
-      } catch {
-        return [accessData];
-      }
+      return [accessData];
     }
+    // Fallback for legacy data that might still have arrays
+    if (Array.isArray(accessData)) return accessData;
     return [];
   };
 
@@ -201,11 +199,11 @@ export function ResourceDetail() {
             {resource.category}
           </span>
           <span className={`inline-block px-4 py-2 rounded-full font-medium border ${getCostBadge(resource.cost)}`}>
-            {resource.cost === 'free' ? 'Free' : resource.cost === 'sliding-scale' ? 'Sliding Scale' : 'Paid'}
+            {formatCostType(resource.cost)}
           </span>
           {accessTypes.map((type) => (
             <span key={type} className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded text-sm">
-              {type}
+              {formatAccessType(type)}
             </span>
           ))}
         </div>
