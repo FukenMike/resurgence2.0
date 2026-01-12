@@ -4,7 +4,7 @@ import { VerificationBadge } from '../components/resources/VerificationBadge';
 import { OutcomeButtons } from '../components/resources/OutcomeButtons';
 import { AdminNoteForm } from '../components/resources/AdminNoteForm';
 import { ResourceCard } from '../components/resources/ResourceCard';
-import { fetchResourceBySlug, fetchAllResources, parseResourceJsonFields } from '../lib/supabaseQueries';
+import { fetchResourceBySlugOrId, fetchAllResources, parseResourceJsonFields } from '../lib/supabaseQueries';
 import { hasValidSupabaseConfig } from '../lib/supabaseClient';
 import { updatePageMeta } from '../utils/seo';
 import type { Resource, AccessType } from '../lib/types';
@@ -20,7 +20,7 @@ import { formatCostType, formatAccessType } from '../lib/types';
  * - Related resources by category
  */
 export function ResourceDetail() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug: slugOrId } = useParams<{ slug: string }>();
   const [resource, setResource] = useState<Resource | null>(null);
   const [relatedResources, setRelatedResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,12 +28,16 @@ export function ResourceDetail() {
 
   useEffect(() => {
     const loadResource = async () => {
-      if (!slug) return;
+      if (!slugOrId) {
+        console.warn('[ResourceDetail] Missing slugOrId parameter');
+        setLoading(false);
+        return;
+      }
 
       try {
         setLoading(true);
         setError(null);
-        const resourceData = await fetchResourceBySlug(slug);
+        const resourceData = await fetchResourceBySlugOrId(slugOrId);
 
         if (!resourceData) {
           setResource(null);
@@ -80,10 +84,10 @@ export function ResourceDetail() {
     };
 
     loadResource();
-  }, [slug]);
+  }, [slugOrId]);
 
   // Handle not found
-  if (!loading && (!slug || !resource)) {
+  if (!loading && (!slugOrId || !resource)) {
     return <Navigate to="/not-found" replace />;
   }
 

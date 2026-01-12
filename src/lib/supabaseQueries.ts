@@ -125,6 +125,128 @@ export async function fetchResourceBySlug(slug: string): Promise<Resource | null
 }
 
 /**
+ * Fetch a single resource by slug or ID with all related data
+ * First tries to match slug, then tries ID if it's a valid UUID
+ */
+export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resource | null> {
+  // First try by slug
+  const { data: bySlug, error: slugError } = await supabase
+    .from('resources')
+    .select(`
+      id,
+      slug,
+      title,
+      category,
+      summary,
+      details,
+      cost,
+      access,
+      eligibility,
+      how_to_apply,
+      requirements,
+      hours,
+      status,
+      verification,
+      last_verified_at,
+      org_id,
+      organizations:org_id (
+        id,
+        name,
+        website,
+        phone,
+        email,
+        description
+      ),
+      resource_service_areas (
+        resource_id,
+        coverage,
+        state_code,
+        county_fips,
+        city_name,
+        zip
+      )
+    `)
+    .eq('slug', slugOrId)
+    .eq('status', 'active')
+    .maybeSingle();
+
+  if (slugError && slugError.code !== 'PGRST116') {
+    console.error('Error fetching resource by slug:', slugError);
+    throw slugError;
+  }
+
+  if (bySlug) {
+    const normalized = {
+      ...bySlug,
+      organization: Array.isArray(bySlug.organizations) ? bySlug.organizations[0] : bySlug.organizations,
+      service_areas: bySlug.resource_service_areas || [],
+    } as Resource;
+    return normalized;
+  }
+
+  // If not found by slug, try by UUID if it matches UUID format
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!uuidRegex.test(slugOrId)) {
+    return null; // Not a UUID, give up
+  }
+
+  const { data: byId, error: idError } = await supabase
+    .from('resources')
+    .select(`
+      id,
+      slug,
+      title,
+      category,
+      summary,
+      details,
+      cost,
+      access,
+      eligibility,
+      how_to_apply,
+      requirements,
+      hours,
+      status,
+      verification,
+      last_verified_at,
+      org_id,
+      organizations:org_id (
+        id,
+        name,
+        website,
+        phone,
+        email,
+        description
+      ),
+      resource_service_areas (
+        resource_id,
+        coverage,
+        state_code,
+        county_fips,
+        city_name,
+        zip
+      )
+    `)
+    .eq('id', slugOrId)
+    .eq('status', 'active')
+    .maybeSingle();
+
+  if (idError && idError.code !== 'PGRST116') {
+    console.error('Error fetching resource by ID:', idError);
+    throw idError;
+  }
+
+  if (!byId) return null;
+
+  const normalized = {
+    ...byId,
+    organization: Array.isArray(byId.organizations) ? byId.organizations[0] : byId.organizations,
+    service_areas: byId.resource_service_areas || [],
+  } as Resource;
+
+  return normalized;
+}
+
+/**
  * Look up ZIP code information
  */
 export async function lookupZipcode(zip: string): Promise<ZipcodeInfo | null> {
