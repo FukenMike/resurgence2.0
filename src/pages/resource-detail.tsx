@@ -5,6 +5,7 @@ import { OutcomeButtons } from '../components/resources/OutcomeButtons';
 import { AdminNoteForm } from '../components/resources/AdminNoteForm';
 import { ResourceCard } from '../components/resources/ResourceCard';
 import { fetchResourceBySlugOrId, fetchAllResources, parseResourceJsonFields } from '../lib/supabaseQueries';
+import { validateResourceDetail, isUuidLike } from '../lib/resourceGuards';
 import { hasValidSupabaseConfig } from '../lib/supabaseClient';
 import { updatePageMeta } from '../utils/seo';
 import type { Resource, AccessType } from '../lib/types';
@@ -20,7 +21,7 @@ import { formatCostType, formatAccessType } from '../lib/types';
  * - Related resources by category
  */
 export function ResourceDetail() {
-  const { slug: slugOrId } = useParams<{ slug: string }>();
+  const { slugOrId } = useParams<{ slugOrId: string }>();
   const [resource, setResource] = useState<Resource | null>(null);
   const [relatedResources, setRelatedResources] = useState<Resource[]>([]);
   const [loading, setLoading] = useState(true);
@@ -28,6 +29,8 @@ export function ResourceDetail() {
 
   useEffect(() => {
     const loadResource = async () => {
+      console.debug('[ResourceDetail] param', { slugOrId });
+      
       if (!slugOrId) {
         console.warn('[ResourceDetail] Missing slugOrId parameter');
         setLoading(false);
@@ -38,6 +41,7 @@ export function ResourceDetail() {
         setLoading(true);
         setError(null);
         const resourceData = await fetchResourceBySlugOrId(slugOrId);
+        console.debug('[ResourceDetail] fetch result', { found: !!resourceData, resourceData });
 
         if (!resourceData) {
           setResource(null);
@@ -46,6 +50,27 @@ export function ResourceDetail() {
 
         // Parse JSON fields
         const parsedResource = parseResourceJsonFields(resourceData);
+        
+        // Validate data contract (dev-only warnings)
+        const validation = validateResourceDetail(parsedResource);
+        if (import.meta.env.DEV && !validation.ok) {
+          console.warn('[ResourceDetail] invalid resource detail', { issues: validation.issues, resource: parsedResource });
+        }
+        
+        // Debug: log loaded resource
+        console.debug('[ResourceDetail] loaded resource', parsedResource);
+        
+        // Validate required fields
+        if (!parsedResource.id || !isUuidLike(parsedResource.id)) {
+          console.error('[ResourceDetail] Resource missing or invalid id field');
+          setResource(null);
+          setLoading(false);
+          return;
+        }
+        
+        if (!parsedResource.title) {
+          console.warn('[ResourceDetail] Resource missing title field', parsedResource.id);
+        }
         
         // Debug mode - can be enabled to verify data in component
         const DEBUG_DETAIL_PAGE = false;
@@ -86,8 +111,30 @@ export function ResourceDetail() {
     loadResource();
   }, [slugOrId]);
 
-  // Handle not found
-  if (!loading && (!slugOrId || !resource)) {
+  // Handle missing parameter - show error instead of redirect
+  if (!loading && !slugOrId) {
+    return (
+      <div className="max-w-4xl mx-auto px-4 py-12">
+        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-red-900 mb-4">Invalid Resource URL</h2>
+          <p className="text-red-700 mb-4">
+            No resource identifier was provided in the URL.
+            <br />
+            <span className="text-sm text-red-600">Param value: {JSON.stringify(slugOrId)}</span>
+          </p>
+          <Link
+            to="/resources/directory"
+            className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            ← Back to Resource Directory
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  // Handle not found - only when slugOrId exists but resource not found
+  if (!loading && slugOrId && !resource) {
     return <Navigate to="/not-found" replace />;
   }
 
@@ -191,7 +238,7 @@ export function ResourceDetail() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-start justify-between gap-4 mb-4">
-          <h1 className="text-4xl font-bold text-gray-900">{resource.title}</h1>
+          <h1 className="text-4xl font-bold text-gray-900">{resource.title || 'Untitled Resource'}</h1>
           <VerificationBadge
             status={resource.verification}
             lastVerified={resource.last_verified_at}
@@ -200,7 +247,7 @@ export function ResourceDetail() {
 
         <div className="flex flex-wrap items-center gap-3">
           <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">
-            {resource.category}
+            {resource.category || 'Uncategorized'}
           </span>
           <span className={`inline-block px-4 py-2 rounded-full font-medium border ${getCostBadge(resource.cost)}`}>
             {formatCostType(resource.cost)}
@@ -215,7 +262,7 @@ export function ResourceDetail() {
 
       {/* Overview */}
       <section className="mb-8">
-        <p className="text-lg text-gray-700 leading-relaxed">{resource.summary}</p>
+        <p className="text-lg text-gray-700 leading-relaxed">{resource.summary || 'No summary provided.'}</p>
       </section>
 
       {/* Details if available */}
@@ -277,10 +324,10 @@ export function ResourceDetail() {
       )}
 
       {/* Organization Info */}
-      {resource.organization && (
+      {resource.organization ? (
         <section className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Organization</h2>
-          <h3 className="text-xl font-semibold text-gray-900 mb-3">{resource.organization.name}</h3>
+          <h3 className="text-xl font-semibold text-gray-900 mb-3">{resource.organization.name || 'Organization name not available'}</h3>
           {resource.organization.description && (
             <p className="text-gray-700 mb-4">{resource.organization.description}</p>
           )}
@@ -326,10 +373,15 @@ export function ResourceDetail() {
             )}
           </div>
         </section>
+      ) : (
+        <section className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">Organization</h2>
+          <p className="text-gray-600 italic">Organization information not provided.</p>
+        </section>
       )}
 
       {/* Service Areas / Coverage */}
-      {resource.service_areas && resource.service_areas.length > 0 ? (
+      {Array.isArray(resource.service_areas) && resource.service_areas.length > 0 ? (
         <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Service Areas & Coverage</h2>
           <div className="space-y-3">

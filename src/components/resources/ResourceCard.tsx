@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Resource } from '../../lib/types';
+import { validateResourceListItem } from '../../lib/resourceGuards';
 import { VerificationBadge } from './VerificationBadge';
 
 interface ResourceCardProps {
@@ -67,14 +68,60 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     return 'Coverage area';
   };
 
+  const validation = import.meta.env.DEV ? validateResourceListItem(resource) : { ok: true, issues: [] };
+  if (import.meta.env.DEV && !validation.ok) {
+    console.warn('[ResourceCard] invalid resource list item', { issues: validation.issues, resource });
+  }
+
+  const linkTarget = resource.slug || resource.id;
+  console.debug('[ResourceCard] link target', { id: resource.id, slug: resource.slug, target: linkTarget });
+
+  // If no valid link target, warn and fallback to directory
+  if (!linkTarget) {
+    console.warn('[ResourceCard] Resource has no slug or id', resource);
+    return (
+      <div className="block bg-white border border-red-300 rounded-lg p-5 opacity-75">
+        <div className="flex items-start justify-between gap-3 mb-3">
+          <h3 className="text-xl font-semibold text-gray-900">
+            {resource.title || 'Untitled Resource'}
+          </h3>
+          <VerificationBadge
+            status={resource.verification}
+            lastVerified={resource.last_verified_at}
+            compact
+          />
+        </div>
+        <div className="bg-red-50 border border-red-200 rounded p-2 mb-3">
+          <p className="text-xs text-red-600">⚠️ Invalid resource data (missing ID)</p>
+          {import.meta.env.DEV && (
+            <span className="inline-block mt-1 text-[11px] text-red-700 bg-red-100 px-2 py-0.5 rounded">
+              Missing link target
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2 mb-3">
+          <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(resource.category || 'Unknown')}`}>
+            {resource.category || 'Unknown'}
+          </span>
+          {resource.cost === 'free' && (
+            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-700 border border-green-200">
+              Free
+            </span>
+          )}
+        </div>
+        <p className="text-gray-700 mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
+      </div>
+    );
+  }
+
   return (
     <Link
-      to={`/resources/directory/${resource.slug || resource.id}`}
+      to={`/resources/directory/${linkTarget}`}
       className="block bg-white border border-gray-200 rounded-lg p-5 hover:shadow-lg hover:border-gray-300 transition-all"
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <h3 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
-          {resource.title}
+          {resource.title || 'Untitled Resource'}
         </h3>
         <VerificationBadge
           status={resource.verification}
@@ -84,8 +131,8 @@ export function ResourceCard({ resource }: ResourceCardProps) {
       </div>
 
       <div className="flex items-center gap-2 mb-3">
-        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(resource.category)}`}>
-          {resource.category}
+        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(resource.category || 'Unknown')}`}>
+          {resource.category || 'Unknown'}
         </span>
         {resource.cost === 'free' && (
           <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-700 border border-green-200">
@@ -94,12 +141,16 @@ export function ResourceCard({ resource }: ResourceCardProps) {
         )}
       </div>
 
-      <p className="text-gray-700 mb-3 line-clamp-2">{resource.summary}</p>
+      <p className="text-gray-700 mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
 
       {/* Organization name if available */}
-      {resource.organization && (
+      {resource.organization?.name ? (
         <div className="mb-2 text-sm text-gray-600">
           <span className="font-medium">By: {resource.organization.name}</span>
+        </div>
+      ) : (
+        <div className="mb-2 text-sm text-gray-500 italic">
+          <span>Organization not listed</span>
         </div>
       )}
 

@@ -129,6 +129,8 @@ export async function fetchResourceBySlug(slug: string): Promise<Resource | null
  * First tries to match slug, then tries ID if it's a valid UUID
  */
 export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resource | null> {
+  console.debug('[fetchResourceBySlugOrId] attempting fetch', { slugOrId });
+  
   // First try by slug
   const { data: bySlug, error: slugError } = await supabase
     .from('resources')
@@ -176,6 +178,7 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
   }
 
   if (bySlug) {
+    console.debug('[fetchResourceBySlugOrId] found by slug', { id: bySlug.id, slug: bySlug.slug });
     const normalized = {
       ...bySlug,
       organization: Array.isArray(bySlug.organizations) ? bySlug.organizations[0] : bySlug.organizations,
@@ -187,8 +190,11 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
   // If not found by slug, try by UUID if it matches UUID format
   const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
   if (!uuidRegex.test(slugOrId)) {
+    console.debug('[fetchResourceBySlugOrId] not found by slug and not a UUID', { slugOrId });
     return null; // Not a UUID, give up
   }
+  
+  console.debug('[fetchResourceBySlugOrId] trying by UUID', { slugOrId });
 
   const { data: byId, error: idError } = await supabase
     .from('resources')
@@ -235,8 +241,12 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
     throw idError;
   }
 
-  if (!byId) return null;
+  if (!byId) {
+    console.debug('[fetchResourceBySlugOrId] not found by UUID either', { slugOrId });
+    return null;
+  }
 
+  console.debug('[fetchResourceBySlugOrId] found by UUID', { id: byId.id, slug: byId.slug });
   const normalized = {
     ...byId,
     organization: Array.isArray(byId.organizations) ? byId.organizations[0] : byId.organizations,
