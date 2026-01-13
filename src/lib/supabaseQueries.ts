@@ -47,31 +47,57 @@ export async function fetchResourceBySlug(slug: string): Promise<Resource | null
 
 /**
  * Fetch a single resource by slug or ID from the resource_directory VIEW.
- * Uses OR clause to check both slug and id efficiently.
+ * First tries slug match, then tries ID if it looks like a UUID.
  */
 export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resource | null> {
   console.log('[fetchResourceBySlugOrId] Fetching with key:', { slugOrId });
   
-  const { data: row, error } = await supabase
+  // First try by slug
+  const { data: bySlug, error: slugError } = await supabase
     .from('resource_directory')
     .select('*')
-    .or(`slug.eq.${slugOrId},id.eq.${slugOrId}`)
+    .eq('slug', slugOrId)
     .eq('status', 'active')
-    .limit(1)
     .maybeSingle();
 
-  if (error) {
-    console.error('Error fetching resource by slug or ID:', error);
-    throw error;
+  if (slugError) {
+    console.error('Error fetching resource by slug:', slugError);
+    throw slugError;
   }
 
-  if (!row) {
-    console.warn('[fetchResourceBySlugOrId] Resource not found', { slugOrId });
+  if (bySlug) {
+    console.log('[fetchResourceBySlugOrId] Found by slug:', { id: bySlug.id, slug: bySlug.slug });
+    return normalizeResource(bySlug);
+  }
+
+  // If not found by slug, try by ID (only if it looks like a UUID)
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!uuidRegex.test(slugOrId)) {
+    console.log('[fetchResourceBySlugOrId] Not found by slug and not a UUID format:', { slugOrId });
     return null;
   }
 
-  console.log('[fetchResourceBySlugOrId] Found resource:', { id: row.id, slug: row.slug });
-  return normalizeResource(row);
+  console.log('[fetchResourceBySlugOrId] Trying by UUID:', { slugOrId });
+  
+  const { data: byId, error: idError } = await supabase
+    .from('resource_directory')
+    .select('*')
+    .eq('id', slugOrId)
+    .eq('status', 'active')
+    .maybeSingle();
+
+  if (idError) {
+    console.error('Error fetching resource by ID:', idError);
+    throw idError;
+  }
+
+  if (byId) {
+    console.log('[fetchResourceBySlugOrId] Found by ID:', { id: byId.id, slug: byId.slug });
+    return normalizeResource(byId);
+  }
+
+  console.log('[fetchResourceBySlugOrId] Not found by slug or ID:', { slugOrId });
+  return null;
 }
 
 /**
