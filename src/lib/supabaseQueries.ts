@@ -50,54 +50,80 @@ export async function fetchResourceBySlug(slug: string): Promise<Resource | null
  * First tries slug match, then tries ID if it looks like a UUID.
  */
 export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resource | null> {
-  console.log('[fetchResourceBySlugOrId] Fetching with key:', { slugOrId });
+  console.log('[fetchResourceBySlugOrId] 🔍 START with:', { slugOrId });
   
-  // First try by slug
-  const { data: bySlug, error: slugError } = await supabase
-    .from('resource_directory')
-    .select('*')
-    .eq('slug', slugOrId)
-    .eq('status', 'active')
-    .maybeSingle();
+  try {
+    // First try by slug
+    console.log('[fetchResourceBySlugOrId] 🔍 Querying by slug...');
+    const { data: bySlug, error: slugError } = await supabase
+      .from('resource_directory')
+      .select('*')
+      .eq('slug', slugOrId)
+      .eq('status', 'active')
+      .maybeSingle();
 
-  if (slugError) {
-    console.error('Error fetching resource by slug:', slugError);
-    throw slugError;
-  }
+    console.log('[fetchResourceBySlugOrId] Slug query result:', { found: !!bySlug, error: slugError?.message });
 
-  if (bySlug) {
-    console.log('[fetchResourceBySlugOrId] Found by slug:', { id: bySlug.id, slug: bySlug.slug });
-    return normalizeResource(bySlug);
-  }
+    if (slugError) {
+      console.error('❌ Error fetching resource by slug:', slugError);
+      throw slugError;
+    }
 
-  // If not found by slug, try by ID (only if it looks like a UUID)
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-  if (!uuidRegex.test(slugOrId)) {
-    console.log('[fetchResourceBySlugOrId] Not found by slug and not a UUID format:', { slugOrId });
+    if (bySlug) {
+      console.log('[fetchResourceBySlugOrId] ✅ Found by slug:', { id: bySlug.id, slug: bySlug.slug });
+      try {
+        const normalized = normalizeResource(bySlug);
+        console.log('[fetchResourceBySlugOrId] ✅ Normalized successfully');
+        return normalized;
+      } catch (normErr) {
+        console.error('❌ Normalization failed:', normErr);
+        throw normErr;
+      }
+    }
+
+    console.log('[fetchResourceBySlugOrId] Not found by slug, checking if UUID format...');
+
+    // If not found by slug, try by ID (only if it looks like a UUID)
+    const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+    if (!uuidRegex.test(slugOrId)) {
+      console.log('[fetchResourceBySlugOrId] ❌ Not a UUID format, giving up:', { slugOrId });
+      return null;
+    }
+
+    console.log('[fetchResourceBySlugOrId] 🔍 Querying by UUID:', { slugOrId });
+    
+    const { data: byId, error: idError } = await supabase
+      .from('resource_directory')
+      .select('*')
+      .eq('id', slugOrId)
+      .eq('status', 'active')
+      .maybeSingle();
+
+    console.log('[fetchResourceBySlugOrId] UUID query result:', { found: !!byId, error: idError?.message });
+
+    if (idError) {
+      console.error('❌ Error fetching resource by ID:', idError);
+      throw idError;
+    }
+
+    if (byId) {
+      console.log('[fetchResourceBySlugOrId] ✅ Found by ID:', { id: byId.id, slug: byId.slug });
+      try {
+        const normalized = normalizeResource(byId);
+        console.log('[fetchResourceBySlugOrId] ✅ Normalized successfully');
+        return normalized;
+      } catch (normErr) {
+        console.error('❌ Normalization failed:', normErr);
+        throw normErr;
+      }
+    }
+
+    console.log('❌ [fetchResourceBySlugOrId] NOT FOUND by slug or ID:', { slugOrId });
     return null;
+  } catch (err) {
+    console.error('❌ [fetchResourceBySlugOrId] EXCEPTION:', err);
+    throw err;
   }
-
-  console.log('[fetchResourceBySlugOrId] Trying by UUID:', { slugOrId });
-  
-  const { data: byId, error: idError } = await supabase
-    .from('resource_directory')
-    .select('*')
-    .eq('id', slugOrId)
-    .eq('status', 'active')
-    .maybeSingle();
-
-  if (idError) {
-    console.error('Error fetching resource by ID:', idError);
-    throw idError;
-  }
-
-  if (byId) {
-    console.log('[fetchResourceBySlugOrId] Found by ID:', { id: byId.id, slug: byId.slug });
-    return normalizeResource(byId);
-  }
-
-  console.log('[fetchResourceBySlugOrId] Not found by slug or ID:', { slugOrId });
-  return null;
 }
 
 /**

@@ -27,6 +27,8 @@ export function ResourceDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  const DEBUG_MODE = true; // Set to false to disable debug rendering
+
   useEffect(() => {
     const loadResource = async () => {
       console.log('[ResourceDetail] Loading resource:', { slugOrId });
@@ -40,14 +42,17 @@ export function ResourceDetail() {
       try {
         setLoading(true);
         setError(null);
+        console.log('🔍 [ResourceDetail] Attempting to fetch:', { slugOrId });
         const resourceData = await fetchResourceBySlugOrId(slugOrId);
-        console.log('[ResourceDetail] Fetch result:', { 
+        console.log('✅ [ResourceDetail] Fetch result:', { 
           found: !!resourceData, 
           slug: resourceData?.slug,
           title: resourceData?.title,
+          rawData: resourceData ? JSON.stringify(resourceData).substring(0, 200) : 'null'
         });
 
         if (!resourceData) {
+          console.error('❌ [ResourceDetail] fetchResourceBySlugOrId returned null/undefined');
           setResource(null);
           return;
         }
@@ -91,7 +96,8 @@ export function ResourceDetail() {
           path: `/resources/directory/${parsedResource.slug}`,
         });
       } catch (err) {
-        console.error('Failed to load resource:', err);
+        console.error('❌ ERROR loading resource:', err);
+        console.error('Error details:', { message: (err as any)?.message, code: (err as any)?.code });
         setError('Failed to load resource. Please try again.');
         setResource(null);
       } finally {
@@ -133,6 +139,21 @@ export function ResourceDetail() {
       hasSlugOrId: !!slugOrId,
       hasResource: !!resource 
     });
+
+    if (DEBUG_MODE) {
+      return (
+        <div className="max-w-4xl mx-auto px-4 py-12">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-red-900 mb-4">🐛 DEBUG: Not Found</h2>
+            <pre className="bg-red-100 p-4 rounded mb-4 text-sm overflow-auto">
+              {JSON.stringify({ slugOrId, hasResource: !!resource, loading }, null, 2)}
+            </pre>
+            <p className="text-red-700 mb-4">Resource fetch returned null/undefined</p>
+          </div>
+        </div>
+      );
+    }
+
     return <Navigate to="/not-found" replace />;
   }
 
@@ -194,6 +215,11 @@ export function ResourceDetail() {
         <div className="flex flex-col items-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
           <p className="text-gray-600">Loading resource...</p>
+          {DEBUG_MODE && (
+            <pre className="text-xs mt-4 bg-gray-100 p-2 rounded text-gray-700">
+              {`slugOrId: ${slugOrId}\nloading: ${loading}`}
+            </pre>
+          )}
         </div>
       </div>
     );
