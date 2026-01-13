@@ -29,7 +29,7 @@ export function ResourceDetail() {
 
   useEffect(() => {
     const loadResource = async () => {
-      console.log('[ResourceDetail] Starting load with param:', { slugOrId });
+      console.log('[ResourceDetail] Loading resource:', { slugOrId });
       
       if (!slugOrId) {
         console.warn('[ResourceDetail] Missing slugOrId parameter');
@@ -40,13 +40,11 @@ export function ResourceDetail() {
       try {
         setLoading(true);
         setError(null);
-        console.log('[ResourceDetail] Fetching resource...', { slugOrId });
         const resourceData = await fetchResourceBySlugOrId(slugOrId);
         console.log('[ResourceDetail] Fetch result:', { 
           found: !!resourceData, 
           slug: resourceData?.slug,
           title: resourceData?.title,
-          id: resourceData?.id
         });
 
         if (!resourceData) {
@@ -54,7 +52,9 @@ export function ResourceDetail() {
           return;
         }
 
-        // Parse JSON fields
+        // Normalize data (parseResourceJsonFields ensures JSON fields are parsed properly)
+        // The resource_directory VIEW returns how_to_apply and requirements as jsonb,
+        // but we still parse them defensively in case they're stored as strings
         const parsedResource = parseResourceJsonFields(resourceData);
         
         // Validate data contract (dev-only warnings)
@@ -62,9 +62,6 @@ export function ResourceDetail() {
         if (import.meta.env.DEV && !validation.ok) {
           console.warn('[ResourceDetail] invalid resource detail', { issues: validation.issues, resource: parsedResource });
         }
-        
-        // Debug: log loaded resource
-        console.debug('[ResourceDetail] loaded resource', parsedResource);
         
         // Validate required fields
         if (!parsedResource.id || !isUuidLike(parsedResource.id)) {
@@ -76,18 +73,6 @@ export function ResourceDetail() {
         
         if (!parsedResource.title) {
           console.warn('[ResourceDetail] Resource missing title field', parsedResource.id);
-        }
-        
-        // Debug mode - can be enabled to verify data in component
-        const DEBUG_DETAIL_PAGE = false;
-        if (DEBUG_DETAIL_PAGE) {
-          console.log('[ResourceDetail] Loaded resource:', {
-            title: parsedResource.title,
-            hasOrganization: !!parsedResource.organization,
-            organization: parsedResource.organization,
-            serviceAreasCount: parsedResource.service_areas?.length || 0,
-            serviceAreas: parsedResource.service_areas,
-          });
         }
         
         setResource(parsedResource);
@@ -141,6 +126,13 @@ export function ResourceDetail() {
 
   // Handle not found - only when slugOrId exists but resource not found
   if (!loading && slugOrId && !resource) {
+    console.error('[ResourceDetail] Redirecting to not-found', { 
+      slugOrId, 
+      resource, 
+      loading,
+      hasSlugOrId: !!slugOrId,
+      hasResource: !!resource 
+    });
     return <Navigate to="/not-found" replace />;
   }
 

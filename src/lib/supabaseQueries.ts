@@ -1,38 +1,20 @@
 import { supabase } from './supabaseClient';
 import type { Resource, FilterOptions, ZipcodeInfo, ServiceArea } from './types';
+import { normalizeResource, type ResourceDirectoryRow } from './normalizeResource';
 
 /**
- * Fetch all resources with organizations and service areas
+ * FIX: Now uses public.resource_directory VIEW instead of base tables.
+ * The view provides a denormalized, flat schema that includes org_* columns
+ * and service_areas as jsonb, which matches database deployment architecture.
+ */
+
+/**
+ * Fetch all resources from the resource_directory VIEW
  */
 export async function fetchAllResources(): Promise<Resource[]> {
   const { data: resources, error } = await supabase
-    .from('resources')
-    .select(`
-      id,
-      slug,
-      title,
-      category,
-      summary,
-      details,
-      cost,
-      access,
-      eligibility,
-      how_to_apply,
-      requirements,
-      hours,
-      status,
-      verification,
-      last_verified_at,
-      org_id,
-      organizations:org_id (
-        id,
-        name,
-        website,
-        phone,
-        email,
-        description
-      )
-    `)
+    .from('resource_directory')
+    .select('*')
     .eq('status', 'active');
 
   if (error) {
@@ -40,220 +22,56 @@ export async function fetchAllResources(): Promise<Resource[]> {
     throw error;
   }
 
-  return (resources || []).map((r: any) => ({
-    ...r,
-    organization: Array.isArray(r.organizations) ? r.organizations[0] : r.organizations,
-  }));
+  return (resources || []).map((row: ResourceDirectoryRow) => normalizeResource(row));
 }
 
 /**
- * Fetch a single resource by slug with all related data
+ * Fetch a single resource by slug from the resource_directory VIEW
  */
 export async function fetchResourceBySlug(slug: string): Promise<Resource | null> {
-  const { data: resource, error } = await supabase
-    .from('resources')
-    .select(`
-      id,
-      slug,
-      title,
-      category,
-      summary,
-      details,
-      cost,
-      access,
-      eligibility,
-      how_to_apply,
-      requirements,
-      hours,
-      status,
-      verification,
-      last_verified_at,
-      org_id,
-      organizations:org_id (
-        id,
-        name,
-        website,
-        phone,
-        email,
-        description
-      ),
-      resource_service_areas (
-        resource_id,
-        coverage,
-        state_code,
-        county_fips,
-        city_name,
-        zip
-      )
-    `)
+  const { data: row, error } = await supabase
+    .from('resource_directory')
+    .select('*')
     .eq('slug', slug)
     .eq('status', 'active')
-    .single();
+    .maybeSingle();
 
   if (error) {
-    if (error.code === 'PGRST116') {
-      return null; // Not found
-    }
-    console.error('Error fetching resource:', error);
+    console.error('Error fetching resource by slug:', error);
     throw error;
   }
 
-  if (!resource) return null;
-
-  // Debug mode - can be enabled to verify data shape
-  const DEBUG_RESOURCE_FETCH = false;
-  if (DEBUG_RESOURCE_FETCH) {
-    console.log('[fetchResourceBySlug] Raw Supabase response:', resource);
-  }
-
-  const normalized = {
-    ...resource,
-    organization: Array.isArray(resource.organizations) ? resource.organizations[0] : resource.organizations,
-    service_areas: resource.resource_service_areas || [],
-  } as Resource;
-
-  if (DEBUG_RESOURCE_FETCH) {
-    console.log('[fetchResourceBySlug] Normalized resource:', {
-      hasOrganization: !!normalized.organization,
-      organizationData: normalized.organization,
-      serviceAreasCount: normalized.service_areas?.length || 0,
-      serviceAreas: normalized.service_areas,
-    });
-  }
-
-  return normalized;
+  if (!row) return null;
+  return normalizeResource(row);
 }
 
 /**
- * Fetch a single resource by slug or ID with all related data
- * First tries to match slug, then tries ID if it's a valid UUID
+ * Fetch a single resource by slug or ID from the resource_directory VIEW.
+ * Uses OR clause to check both slug and id efficiently.
  */
 export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resource | null> {
-  console.debug('[fetchResourceBySlugOrId] attempting fetch', { slugOrId });
+  console.log('[fetchResourceBySlugOrId] Fetching with key:', { slugOrId });
   
-  // First try by slug
-  const { data: bySlug, error: slugError } = await supabase
-    .from('resources')
-    .select(`
-      id,
-      slug,
-      title,
-      category,
-      summary,
-      details,
-      cost,
-      access,
-      eligibility,
-      how_to_apply,
-      requirements,
-      hours,
-      status,
-      verification,
-      last_verified_at,
-      org_id,
-      organizations:org_id (
-        id,
-        name,
-        website,
-        phone,
-        email,
-        description
-      ),
-      resource_service_areas (
-        resource_id,
-        coverage,
-        state_code,
-        county_fips,
-        city_name,
-        zip
-      )
-    `)
-    .eq('slug', slugOrId)
+  const { data: row, error } = await supabase
+    .from('resource_directory')
+    .select('*')
+    .or(`slug.eq.${slugOrId},id.eq.${slugOrId}`)
     .eq('status', 'active')
+    .limit(1)
     .maybeSingle();
 
-  if (slugError && slugError.code !== 'PGRST116') {
-    console.error('Error fetching resource by slug:', slugError);
-    throw slugError;
+  if (error) {
+    console.error('Error fetching resource by slug or ID:', error);
+    throw error;
   }
 
-  if (bySlug) {
-    console.debug('[fetchResourceBySlugOrId] found by slug', { id: bySlug.id, slug: bySlug.slug });
-    const normalized = {
-      ...bySlug,
-      organization: Array.isArray(bySlug.organizations) ? bySlug.organizations[0] : bySlug.organizations,
-      service_areas: bySlug.resource_service_areas || [],
-    } as Resource;
-    return normalized;
-  }
-
-  // If not found by slug, try by UUID if it matches UUID format
-  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-  if (!uuidRegex.test(slugOrId)) {
-    console.debug('[fetchResourceBySlugOrId] not found by slug and not a UUID', { slugOrId });
-    return null; // Not a UUID, give up
-  }
-  
-  console.debug('[fetchResourceBySlugOrId] trying by UUID', { slugOrId });
-
-  const { data: byId, error: idError } = await supabase
-    .from('resources')
-    .select(`
-      id,
-      slug,
-      title,
-      category,
-      summary,
-      details,
-      cost,
-      access,
-      eligibility,
-      how_to_apply,
-      requirements,
-      hours,
-      status,
-      verification,
-      last_verified_at,
-      org_id,
-      organizations:org_id (
-        id,
-        name,
-        website,
-        phone,
-        email,
-        description
-      ),
-      resource_service_areas (
-        resource_id,
-        coverage,
-        state_code,
-        county_fips,
-        city_name,
-        zip
-      )
-    `)
-    .eq('id', slugOrId)
-    .eq('status', 'active')
-    .maybeSingle();
-
-  if (idError && idError.code !== 'PGRST116') {
-    console.error('Error fetching resource by ID:', idError);
-    throw idError;
-  }
-
-  if (!byId) {
-    console.debug('[fetchResourceBySlugOrId] not found by UUID either', { slugOrId });
+  if (!row) {
+    console.warn('[fetchResourceBySlugOrId] Resource not found', { slugOrId });
     return null;
   }
 
-  console.debug('[fetchResourceBySlugOrId] found by UUID', { id: byId.id, slug: byId.slug });
-  const normalized = {
-    ...byId,
-    organization: Array.isArray(byId.organizations) ? byId.organizations[0] : byId.organizations,
-    service_areas: byId.resource_service_areas || [],
-  } as Resource;
-
-  return normalized;
+  console.log('[fetchResourceBySlugOrId] Found resource:', { id: row.id, slug: row.slug });
+  return normalizeResource(row);
 }
 
 /**
