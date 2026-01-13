@@ -30,7 +30,7 @@ export default function App() {
           {/* /resources restored to original tools layout; directory lives under /resources/directory */}
           <Route path="resources" element={<ResourcesTools />} />
           <Route path="resources/directory" element={<ResourcesDirectory />} />
-          <Route path="/resources/directory/:slugOrId" element={<ResourceDetail />} />
+          <Route path="resources/directory/:slugOrId" element={<ResourceDetail />} />
           <Route path="get-involved" element={<GetInvolved />} />
           <Route path="transparency" element={<Transparency />} />
           <Route path="privacy-policy" element={<PrivacyPolicy />} />

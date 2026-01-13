@@ -29,7 +29,7 @@ export function ResourceDetail() {
 
   useEffect(() => {
     const loadResource = async () => {
-      console.debug('[ResourceDetail] param', { slugOrId });
+      console.log('[ResourceDetail] Starting load with param:', { slugOrId });
       
       if (!slugOrId) {
         console.warn('[ResourceDetail] Missing slugOrId parameter');
@@ -40,8 +40,14 @@ export function ResourceDetail() {
       try {
         setLoading(true);
         setError(null);
+        console.log('[ResourceDetail] Fetching resource...', { slugOrId });
         const resourceData = await fetchResourceBySlugOrId(slugOrId);
-        console.debug('[ResourceDetail] fetch result', { found: !!resourceData, resourceData });
+        console.log('[ResourceDetail] Fetch result:', { 
+          found: !!resourceData, 
+          slug: resourceData?.slug,
+          title: resourceData?.title,
+          id: resourceData?.id
+        });
 
         if (!resourceData) {
           setResource(null);
