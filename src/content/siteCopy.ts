@@ -105,8 +105,50 @@ export const resourcesCopy = {
 }
 
 export const getInvolvedCopy = {
-  headline: 'Partner with Us',
-  items: ['Professional Partnerships', 'Volunteer Opportunities', 'Corporate Giving'],
+  headline: "Support the Work That Fills the Gaps",
+  hero: {
+    eyebrow: "Support",
+    subheadline:
+      "The Father's Alliance is building practical infrastructure where systems fail families. This page is the central place to support that work — financially, practically, or by helping strengthen what's being built."
+  },
+  cards: [
+    {
+      title: "Fund Active Work",
+      body:
+        "Direct financial support allows this work to continue — keeping systems online, data accurate, and tools available to people who need them. Needs change as the work evolves. This page always reflects the most current way to support what's active right now."
+    },
+    {
+      title: "Support Beyond Donations",
+      body:
+        "Not everyone can give financially — and that's okay. Support also looks like sharing this work, helping keep information accurate, or pointing out gaps that need attention."
+    },
+    {
+      title: "Help Build What's Missing",
+      body:
+        "As systems and tools take shape, there may be moments where targeted help is needed — technical, organizational, or research-based. When those opportunities are open, they'll appear here."
+    }
+  ],
+  support: {
+    sectionTitle: "Support Current Needs",
+    sectionBody:
+      "Direct support helps sustain active work — hosting and infrastructure, verification and maintenance, development, and essential equipment when needed. Needs shift over time, but this page stays current so you always have one link to share.",
+    stripe: {
+      label: "Donate (Stripe)",
+      url: "https://donate.stripe.com/cNi6oIbYM6s2boseqdgIo00",
+      note: "Secure donation processing"
+    },
+    gofundme: {
+      label: "GoFundMe",
+      url: "https://www.gofundme.com/f/help-me-continue-nonprofit-tech-work"
+    },
+    embed: {
+      enabled: false,
+      widgetUrl:
+        "https://www.gofundme.com/f/help-me-continue-nonprofit-tech-work/widget/medium?sharesheet=undefined&attribution_id=sl:66adb319-e3a3-4571-839d-b51e80ed75ef",
+      scriptUrl: "https://www.gofundme.com/static/js/embed.js",
+      scriptId: "gfm-embed-script"
+    }
+  }
 }
 
 export const transparencyCopy = {
