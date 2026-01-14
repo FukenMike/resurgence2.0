@@ -7,9 +7,9 @@ import { updatePageMeta, getOrganizationSchema, getWebsiteSchema, injectStructur
 export default function Home() {
   useEffect(() => {
     updatePageMeta({
-      title: "The Father's Alliance - Stability Support That Keeps Families Moving Forward",
+      title: "The Father's Alliance — Stability Support That Keeps Families Moving Forward",
       description:
-        'Supplemental, practical stability support for households when traditional assistance is delayed, unavailable, or exhausted. Helping families stay housed, mobile, and moving forward.',
+        "The Father's Alliance represents a role of protection, guidance, responsibility, and support—especially during times of need. We provide practical stability support to help households stay housed, mobile, and moving forward.",
       path: '/',
     });
     // Inject organization and website schema

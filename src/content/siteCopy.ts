@@ -11,16 +11,16 @@ export const navLinks = [
 export const homeCopy = {
   headline: 'Stability Support That Keeps Families Moving Forward.',
   subheadline:
-    'The Father’s Alliance provides supplemental, practical support to help households stay stable when traditional assistance is delayed, unavailable, or exhausted—so a temporary setback doesn’t become a long-term crisis.',
+    "The Father's Alliance represents the role fathers are meant to play — protection, guidance, responsibility, and support — especially during times of need. We provide supplemental, practical stability support to help households stay stable when traditional help is delayed, unavailable, or incomplete—so a temporary setback doesn't become a long-term crisis.",
   mission:
-    'To preserve household stability and independence through timely, practical support—covering critical gaps, reducing avoidable crises, and connecting families to forward pathways when they’re ready.',
+    'To preserve household stability through timely, practical support—covering critical gaps, preventing avoidable crises, and helping families regain forward momentum.',
   vision:
     'A country where families can access fast, dignified stability support that helps them stay housed, stay mobile, and keep moving toward self-sufficiency.',
   coreValues: [
     'Stewardship: We protect resources, make disciplined decisions, and document outcomes with care.',
     'Dignity: We help without shame, judgment, or unnecessary barriers.',
     'Reliability: We act quickly, communicate clearly, and follow through.',
-    'Collaboration: We partner with community providers to keep support practical and sustainable.',
+    'Collaboration: We coordinate with community providers to keep support practical and sustainable.',
     'Neutrality: We focus on stability outcomes—not rhetoric, blame, or politics.',
   ],
   pillars: ['Stability Support', 'Rapid Response', 'Forward Pathways'],
