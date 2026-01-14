@@ -5,7 +5,6 @@ export const navLinks = [
   { label: 'How We Help', path: '/how-we-help' },
   { label: 'About', path: '/about' },
   { label: 'Resources', path: '/resources' },
-  { label: 'Get Involved', path: '/get-involved' },
   { label: 'Transparency', path: '/transparency' },
 ]
 
