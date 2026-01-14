@@ -9,12 +9,37 @@ import { normalizeResource, type ResourceDirectoryRow } from './normalizeResourc
  */
 
 /**
- * Fetch all resources from the resource_directory VIEW
+ * Fetch all resources from the base resources table with organization joins
  */
 export async function fetchAllResources(): Promise<Resource[]> {
   const { data: resources, error } = await supabase
-    .from('resource_directory')
-    .select('*')
+    .from('resources')
+    .select(`
+      id,
+      slug,
+      title,
+      category,
+      summary,
+      details,
+      cost,
+      access,
+      eligibility,
+      how_to_apply,
+      requirements,
+      hours,
+      status,
+      verification,
+      last_verified_at,
+      org_id,
+      organizations:org_id (
+        id,
+        name,
+        website,
+        phone,
+        email,
+        description
+      )
+    `)
     .eq('status', 'active');
 
   if (error) {
@@ -22,16 +47,44 @@ export async function fetchAllResources(): Promise<Resource[]> {
     throw error;
   }
 
-  return (resources || []).map((row: ResourceDirectoryRow) => normalizeResource(row));
+  return (resources || []).map((r: any) => ({
+    ...r,
+    organization: Array.isArray(r.organizations) ? r.organizations[0] : r.organizations,
+  }));
 }
 
 /**
- * Fetch a single resource by slug from the resource_directory VIEW
+ * Fetch a single resource by slug from the base resources table
  */
 export async function fetchResourceBySlug(slug: string): Promise<Resource | null> {
-  const { data: row, error } = await supabase
-    .from('resource_directory')
-    .select('*')
+  const { data: resource, error } = await supabase
+    .from('resources')
+    .select(`
+      id,
+      slug,
+      title,
+      category,
+      summary,
+      details,
+      cost,
+      access,
+      eligibility,
+      how_to_apply,
+      requirements,
+      hours,
+      status,
+      verification,
+      last_verified_at,
+      org_id,
+      organizations:org_id (
+        id,
+        name,
+        website,
+        phone,
+        email,
+        description
+      )
+    `)
     .eq('slug', slug)
     .eq('status', 'active')
     .maybeSingle();
@@ -41,12 +94,16 @@ export async function fetchResourceBySlug(slug: string): Promise<Resource | null
     throw error;
   }
 
-  if (!row) return null;
-  return normalizeResource(row);
+  if (!resource) return null;
+
+  return {
+    ...resource,
+    organization: Array.isArray(resource.organizations) ? resource.organizations[0] : resource.organizations,
+  } as Resource;
 }
 
 /**
- * Fetch a single resource by slug or ID from the resource_directory VIEW.
+ * Fetch a single resource by slug or ID from the base resources table.
  * First tries slug match, then tries ID if it looks like a UUID.
  */
 export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resource | null> {
@@ -56,8 +113,33 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
     // First try by slug
     console.log('[fetchResourceBySlugOrId] 🔍 Querying by slug...');
     const { data: bySlug, error: slugError } = await supabase
-      .from('resource_directory')
-      .select('*')
+      .from('resources')
+      .select(`
+        id,
+        slug,
+        title,
+        category,
+        summary,
+        details,
+        cost,
+        access,
+        eligibility,
+        how_to_apply,
+        requirements,
+        hours,
+        status,
+        verification,
+        last_verified_at,
+        org_id,
+        organizations:org_id (
+          id,
+          name,
+          website,
+          phone,
+          email,
+          description
+        )
+      `)
       .eq('slug', slugOrId)
       .eq('status', 'active')
       .maybeSingle();
@@ -71,14 +153,12 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
 
     if (bySlug) {
       console.log('[fetchResourceBySlugOrId] ✅ Found by slug:', { id: bySlug.id, slug: bySlug.slug });
-      try {
-        const normalized = normalizeResource(bySlug);
-        console.log('[fetchResourceBySlugOrId] ✅ Normalized successfully');
-        return normalized;
-      } catch (normErr) {
-        console.error('❌ Normalization failed:', normErr);
-        throw normErr;
-      }
+      const normalized = {
+        ...bySlug,
+        organization: Array.isArray(bySlug.organizations) ? bySlug.organizations[0] : bySlug.organizations,
+      } as Resource;
+      console.log('[fetchResourceBySlugOrId] ✅ Normalized successfully');
+      return normalized;
     }
 
     console.log('[fetchResourceBySlugOrId] Not found by slug, checking if UUID format...');
@@ -93,8 +173,33 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
     console.log('[fetchResourceBySlugOrId] 🔍 Querying by UUID:', { slugOrId });
     
     const { data: byId, error: idError } = await supabase
-      .from('resource_directory')
-      .select('*')
+      .from('resources')
+      .select(`
+        id,
+        slug,
+        title,
+        category,
+        summary,
+        details,
+        cost,
+        access,
+        eligibility,
+        how_to_apply,
+        requirements,
+        hours,
+        status,
+        verification,
+        last_verified_at,
+        org_id,
+        organizations:org_id (
+          id,
+          name,
+          website,
+          phone,
+          email,
+          description
+        )
+      `)
       .eq('id', slugOrId)
       .eq('status', 'active')
       .maybeSingle();
@@ -108,14 +213,12 @@ export async function fetchResourceBySlugOrId(slugOrId: string): Promise<Resourc
 
     if (byId) {
       console.log('[fetchResourceBySlugOrId] ✅ Found by ID:', { id: byId.id, slug: byId.slug });
-      try {
-        const normalized = normalizeResource(byId);
-        console.log('[fetchResourceBySlugOrId] ✅ Normalized successfully');
-        return normalized;
-      } catch (normErr) {
-        console.error('❌ Normalization failed:', normErr);
-        throw normErr;
-      }
+      const normalized = {
+        ...byId,
+        organization: Array.isArray(byId.organizations) ? byId.organizations[0] : byId.organizations,
+      } as Resource;
+      console.log('[fetchResourceBySlugOrId] ✅ Normalized successfully');
+      return normalized;
     }
 
     console.log('❌ [fetchResourceBySlugOrId] NOT FOUND by slug or ID:', { slugOrId });
