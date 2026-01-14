@@ -131,7 +131,7 @@ export const getInvolvedCopy = {
   support: {
     sectionTitle: "Support Current Needs",
     sectionBody:
-      "Direct support helps sustain active work — hosting and infrastructure, verification and maintenance, development, and essential equipment when needed. Needs shift over time, but this page stays current so you always have one link to share.",
+      "Direct support helps sustain active work — hosting and infrastructure, verification and maintenance, development, and essential equipment when needed. Needs shift over time, but this page stays current — so you always have one link to share with your communities and anyone else who wants to help.",
     stripe: {
       label: "Donate (Stripe)",
       url: "https://donate.stripe.com/cNi6oIbYM6s2boseqdgIo00",
