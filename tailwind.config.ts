@@ -24,7 +24,11 @@ const config: Config = {
         serif: ['Source Serif 4', 'DM Sans', 'serif'],
       },
       boxShadow: {
-        soft: '0 10px 30px rgba(15, 23, 42, 0.08)',
+        sm: '0 1px 2px rgba(15, 23, 42, 0.05)',
+        md: '0 4px 12px rgba(15, 23, 42, 0.08)',
+        lg: '0 10px 30px rgba(15, 23, 42, 0.10)',
+        hover: '0 12px 40px rgba(15, 23, 42, 0.15)',
+        soft: '0 10px 30px rgba(15, 23, 42, 0.08)', /* Legacy - use md instead */
       },
     },
   },

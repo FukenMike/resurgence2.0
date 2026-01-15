@@ -117,7 +117,7 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   return (
     <Link
       to={`/resources/directory/${linkTarget}`}
-      className="block bg-surface border border-border-soft rounded-lg p-5 hover:shadow-lg hover:border-ocean transition-all"
+      className="block bg-surface border border-border-soft rounded-lg p-5 shadow-sm hover:shadow-hover hover:border-ocean transition-all duration-200"
     >
       <div className="flex items-start justify-between gap-3 mb-3">
         <h3 className="text-xl font-semibold text-ink hover:text-ocean transition-colors">
