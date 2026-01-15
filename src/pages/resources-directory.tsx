@@ -107,9 +107,9 @@ export function ResourcesDirectory() {
   if (!hasValidSupabaseConfig) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-12">
-        <div className="bg-surface-muted border border-border-soft rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-ink mb-2">Configuration Error</h2>
-          <p className="text-muted">
+        <div className="bg-danger-bg border border-danger-border rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-danger mb-2">Configuration Error</h2>
+          <p className="text-danger">
             Supabase environment variables are not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file and restart the development server.
           </p>
         </div>
@@ -130,8 +130,8 @@ export function ResourcesDirectory() {
 
         {/* Error State */}
         {error && (
-          <div className="mb-8 bg-surface-muted border border-border-soft rounded-lg p-4">
-            <p className="text-muted">{error}</p>
+          <div className="mb-8 bg-danger-bg border border-danger-border rounded-lg p-4">
+            <p className="text-danger">{error}</p>
           </div>
         )}
 

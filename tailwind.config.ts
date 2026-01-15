@@ -15,6 +15,9 @@ const config: Config = {
         'border-muted': '#cbd5e1',
         ocean: '#0ea5e9',    /* Primary accent */
         forest: '#047857',   /* Secondary accent */
+        danger: '#dc2626',         /* Error text and icons */
+        'danger-bg': '#fef2f2',    /* Error background */
+        'danger-border': '#fecaca', /* Error borders */
       },
       fontFamily: {
         sans: ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],

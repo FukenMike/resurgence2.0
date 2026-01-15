@@ -42,6 +42,11 @@
   --color-ocean: #0ea5e9;         /* Primary accent (sky/blue) */
   --color-forest: #047857;        /* Secondary accent (green/emerald) */
   
+  /* Danger & Errors */
+  --color-danger: #dc2626;        /* Error text and icons */
+  --color-danger-bg: #fef2f2;     /* Error background */
+  --color-danger-border: #fecaca; /* Error borders */
+  
   /* Typography */
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --font-serif: "Source Serif 4", "DM Sans", serif;

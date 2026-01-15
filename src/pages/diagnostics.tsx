@@ -130,9 +130,9 @@ export function Diagnostics() {
             ← Back to Home
           </Link>
         </nav>
-        <div className="bg-surface-muted border border-border-soft rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-ink mb-2">Diagnostics Error</h2>
-          <p className="text-muted">{error}</p>
+        <div className="bg-danger-bg border border-danger-border rounded-lg p-6">
+          <h2 className="text-xl font-semibold text-danger mb-2">Diagnostics Error</h2>
+          <p className="text-danger">{error}</p>
         </div>
       </div>
     );

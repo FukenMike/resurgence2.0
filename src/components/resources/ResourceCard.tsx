@@ -91,10 +91,10 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             compact
           />
         </div>
-        <div className="bg-surface-muted border border-border-soft rounded p-2 mb-3">
-          <p className="text-xs text-muted">⚠️ Invalid resource data (missing ID)</p>
+        <div className="bg-danger-bg border border-danger-border rounded p-2 mb-3">
+          <p className="text-xs text-danger">⚠️ Invalid resource data (missing ID)</p>
           {import.meta.env.DEV && (
-            <span className="inline-block mt-1 text-[11px] text-muted bg-surface-muted px-2 py-0.5 rounded">
+            <span className="inline-block mt-1 text-[11px] text-danger bg-danger-bg px-2 py-0.5 rounded">
               Missing link target
             </span>
           )}
