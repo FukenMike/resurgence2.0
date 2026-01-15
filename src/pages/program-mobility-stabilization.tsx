@@ -15,9 +15,9 @@ export default function ProgramMobilityStabilization() {
   return (
     <div className="flex flex-col gap-8">
       <section className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600">Program</p>
-        <h1 className="text-4xl font-semibold text-slate-900">Mobility Stabilization Program (MSP)</h1>
-        <p className="max-w-3xl text-lg text-slate-600">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean">Program</p>
+        <h1 className="text-4xl font-semibold text-ink">Mobility Stabilization Program (MSP)</h1>
+        <p className="max-w-3xl text-lg text-muted">
           A vehicle-repair assistance program framework designed to prevent stability harm when mechanical failure
           threatens work, medical access, school, or caregiving.
         </p>
@@ -26,7 +26,7 @@ export default function ProgramMobilityStabilization() {
       <section className="grid gap-4 md:grid-cols-2">
         <Card eyebrow="In Development" title="Status">
           <div className="space-y-2">
-            <p className="font-semibold text-slate-900">Honest status: funding not yet secured.</p>
+            <p className="font-semibold text-ink">Honest status: funding not yet secured.</p>
             <p>
               We are shaping the intake, verification, and partner stack. Launch timelines depend on confirming repair
               funding and emergency reserve policies.

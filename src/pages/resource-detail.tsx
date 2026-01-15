@@ -112,16 +112,16 @@ export function ResourceDetail() {
   if (!loading && !slugOrId) {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12">
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-red-900 mb-4">Invalid Resource URL</h2>
-          <p className="text-red-700 mb-4">
+        <div className="bg-danger-bg border border-danger-border rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-danger mb-4">Invalid Resource URL</h2>
+          <p className="text-danger mb-4">
             No resource identifier was provided in the URL.
             <br />
-            <span className="text-sm text-red-600">Param value: {JSON.stringify(slugOrId)}</span>
+            <span className="text-sm text-danger">Param value: {JSON.stringify(slugOrId)}</span>
           </p>
           <Link
             to="/resources/directory"
-            className="inline-block px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-block px-6 py-2 bg-ocean text-white rounded-lg hover:bg-ocean transition-colors"
           >
             ← Back to Resource Directory
           </Link>
@@ -143,12 +143,12 @@ export function ResourceDetail() {
     if (DEBUG_MODE) {
       return (
         <div className="max-w-4xl mx-auto px-4 py-12">
-          <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-red-900 mb-4">🐛 DEBUG: Not Found</h2>
-            <pre className="bg-red-100 p-4 rounded mb-4 text-sm overflow-auto">
+          <div className="bg-danger-bg border border-danger-border rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-danger mb-4">🐛 DEBUG: Not Found</h2>
+            <pre className="bg-danger-bg p-4 rounded mb-4 text-sm overflow-auto">
               {JSON.stringify({ slugOrId, hasResource: !!resource, loading }, null, 2)}
             </pre>
-            <p className="text-red-700 mb-4">Resource fetch returned null/undefined</p>
+            <p className="text-danger mb-4">Resource fetch returned null/undefined</p>
           </div>
         </div>
       );
@@ -159,11 +159,11 @@ export function ResourceDetail() {
 
   const getCostBadge = (cost: string) => {
     const badges: Record<string, string> = {
-      free: 'bg-green-50 text-green-700 border-green-200',
-      paid: 'bg-blue-50 text-blue-700 border-blue-200',
-      sliding: 'bg-purple-50 text-purple-700 border-purple-200',
+      free: 'bg-surface-muted text-forest border-border-soft',
+      paid: 'bg-surface-muted text-ocean border-ocean',
+      sliding: 'bg-surface-muted text-ocean border-border-soft',
     };
-    return badges[cost] || 'bg-gray-50 text-gray-700 border-gray-200';
+    return badges[cost] || 'bg-surface-muted text-muted border-border-soft';
   };
 
   const formatAccessTypes = (accessData: AccessType | AccessType[] | null | undefined): AccessType[] => {
@@ -194,13 +194,13 @@ export function ResourceDetail() {
     return (
       <div className="max-w-5xl mx-auto px-4 py-12">
         <nav className="mb-6 text-sm">
-          <Link to="/resources/directory" className="text-blue-600 hover:text-blue-700">
+          <Link to="/resources/directory" className="text-ocean hover:text-ocean">
             ← Back to Resource Directory
           </Link>
         </nav>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-red-900 mb-2">Configuration Error</h2>
-          <p className="text-red-700">
+        <div className="bg-danger-bg border border-danger-border rounded-lg p-6">
+          <h2 className="text-lg font-semibold text-danger mb-2">Configuration Error</h2>
+          <p className="text-danger">
             Supabase environment variables are not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env file and restart the development server.
           </p>
         </div>
@@ -213,10 +213,10 @@ export function ResourceDetail() {
     return (
       <div className="max-w-5xl mx-auto px-4 py-12 flex justify-center items-center min-h-96">
         <div className="flex flex-col items-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-          <p className="text-gray-600">Loading resource...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ocean mb-4"></div>
+          <p className="text-muted">Loading resource...</p>
           {DEBUG_MODE && (
-            <pre className="text-xs mt-4 bg-gray-100 p-2 rounded text-gray-700">
+            <pre className="text-xs mt-4 bg-surface-muted p-2 rounded text-muted">
               {`slugOrId: ${slugOrId}\nloading: ${loading}`}
             </pre>
           )}
@@ -230,12 +230,12 @@ export function ResourceDetail() {
     return (
       <div className="max-w-5xl mx-auto px-4 py-12">
         <nav className="mb-6 text-sm">
-          <Link to="/resources/directory" className="text-blue-600 hover:text-blue-700">
+          <Link to="/resources/directory" className="text-ocean hover:text-ocean">
             ← Back to Resource Directory
           </Link>
         </nav>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <p className="text-red-700">{error}</p>
+        <div className="bg-danger-bg border border-danger-border rounded-lg p-6">
+          <p className="text-danger">{error}</p>
         </div>
       </div>
     );
@@ -254,7 +254,7 @@ export function ResourceDetail() {
     <div className="max-w-5xl mx-auto px-4 py-12">
       {/* Breadcrumb */}
       <nav className="mb-6 text-sm">
-        <Link to="/resources/directory" className="text-blue-600 hover:text-blue-700">
+        <Link to="/resources/directory" className="text-ocean hover:text-ocean">
           ← Back to Resource Directory
         </Link>
       </nav>
@@ -262,7 +262,7 @@ export function ResourceDetail() {
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-start justify-between gap-4 mb-4">
-          <h1 className="text-4xl font-bold text-gray-900">{resource.title || 'Untitled Resource'}</h1>
+          <h1 className="text-4xl font-bold text-ink">{resource.title || 'Untitled Resource'}</h1>
           <VerificationBadge
             status={resource.verification}
             lastVerified={resource.last_verified_at}
@@ -270,14 +270,14 @@ export function ResourceDetail() {
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
-          <span className="inline-block px-4 py-2 bg-blue-100 text-blue-800 rounded-full font-medium">
+          <span className="inline-block px-4 py-2 bg-surface-muted text-ocean rounded-full font-medium">
             {resource.category || 'Uncategorized'}
           </span>
           <span className={`inline-block px-4 py-2 rounded-full font-medium border ${getCostBadge(resource.cost)}`}>
             {formatCostType(resource.cost)}
           </span>
           {accessTypes.map((type) => (
-            <span key={type} className="inline-block px-3 py-1 bg-gray-100 text-gray-700 rounded text-sm">
+            <span key={type} className="inline-block px-3 py-1 bg-surface-muted text-muted rounded text-sm">
               {formatAccessType(type)}
             </span>
           ))}
@@ -286,14 +286,14 @@ export function ResourceDetail() {
 
       {/* Overview */}
       <section className="mb-8">
-        <p className="text-lg text-gray-700 leading-relaxed">{resource.summary || 'No summary provided.'}</p>
+        <p className="text-lg text-muted leading-relaxed">{resource.summary || 'No summary provided.'}</p>
       </section>
 
       {/* Details if available */}
       {resource.details && (
-        <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Details</h2>
-          <p className="text-gray-700 leading-relaxed">{resource.details}</p>
+        <section className="mb-8 bg-white border border-border-soft rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-ink mb-4">Details</h2>
+          <p className="text-muted leading-relaxed">{resource.details}</p>
         </section>
       )}
 
@@ -301,13 +301,13 @@ export function ResourceDetail() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
         {/* Eligibility */}
         {eligibilityItems.length > 0 && (
-          <section className="bg-white border border-gray-200 rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Eligibility</h2>
+          <section className="bg-white border border-border-soft rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-ink mb-4">Eligibility</h2>
             <ul className="space-y-2">
               {eligibilityItems.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="text-blue-600 mt-1">•</span>
-                  <span className="text-gray-700">{item}</span>
+                  <span className="text-ocean mt-1">•</span>
+                  <span className="text-muted">{item}</span>
                 </li>
               ))}
             </ul>
@@ -316,13 +316,13 @@ export function ResourceDetail() {
 
         {/* Requirements */}
         {requirementsItems.length > 0 && (
-          <section className="bg-white border border-gray-200 rounded-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Requirements</h2>
+          <section className="bg-white border border-border-soft rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-ink mb-4">Requirements</h2>
             <ul className="space-y-2">
               {requirementsItems.map((item, index) => (
                 <li key={index} className="flex items-start gap-3">
-                  <span className="text-gray-400">📄</span>
-                  <span className="text-gray-700">{item}</span>
+                  <span className="text-muted">📄</span>
+                  <span className="text-muted">{item}</span>
                 </li>
               ))}
             </ul>
@@ -332,15 +332,15 @@ export function ResourceDetail() {
 
       {/* How to Apply */}
       {howToApplyItems.length > 0 && (
-        <section className="mb-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">How to Apply</h2>
+        <section className="mb-8 bg-surface-muted border border-ocean rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-ink mb-4">How to Apply</h2>
           <ol className="space-y-3">
             {howToApplyItems.map((step, index) => (
               <li key={index} className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-7 h-7 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-sm">
+                <span className="flex-shrink-0 w-7 h-7 bg-ocean text-white rounded-full flex items-center justify-center font-bold text-sm">
                   {index + 1}
                 </span>
-                <span className="text-gray-700 pt-0.5">{step}</span>
+                <span className="text-muted pt-0.5">{step}</span>
               </li>
             ))}
           </ol>
@@ -349,38 +349,38 @@ export function ResourceDetail() {
 
       {/* Organization Info */}
       {resource.organization ? (
-        <section className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Organization</h2>
-          <h3 className="text-xl font-semibold text-gray-900 mb-3">{resource.organization.name || 'Organization name not available'}</h3>
+        <section className="mb-8 bg-surface-muted border border-border-soft rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-ink mb-4">Organization</h2>
+          <h3 className="text-xl font-semibold text-ink mb-3">{resource.organization.name || 'Organization name not available'}</h3>
           {resource.organization.description && (
-            <p className="text-gray-700 mb-4">{resource.organization.description}</p>
+            <p className="text-muted mb-4">{resource.organization.description}</p>
           )}
           
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             {resource.organization.phone && (
               <div>
-                <div className="text-sm font-medium text-gray-500 mb-1">Phone</div>
-                <a href={`tel:${resource.organization.phone}`} className="text-blue-600 hover:text-blue-700 font-medium">
+                <div className="text-sm font-medium text-muted mb-1">Phone</div>
+                <a href={`tel:${resource.organization.phone}`} className="text-ocean hover:text-ocean font-medium">
                   {resource.organization.phone}
                 </a>
               </div>
             )}
             {resource.organization.email && (
               <div>
-                <div className="text-sm font-medium text-gray-500 mb-1">Email</div>
-                <a href={`mailto:${resource.organization.email}`} className="text-blue-600 hover:text-blue-700 font-medium break-all">
+                <div className="text-sm font-medium text-muted mb-1">Email</div>
+                <a href={`mailto:${resource.organization.email}`} className="text-ocean hover:text-ocean font-medium break-all">
                   {resource.organization.email}
                 </a>
               </div>
             )}
             {resource.organization.website && (
               <div>
-                <div className="text-sm font-medium text-gray-500 mb-1">Website</div>
+                <div className="text-sm font-medium text-muted mb-1">Website</div>
                 <a
                   href={resource.organization.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-600 hover:text-blue-700 font-medium inline-flex items-center gap-1"
+                  className="text-ocean hover:text-ocean font-medium inline-flex items-center gap-1"
                 >
                   Visit Website
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -391,23 +391,23 @@ export function ResourceDetail() {
             )}
             {resource.hours && (
               <div>
-                <div className="text-sm font-medium text-gray-500 mb-1">Hours</div>
-                <div className="text-gray-700">{resource.hours}</div>
+                <div className="text-sm font-medium text-muted mb-1">Hours</div>
+                <div className="text-muted">{resource.hours}</div>
               </div>
             )}
           </div>
         </section>
       ) : (
-        <section className="mb-8 bg-gray-50 border border-gray-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Organization</h2>
-          <p className="text-gray-600 italic">Organization information not provided.</p>
+        <section className="mb-8 bg-surface-muted border border-border-soft rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-ink mb-4">Organization</h2>
+          <p className="text-muted italic">Organization information not provided.</p>
         </section>
       )}
 
       {/* Service Areas / Coverage */}
       {Array.isArray(resource.service_areas) && resource.service_areas.length > 0 ? (
-        <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Service Areas & Coverage</h2>
+        <section className="mb-8 bg-white border border-border-soft rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-ink mb-4">Service Areas & Coverage</h2>
           <div className="space-y-3">
             {resource.service_areas.map((sa, index) => {
               let displayText = '';
@@ -438,7 +438,7 @@ export function ResourceDetail() {
               }
               
               return (
-                <div key={index} className="flex items-start gap-3 text-gray-700">
+                <div key={index} className="flex items-start gap-3 text-muted">
                   <span className="text-xl">{icon}</span>
                   <span>{displayText}</span>
                 </div>
@@ -447,9 +447,9 @@ export function ResourceDetail() {
           </div>
         </section>
       ) : (
-        <section className="mb-8 bg-white border border-gray-200 rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Service Areas & Coverage</h2>
-          <p className="text-gray-600 italic">Coverage not listed yet.</p>
+        <section className="mb-8 bg-white border border-border-soft rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-ink mb-4">Service Areas & Coverage</h2>
+          <p className="text-muted italic">Coverage not listed yet.</p>
         </section>
       )}
 
@@ -466,7 +466,7 @@ export function ResourceDetail() {
       {/* Related Resources */}
       {relatedResources.length > 0 && (
         <section className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Resources</h2>
+          <h2 className="text-2xl font-bold text-ink mb-6">Related Resources</h2>
           <div className="grid grid-cols-1 gap-6">
             {relatedResources.map((related) => (
               <ResourceCard key={related.id} resource={related} />
