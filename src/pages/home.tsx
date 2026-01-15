@@ -51,7 +51,7 @@ export default function Home() {
         </div>
       </section>
 
-      <SectionSurface variant="muted">
+      <SectionSurface variant="muted" edge="left" edgeTone="accent">
         <section className="grid gap-6 md:grid-cols-2">
           <Card eyebrow="Core Values" title="How we show up">
             <ul className="mt-2 space-y-3 text-slate-600">

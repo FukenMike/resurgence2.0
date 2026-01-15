@@ -23,7 +23,7 @@ export default function Programs() {
         <p className="max-w-3xl text-lg text-slate-600">{programsCopy.body}</p>
       </section>
 
-      <SectionSurface variant="muted">
+      <SectionSurface variant="muted" edge="left" edgeTone="neutral">
         <section className="grid gap-4 md:grid-cols-2">
           {programsCopy.programs.map((program) => (
             program.href ? (

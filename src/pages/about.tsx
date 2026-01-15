@@ -22,7 +22,7 @@ export default function About() {
         <p className="max-w-3xl text-lg text-slate-600">{aboutCopy.body}</p>
       </section>
 
-      <SectionSurface variant="default">
+      <SectionSurface variant="default" edge="top" edgeTone="accent">
         <section className="grid gap-4 md:grid-cols-2">
           <Card title="Our philosophy">
             <p className="text-slate-600">{aboutCopy.philosophy}</p>
