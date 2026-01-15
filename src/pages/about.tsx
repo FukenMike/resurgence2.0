@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
+import SectionSurface from '../components/SectionSurface';
 import { aboutCopy } from '../content/siteCopy';
 import { updatePageMeta } from '../utils/seo';
 
@@ -21,14 +22,16 @@ export default function About() {
         <p className="max-w-3xl text-lg text-slate-600">{aboutCopy.body}</p>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-2">
-        <Card title="Our philosophy">
-          <p className="text-slate-600">{aboutCopy.philosophy}</p>
-        </Card>
-        <Card title="Accountability first">
-          <p className="text-slate-600">We measure success by stability outcomes: evictions avoided, shutoffs prevented, transportation restored, and barriers removed—paired with disciplined documentation and responsible stewardship of every dollar.</p>
-        </Card>
-      </section>
+      <SectionSurface variant="default">
+        <section className="grid gap-4 md:grid-cols-2">
+          <Card title="Our philosophy">
+            <p className="text-slate-600">{aboutCopy.philosophy}</p>
+          </Card>
+          <Card title="Accountability first">
+            <p className="text-slate-600">We measure success by stability outcomes: evictions avoided, shutoffs prevented, transportation restored, and barriers removed—paired with disciplined documentation and responsible stewardship of every dollar.</p>
+          </Card>
+        </section>
+      </SectionSurface>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
+import SectionSurface from '../components/SectionSurface';
 import { getInvolvedCopy } from '../content/siteCopy';
 import { updatePageMeta } from '../utils/seo';
 
@@ -37,20 +38,23 @@ export default function GetInvolved() {
         <p className="max-w-3xl text-lg text-slate-600">{getInvolvedCopy.hero.subheadline}</p>
       </section>
 
-      <section className="grid gap-4 md:grid-cols-3">
-        {getInvolvedCopy.cards.map((card) => (
-          <Card key={card.title} title={card.title}>
-            <p className="text-slate-600">{card.body}</p>
-          </Card>
-        ))}
-      </section>
-      <section id="support-our-work" className="space-y-4">
-        <div className="space-y-3">
-          <h2 className="text-2xl font-semibold text-slate-900">{getInvolvedCopy.support.sectionTitle}</h2>
-          <p className="max-w-3xl text-slate-600">
-            {getInvolvedCopy.support.sectionBody}
-          </p>
-        </div>
+      <SectionSurface variant="muted">
+        <section className="grid gap-4 md:grid-cols-3">
+          {getInvolvedCopy.cards.map((card) => (
+            <Card key={card.title} title={card.title}>
+              <p className="text-slate-600">{card.body}</p>
+            </Card>
+          ))}
+        </section>
+      </SectionSurface>
+      <SectionSurface variant="accent">
+        <section id="support-our-work" className="space-y-4">
+          <div className="space-y-3">
+            <h2 className="text-2xl font-semibold text-slate-900">{getInvolvedCopy.support.sectionTitle}</h2>
+            <p className="max-w-3xl text-slate-600">
+              {getInvolvedCopy.support.sectionBody}
+            </p>
+          </div>
 
         <div className="card-surface max-w-2xl space-y-4 p-6 md:p-8">
           <div className="space-y-2">
@@ -105,6 +109,8 @@ export default function GetInvolved() {
             .
           </p>
         </div>
-      </section>    </div>
+        </section>
+      </SectionSurface>
+    </div>
   );
 }

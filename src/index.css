@@ -57,3 +57,53 @@ h1, h2, h3, h4 {
   border-radius: 18px;
   box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 }
+
+/* Section Surface Variants */
+.surface-default {
+  background: linear-gradient(135deg, rgba(248, 250, 252, 0.6), rgba(241, 245, 249, 0.4));
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.04);
+}
+
+.surface-muted {
+  background: linear-gradient(135deg, rgba(241, 245, 249, 0.9), rgba(226, 232, 240, 0.6));
+  border: 1px solid rgba(203, 213, 225, 0.9);
+  padding: 1.5rem;
+  box-shadow: 0 6px 24px rgba(15, 23, 42, 0.06);
+}
+
+.surface-accent {
+  background: linear-gradient(135deg, rgba(224, 242, 254, 0.5), rgba(186, 230, 253, 0.3));
+  border: 1px solid rgba(125, 211, 252, 0.4);
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
+}
+
+.surface-inverse {
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  border: 1px solid rgba(71, 85, 105, 0.5);
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  color: #f1f5f9;
+}
+
+.surface-inverse h1,
+.surface-inverse h2,
+.surface-inverse h3,
+.surface-inverse h4 {
+  color: #ffffff;
+}
+
+.surface-inverse p {
+  color: #cbd5e1;
+}
+
+@media (min-width: 768px) {
+  .surface-default,
+  .surface-muted,
+  .surface-accent,
+  .surface-inverse {
+    padding: 2rem;
+  }
+}

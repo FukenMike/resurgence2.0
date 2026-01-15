@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import Card from '../components/Card';
+import SectionSurface from '../components/SectionSurface';
 import { homeCopy } from '../content/siteCopy';
 import { Link } from 'react-router-dom';
 import { updatePageMeta, getOrganizationSchema, getWebsiteSchema, injectStructuredData } from '../utils/seo';
@@ -50,27 +51,29 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="grid gap-6 md:grid-cols-2">
-        <Card eyebrow="Core Values" title="How we show up">
-          <ul className="mt-2 space-y-3 text-slate-600">
-            {homeCopy.coreValues.map((value) => (
-              <li key={value} className="flex gap-3">
-                <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
-                <span>{value}</span>
-              </li>
-            ))}
-          </ul>
-        </Card>
-        <Card eyebrow="Service Pillars" title="What we deliver">
-          <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
-            {homeCopy.pillars.map((pillar) => (
-              <div key={pillar} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800">
-                {pillar}
-              </div>
-            ))}
-          </div>
-        </Card>
-      </section>
+      <SectionSurface variant="muted">
+        <section className="grid gap-6 md:grid-cols-2">
+          <Card eyebrow="Core Values" title="How we show up">
+            <ul className="mt-2 space-y-3 text-slate-600">
+              {homeCopy.coreValues.map((value) => (
+                <li key={value} className="flex gap-3">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-emerald-500" aria-hidden />
+                  <span>{value}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+          <Card eyebrow="Service Pillars" title="What we deliver">
+            <div className="mt-2 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {homeCopy.pillars.map((pillar) => (
+                <div key={pillar} className="rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm font-semibold text-slate-800">
+                  {pillar}
+                </div>
+              ))}
+            </div>
+          </Card>
+        </section>
+      </SectionSurface>
     </div>
   );
 }
