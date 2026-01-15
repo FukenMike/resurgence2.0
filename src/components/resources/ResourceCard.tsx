@@ -32,18 +32,18 @@ export function ResourceCard({ resource }: ResourceCardProps) {
 
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      'Legal Services': 'bg-blue-100 text-blue-800',
-      'Housing Assistance': 'bg-purple-100 text-purple-800',
-      'Mental Health': 'bg-green-100 text-green-800',
-      'Employment Services': 'bg-orange-100 text-orange-800',
-      'Food & Basic Needs': 'bg-yellow-100 text-yellow-800',
-      'Healthcare': 'bg-red-100 text-red-800',
-      'Transportation': 'bg-indigo-100 text-indigo-800',
-      'Child Support': 'bg-pink-100 text-pink-800',
-      'Education & Training': 'bg-teal-100 text-teal-800',
-      'Emergency Services': 'bg-rose-100 text-rose-800',
+      'Legal Services': 'bg-sand text-ocean',
+      'Housing Assistance': 'bg-sand text-forest',
+      'Mental Health': 'bg-sand text-forest',
+      'Employment Services': 'bg-sand text-ocean',
+      'Food & Basic Needs': 'bg-sand text-muted',
+      'Healthcare': 'bg-sand text-muted',
+      'Transportation': 'bg-sand text-ocean',
+      'Child Support': 'bg-sand text-forest',
+      'Education & Training': 'bg-sand text-forest',
+      'Emergency Services': 'bg-sand text-muted',
     };
-    return colors[category] || 'bg-gray-100 text-gray-800';
+    return colors[category] || 'bg-surface-muted text-muted';
   };
 
   // Get service area display
@@ -80,9 +80,9 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   if (!linkTarget) {
     console.warn('[ResourceCard] Resource has no slug or id', resource);
     return (
-      <div className="block bg-white border border-red-300 rounded-lg p-5 opacity-75">
+      <div className="block bg-surface border border-border-soft rounded-lg p-5 opacity-75">
         <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-xl font-semibold text-gray-900">
+          <h3 className="text-xl font-semibold text-ink">
             {resource.title || 'Untitled Resource'}
           </h3>
           <VerificationBadge
@@ -91,10 +91,10 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             compact
           />
         </div>
-        <div className="bg-red-50 border border-red-200 rounded p-2 mb-3">
-          <p className="text-xs text-red-600">⚠️ Invalid resource data (missing ID)</p>
+        <div className="bg-surface-muted border border-border-soft rounded p-2 mb-3">
+          <p className="text-xs text-muted">⚠️ Invalid resource data (missing ID)</p>
           {import.meta.env.DEV && (
-            <span className="inline-block mt-1 text-[11px] text-red-700 bg-red-100 px-2 py-0.5 rounded">
+            <span className="inline-block mt-1 text-[11px] text-muted bg-surface-muted px-2 py-0.5 rounded">
               Missing link target
             </span>
           )}
@@ -104,12 +104,12 @@ export function ResourceCard({ resource }: ResourceCardProps) {
             {resource.category || 'Unknown'}
           </span>
           {resource.cost === 'free' && (
-            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-700 border border-green-200">
+            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-sand text-forest border border-ocean">
               Free
             </span>
           )}
         </div>
-        <p className="text-gray-700 mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
+        <p className="text-muted mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
       </div>
     );
   }
@@ -117,10 +117,10 @@ export function ResourceCard({ resource }: ResourceCardProps) {
   return (
     <Link
       to={`/resources/directory/${linkTarget}`}
-      className="block bg-white border border-gray-200 rounded-lg p-5 hover:shadow-lg hover:border-gray-300 transition-all"
+      className="block bg-surface border border-border-soft rounded-lg p-5 hover:shadow-lg hover:border-ocean transition-all"
     >
       <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className="text-xl font-semibold text-gray-900 hover:text-blue-600 transition-colors">
+        <h3 className="text-xl font-semibold text-ink hover:text-ocean transition-colors">
           {resource.title || 'Untitled Resource'}
         </h3>
         <VerificationBadge
@@ -135,34 +135,34 @@ export function ResourceCard({ resource }: ResourceCardProps) {
           {resource.category || 'Unknown'}
         </span>
         {resource.cost === 'free' && (
-          <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-green-50 text-green-700 border border-green-200">
+          <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-sand text-forest border border-ocean">
             Free
           </span>
         )}
       </div>
 
-      <p className="text-gray-700 mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
+      <p className="text-muted mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
 
       {/* Organization name if available */}
       {resource.organization?.name ? (
-        <div className="mb-2 text-sm text-gray-600">
+        <div className="mb-2 text-sm text-muted">
           <span className="font-medium">By: {resource.organization.name}</span>
         </div>
       ) : (
-        <div className="mb-2 text-sm text-gray-500 italic">
+        <div className="mb-2 text-sm text-muted italic">
           <span>Organization not listed</span>
         </div>
       )}
 
-      <div className="flex items-center justify-between text-sm text-gray-600 pt-3 border-t border-gray-200">
+      <div className="flex items-center justify-between text-sm text-muted pt-3 border-t border-border-soft">
         <div>
           <span className="font-medium">{getServiceAreaDisplay()}</span>
         </div>
         {outcomeSummary && outcomeSummary.total > 0 && (
           <div className="flex items-center gap-1 text-xs">
-            <span className="text-green-600">✓ {outcomeSummary.positive}</span>
-            <span className="text-gray-400">/</span>
-            <span className="text-gray-500">{outcomeSummary.total} reports</span>
+            <span className="text-forest">✓ {outcomeSummary.positive}</span>
+            <span className="text-border-soft">/</span>
+            <span className="text-muted">{outcomeSummary.total} reports</span>
           </div>
         )}
       </div>

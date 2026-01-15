@@ -23,22 +23,22 @@ export function VerificationBadge({ status, lastVerified, compact = false }: Ver
       case 'verified':
         return {
           label: 'Verified',
-          bgColor: 'bg-green-100',
-          textColor: 'text-green-800',
+          bgColor: 'bg-sand',
+          textColor: 'text-forest',
           icon: '✓',
         };
       case 'stale':
         return {
           label: 'Verification Stale',
-          bgColor: 'bg-yellow-100',
-          textColor: 'text-yellow-800',
+          bgColor: 'bg-sand',
+          textColor: 'text-muted',
           icon: '⚠',
         };
       case 'unverified':
         return {
           label: 'Unverified',
-          bgColor: 'bg-gray-100',
-          textColor: 'text-gray-600',
+          bgColor: 'bg-surface-muted',
+          textColor: 'text-muted',
           icon: '?',
         };
     }

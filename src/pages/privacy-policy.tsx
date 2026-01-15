@@ -14,9 +14,9 @@ export default function PrivacyPolicy() {
   return (
     <div className="flex flex-col gap-8">
       <section className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600">Policy</p>
-        <h1 className="text-4xl font-semibold text-slate-900">Privacy Policy</h1>
-        <p className="max-w-3xl text-lg text-slate-600">
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean">Policy</p>
+        <h1 className="text-4xl font-semibold text-ink">Privacy Policy</h1>
+        <p className="max-w-3xl text-lg text-muted">
           This policy explains how The Father’s Alliance handles information to operate services responsibly and protect household dignity.
         </p>
       </section>

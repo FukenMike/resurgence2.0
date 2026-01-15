@@ -33,16 +33,16 @@ export default function GetInvolved() {
   return (
     <div className="flex flex-col gap-8">
       <section className="space-y-3">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-600">{getInvolvedCopy.hero.eyebrow}</p>
-        <h1 className="text-4xl font-semibold text-slate-900">{getInvolvedCopy.headline}</h1>
-        <p className="max-w-3xl text-lg text-slate-600">{getInvolvedCopy.hero.subheadline}</p>
+        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean">{getInvolvedCopy.hero.eyebrow}</p>
+        <h1 className="text-4xl font-semibold text-ink">{getInvolvedCopy.headline}</h1>
+        <p className="max-w-3xl text-lg text-muted">{getInvolvedCopy.hero.subheadline}</p>
       </section>
 
       <SectionSurface variant="muted">
         <section className="grid gap-4 md:grid-cols-3">
           {getInvolvedCopy.cards.map((card) => (
             <Card key={card.title} title={card.title}>
-              <p className="text-slate-600">{card.body}</p>
+              <p className="text-muted">{card.body}</p>
             </Card>
           ))}
         </section>
@@ -50,16 +50,16 @@ export default function GetInvolved() {
       <SectionSurface variant="accent">
         <section id="support-our-work" className="space-y-4">
           <div className="space-y-3">
-            <h2 className="text-2xl font-semibold text-slate-900">{getInvolvedCopy.support.sectionTitle}</h2>
-            <p className="max-w-3xl text-slate-600">
+            <h2 className="text-2xl font-semibold text-ink">{getInvolvedCopy.support.sectionTitle}</h2>
+            <p className="max-w-3xl text-muted">
               {getInvolvedCopy.support.sectionBody}
             </p>
           </div>
 
         <div className="card-surface max-w-2xl space-y-4 p-6 md:p-8">
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-slate-900">Support Active Work</h3>
-            <p className="text-sm text-slate-600">
+            <h3 className="text-lg font-semibold text-ink">Support Active Work</h3>
+            <p className="text-sm text-muted">
               Choose the support route that fits. Stripe is the fastest. GoFundMe is available for broader sharing.
             </p>
           </div>
@@ -70,7 +70,7 @@ export default function GetInvolved() {
               href={getInvolvedCopy.support.stripe.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-sky-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-sky-700"
+              className="rounded-full bg-ocean px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-ocean/90"
               aria-label="Donate via Stripe"
             >
               {getInvolvedCopy.support.stripe.label}
@@ -79,20 +79,20 @@ export default function GetInvolved() {
               href={getInvolvedCopy.support.gofundme.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full border border-slate-300 px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:-translate-y-[1px] hover:border-slate-400 hover:bg-slate-50"
+              className="rounded-full border border-border-soft px-6 py-3 text-sm font-semibold text-ink shadow-sm transition hover:-translate-y-[1px] hover:border-border-muted hover:bg-surface-muted"
               aria-label="Donate via GoFundMe"
             >
               {getInvolvedCopy.support.gofundme.label}
             </a>
-            <span className="text-xs text-slate-500">{getInvolvedCopy.support.stripe.note}</span>
+            <span className="text-xs text-muted">{getInvolvedCopy.support.stripe.note}</span>
           </div>
 
-          <div className="space-y-3 text-sm text-slate-600">
+          <div className="space-y-3 text-sm text-muted">
             <p>
-              <strong className="font-semibold text-slate-700">Stripe donations</strong> support mission resources and program development, including infrastructure, research, verification work, and system and tool development.
+              <strong className="font-semibold text-ink">Stripe donations</strong> support mission resources and program development, including infrastructure, research, verification work, and system and tool development.
             </p>
             <p>
-              <strong className="font-semibold text-slate-700">GoFundMe contributions</strong> help cover essential equipment and tools needed to build and maintain the systems behind The Father's Alliance.
+              <strong className="font-semibold text-ink">GoFundMe contributions</strong> help cover essential equipment and tools needed to build and maintain the systems behind The Father's Alliance.
             </p>
           </div>
 
@@ -101,9 +101,9 @@ export default function GetInvolved() {
             <div className="gfm-embed" data-url={getInvolvedCopy.support.embed.widgetUrl}></div>
           )}
 
-          <p className="text-xs text-slate-500">
+          <p className="text-xs text-muted">
             Donations are generally non-refundable unless required by law. Questions? Contact{' '}
-            <a href="mailto:support@thefathersalliance.org" className="text-sky-700 hover:underline">
+            <a href="mailto:support@thefathersalliance.org" className="text-ocean hover:underline">
               support@thefathersalliance.org
             </a>
             .

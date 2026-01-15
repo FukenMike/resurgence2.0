@@ -103,20 +103,20 @@ export function OutcomeButtons({ resourceId }: OutcomeButtonsProps) {
   ];
 
   return (
-    <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-2">Community Feedback</h3>
-      <p className="text-sm text-gray-600 mb-4">
+    <div className="bg-surface-muted border border-border-soft rounded-lg p-6">
+      <h3 className="text-lg font-semibold text-ink mb-2">Community Feedback</h3>
+      <p className="text-sm text-muted mb-4">
         Help others by sharing your experience with this resource. Your feedback is anonymous.
       </p>
 
       {showThankYou && (
-        <div className="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg text-green-800 text-sm">
+        <div className="mb-4 p-3 bg-sand border border-forest rounded-lg text-forest text-sm">
           Thank you for your feedback! It helps the community.
         </div>
       )}
 
       {userSelection && (
-        <div className="mb-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-blue-800 text-sm">
+        <div className="mb-4 p-3 bg-sand border border-ocean rounded-lg text-ocean text-sm">
           You previously reported: <strong>{outcomeOptions.find(o => o.type === userSelection)?.label}</strong>
         </div>
       )}
@@ -129,31 +129,31 @@ export function OutcomeButtons({ resourceId }: OutcomeButtonsProps) {
             disabled={!!userSelection}
             className={`flex flex-col items-center justify-center p-3 rounded-lg border transition-colors ${
               userSelection === option.type
-                ? 'bg-blue-100 border-blue-300 text-blue-900'
+                ? 'bg-sand border-ocean text-ocean'
                 : userSelection
-                ? 'bg-gray-100 border-gray-200 text-gray-400 cursor-not-allowed'
-                : 'bg-white border-gray-300 hover:bg-gray-50 hover:border-gray-400 text-gray-700 cursor-pointer'
+                ? 'bg-surface-muted border-border-soft text-muted cursor-not-allowed'
+                : 'bg-surface border-border-soft hover:bg-sand hover:border-ocean text-ink cursor-pointer'
             }`}
           >
             <span className="text-2xl mb-1">{option.emoji}</span>
             <span className="text-xs font-medium text-center">{option.label}</span>
             {outcomes[option.type] > 0 && (
-              <span className="text-xs text-gray-500 mt-1">({outcomes[option.type]})</span>
+              <span className="text-xs text-muted mt-1">({outcomes[option.type]})</span>
             )}
           </button>
         ))}
       </div>
 
       {totalOutcomes > 0 && (
-        <div className="text-sm text-gray-600 border-t border-gray-200 pt-3">
+        <div className="text-sm text-muted border-t border-border-soft pt-3">
           <div className="flex items-center justify-between">
             <span>
               Total feedback: <strong>{totalOutcomes}</strong>
             </span>
             <span className={`font-medium ${
-              getConfidenceLevel() === 'High' ? 'text-green-600' :
-              getConfidenceLevel() === 'Medium' ? 'text-yellow-600' :
-              'text-gray-500'
+              getConfidenceLevel() === 'High' ? 'text-forest' :
+              getConfidenceLevel() === 'Medium' ? 'text-muted' :
+              'text-muted'
             }`}>
               Confidence: {getConfidenceLevel()}
             </span>

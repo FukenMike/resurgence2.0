@@ -42,9 +42,9 @@ export function Diagnostics() {
 
   const StatusBadge = ({ status }: { status: 'pass' | 'fail' | 'warning' }) => {
     const styles = {
-      pass: 'bg-green-100 text-green-800 border-green-300',
-      fail: 'bg-red-100 text-red-800 border-red-300',
-      warning: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+      pass: 'bg-sand text-forest border-ocean',
+      fail: 'bg-sand text-ink border-border-soft',
+      warning: 'bg-sand text-muted border-border-soft',
     };
 
     const icons = {
@@ -73,15 +73,15 @@ export function Diagnostics() {
     details?: any;
   }) => {
     return (
-      <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+      <div className="bg-surface border border-border-soft rounded-lg p-6 mb-6">
         <div className="flex items-start justify-between mb-4">
-          <h3 className="text-xl font-semibold text-gray-900">{title}</h3>
+          <h3 className="text-xl font-semibold text-ink">{title}</h3>
           <StatusBadge status={status} />
         </div>
-        <p className="text-gray-700 mb-4">{message}</p>
+        <p className="text-muted mb-4">{message}</p>
 
         {details && (
-          <div className="bg-gray-50 rounded p-4 font-mono text-sm text-gray-800 max-h-64 overflow-auto">
+          <div className="bg-sand rounded p-4 font-mono text-sm text-ink max-h-64 overflow-auto">
             {typeof details === 'object' ? (
               <>
                 {Array.isArray(details) ? (
@@ -114,8 +114,8 @@ export function Diagnostics() {
       <div className="max-w-4xl mx-auto px-4 py-12">
         <div className="flex justify-center items-center min-h-96">
           <div className="flex flex-col items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
-            <p className="text-gray-600">Running diagnostics...</p>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-ocean mb-4"></div>
+            <p className="text-muted">Running diagnostics...</p>
           </div>
         </div>
       </div>
@@ -126,13 +126,13 @@ export function Diagnostics() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-12">
         <nav className="mb-6 text-sm">
-          <Link to="/" className="text-blue-600 hover:text-blue-700">
+          <Link to="/" className="text-ocean hover:text-ocean/80">
             ← Back to Home
           </Link>
         </nav>
-        <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-          <h2 className="text-xl font-semibold text-red-900 mb-2">Diagnostics Error</h2>
-          <p className="text-red-700">{error}</p>
+        <div className="bg-surface-muted border border-border-soft rounded-lg p-6">
+          <h2 className="text-xl font-semibold text-ink mb-2">Diagnostics Error</h2>
+          <p className="text-muted">{error}</p>
         </div>
       </div>
     );
@@ -142,21 +142,21 @@ export function Diagnostics() {
     <div className="max-w-4xl mx-auto px-4 py-12">
       {/* Header */}
       <nav className="mb-8 text-sm">
-        <Link to="/" className="text-blue-600 hover:text-blue-700">
+        <Link to="/" className="text-ocean hover:text-ocean/80">
           ← Back to Home
         </Link>
       </nav>
 
       <div className="mb-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-2">Supabase Diagnostics</h1>
-        <p className="text-gray-600">
+        <h1 className="text-4xl font-bold text-ink mb-2">Supabase Diagnostics</h1>
+        <p className="text-muted">
           Read-only health check for database connectivity and data integrity
         </p>
       </div>
 
       {/* Admin Warning */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-        <p className="text-blue-800 text-sm">
+      <div className="bg-sand border border-ocean rounded-lg p-4 mb-6">
+        <p className="text-ink text-sm">
           <strong>ℹ️ Admin Tool:</strong> This page is intended for administrators and developers to verify Supabase
           configuration and data. No data is modified.
         </p>
@@ -168,8 +168,8 @@ export function Diagnostics() {
           onClick={copyReportToClipboard}
           className={`px-4 py-2 rounded-lg font-medium transition-colors ${
             copied
-              ? 'bg-green-600 text-white'
-              : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+              ? 'bg-forest text-white'
+              : 'bg-surface-muted text-muted hover:bg-sand'
           }`}
         >
           {copied ? '✓ Copied!' : 'Copy Report'}
@@ -178,32 +178,32 @@ export function Diagnostics() {
 
       {/* Overall Summary */}
       {report && (
-        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Summary</h2>
+        <div className="bg-surface border border-border-soft rounded-lg p-6 mb-8">
+          <h2 className="text-2xl font-bold text-ink mb-4">Summary</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             <div className="text-center">
-              <div className="text-sm text-gray-600">Environment</div>
+              <div className="text-sm text-muted">Environment</div>
               <StatusBadge status={report.environment.status} />
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600">Connectivity</div>
+              <div className="text-sm text-muted">Connectivity</div>
               <StatusBadge status={report.connectivity.status} />
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600">Counts</div>
+              <div className="text-sm text-muted">Counts</div>
               <StatusBadge status={report.counts.status} />
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600">Integrity</div>
+              <div className="text-sm text-muted">Integrity</div>
               <StatusBadge status={report.integrity.status} />
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600">Sample Fetch</div>
+              <div className="text-sm text-muted">Sample Fetch</div>
               <StatusBadge status={report.sampleFetch.status} />
             </div>
             <div className="text-center">
-              <div className="text-sm text-gray-600">Timestamp</div>
-              <div className="text-xs text-gray-500 mt-1">
+              <div className="text-sm text-muted">Timestamp</div>
+              <div className="text-xs text-muted mt-1">
                 {new Date(report.timestamp).toLocaleTimeString()}
               </div>
             </div>
@@ -252,7 +252,7 @@ export function Diagnostics() {
       )}
 
       {/* Footer */}
-      <div className="mt-12 pt-8 border-t border-gray-200 text-center text-sm text-gray-600">
+      <div className="mt-12 pt-8 border-t border-border-soft text-center text-sm text-muted">
         <p>Diagnostics page is read-only and does not modify any data.</p>
         <p className="mt-2">
           Last check: {report ? new Date(report.timestamp).toLocaleString() : 'N/A'}
