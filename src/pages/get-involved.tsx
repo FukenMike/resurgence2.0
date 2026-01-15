@@ -83,6 +83,15 @@ export default function GetInvolved() {
             <span className="text-xs text-slate-500">{getInvolvedCopy.support.stripe.note}</span>
           </div>
 
+          <div className="space-y-3 text-sm text-slate-600">
+            <p>
+              <strong className="font-semibold text-slate-700">Stripe donations</strong> support mission resources and program development, including infrastructure, research, verification work, and system and tool development.
+            </p>
+            <p>
+              <strong className="font-semibold text-slate-700">GoFundMe contributions</strong> help cover essential equipment and tools needed to build and maintain the systems behind The Father's Alliance.
+            </p>
+          </div>
+
           {/* Optional GoFundMe embed (feature-flagged) */}
           {getInvolvedCopy.support.embed.enabled && (
             <div className="gfm-embed" data-url={getInvolvedCopy.support.embed.widgetUrl}></div>
