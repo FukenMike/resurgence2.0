@@ -32,23 +32,7 @@ interface SectionSurfaceProps {
 }
 
 /**
- * SectionSurface component - adds background "panel" styling to page sections.
- *
- * This is a layout-neutral wrapper that adds subtle visual depth without
- * changing page structure. It feels like a background wash, not a nested card.
- *
- * Usage guidelines:
- * - Wrap entire section containers (grids of Cards, not individual Cards)
- * - Do not nest SectionSurface within SectionSurface
- * - Keep edge accents minimal (max 1 per page) for rhythm, not clutter
- * - Use 'inverse' only for closing/anchor CTAs or dark-themed sections
- *
- * @example
- * <SectionSurface variant="muted" edge="left" edgeTone="accent">
- *   <section className="grid gap-4 md:grid-cols-2">
- *     {/* Cards or content here */}
- *   </section>
- * </SectionSurface>
+ * SectionSurface component - adds background panel styling to page sections.
  */
 export default function SectionSurface({
   variant = 'default',

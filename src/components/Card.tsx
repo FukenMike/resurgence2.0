@@ -17,9 +17,9 @@ export default function Card({ title, eyebrow, children, actions, className }: C
         className
       )}
     >
-      {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky-600">{eyebrow}</p>}
-      {title && <h3 className="mt-2 text-xl font-semibold text-slate-900">{title}</h3>}
-      <div className="mt-3 text-base text-slate-600">{children}</div>
+      {eyebrow && <p className="text-xs font-semibold uppercase tracking-[0.2em] text-ocean">{eyebrow}</p>}
+      {title && <h3 className="mt-2 text-xl font-semibold text-ink">{title}</h3>}
+      <div className="mt-3 text-base text-muted">{children}</div>
       {actions && <div className="mt-5 flex items-center gap-3">{actions}</div>}
     </div>
   );

@@ -4,12 +4,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+  THEME MAP — Color Token System
+  ===============================
+  Location: src/index.css (CSS variables) + tailwind.config.ts (Tailwind map)
+  
+  Primary sources for theme updates:
+  1. CSS Variables in :root below (used in CSS classes and wrapper components)
+  2. Tailwind theme.extend.colors in tailwind.config.ts (Tailwind utilities)
+  
+  Applied via:
+  - Layout.tsx: Page background & container
+  - Navbar.tsx: Navigation styling, active states
+  - Card.tsx: Card surfaces & text
+  - SectionSurface.tsx: Section wrapper backgrounds
+  - Button.tsx: Button variants with focus states
+  - Global link/focus styles below
+  
+  No dark mode yet. Future: add @media (prefers-color-scheme: dark) if needed.
+*/
+
 :root {
-  --color-ink: #0f172a;
-  --color-sand: #f8fafc;
-  --color-ocean: #0ea5e9;
-  --color-forest: #047857;
-  --color-muted: #475569;
+  /* Text & Semantics */
+  --color-ink: #0f172a;           /* Primary text */
+  --color-muted: #475569;         /* Secondary text, muted paragraphs */
+  
+  /* Backgrounds */
+  --color-sand: #f8fafc;          /* Page background */
+  --color-surface: #ffffff;       /* Card/white surface */
+  --color-surface-muted: #f1f5f9; /* Subtle surface alternative */
+  
+  /* Borders & Dividers */
+  --color-border-soft: #e2e8f0;   /* Light borders */
+  --color-border-muted: #cbd5e1;  /* Medium borders */
+  
+  /* Accents */
+  --color-ocean: #0ea5e9;         /* Primary accent (sky/blue) */
+  --color-forest: #047857;        /* Secondary accent (green/emerald) */
+  
+  /* Typography */
   --font-sans: "DM Sans", system-ui, -apple-system, sans-serif;
   --font-serif: "Source Serif 4", "DM Sans", serif;
 }
@@ -24,7 +57,7 @@ body {
   color: var(--color-ink);
   background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 35%),
     radial-gradient(circle at 80% 0%, rgba(4, 120, 87, 0.08), transparent 30%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+    linear-gradient(180deg, #ffffff 0%, var(--color-sand) 100%);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
@@ -32,6 +65,10 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 p {
@@ -44,6 +81,7 @@ h1, h2, h3, h4 {
   margin: 0;
   font-family: var(--font-serif);
   letter-spacing: -0.01em;
+  color: var(--color-ink);
 }
 
 .container {
@@ -51,14 +89,15 @@ h1, h2, h3, h4 {
   margin: 0 auto;
 }
 
+/* Card Surface — primary card styling */
 .card-surface {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-soft);
   border-radius: 18px;
   box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
 }
 
-/* Section Surface Variants */
+/* Section Surface Variants — semantic background "panels" */
 .surface-default {
   background: linear-gradient(135deg, rgba(248, 250, 252, 0.6), rgba(241, 245, 249, 0.4));
   border: 1px solid rgba(226, 232, 240, 0.6);
@@ -66,7 +105,7 @@ h1, h2, h3, h4 {
 }
 
 .surface-muted {
-  background: linear-gradient(135deg, rgba(241, 245, 249, 0.9), rgba(226, 232, 240, 0.6));
+  background: linear-gradient(135deg, var(--color-surface-muted), rgba(226, 232, 240, 0.6));
   border: 1px solid rgba(203, 213, 225, 0.7);
   padding: 1.5rem;
 }
@@ -131,4 +170,16 @@ h1, h2, h3, h4 {
   .surface-inverse {
     padding: 2rem;
   }
+}
+
+/* Link Focus States & Accessibility */
+a:focus-visible {
+  outline: 2px solid var(--color-ocean);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-ocean);
+  outline-offset: 2px;
 }

@@ -8,13 +8,13 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-20 border-b border-border-soft bg-surface/90 backdrop-blur">
       <div className="container flex items-center justify-between py-4">
         <Link to="/" className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-sky-500 to-emerald-600 shadow-md" aria-hidden />
+          <div className="h-9 w-9 rounded-lg bg-gradient-to-br from-ocean to-forest shadow-md" aria-hidden />
           <div>
-            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-500">The</div>
-            <div className="-mt-1 text-xl font-bold text-slate-900">Father’s Alliance</div>
+            <div className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">The</div>
+            <div className="-mt-1 text-xl font-bold text-ink">Father's Alliance</div>
           </div>
         </Link>
         <nav className="hidden items-center gap-2 md:flex">
@@ -24,7 +24,7 @@ export default function Navbar() {
               to={path}
               className={({ isActive }) =>
                 `rounded-full px-3 py-2 text-sm font-medium transition-colors ${
-                  isActive || pathname === path ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'
+                  isActive || pathname === path ? 'bg-ink text-surface' : 'text-muted hover:bg-sand'
                 }`
               }
             >
@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden rounded-lg p-2 text-slate-600 hover:bg-slate-100 transition"
+            className="md:hidden rounded-lg p-2 text-muted hover:bg-sand transition"
             aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileMenuOpen}
           >
@@ -49,14 +49,14 @@ export default function Navbar() {
           </button>
           <Link
             to="/get-involved"
-            className="rounded-full bg-sky-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-sky-700"
+            className="rounded-full bg-ocean px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:bg-ocean/90"
           >
             Get Involved
           </Link>
         </div>
       </div>
       {mobileMenuOpen && (
-        <nav className="md:hidden border-t border-slate-200 bg-white/95 backdrop-blur">
+        <nav className="md:hidden border-t border-border-soft bg-surface/95 backdrop-blur">
           <div className="container flex flex-col gap-1 py-3">
             {links.map(({ label, path }) => (
               <NavLink
@@ -65,7 +65,7 @@ export default function Navbar() {
                 onClick={() => setMobileMenuOpen(false)}
                 className={({ isActive }) =>
                   `block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                    isActive || pathname === path ? 'bg-slate-900 text-white' : 'text-slate-600 hover:bg-slate-100'
+                    isActive || pathname === path ? 'bg-ink text-surface' : 'text-muted hover:bg-sand'
                   }`
                 }
               >
