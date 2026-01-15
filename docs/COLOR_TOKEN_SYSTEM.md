@@ -45,6 +45,23 @@ This document describes the cohesive color palette system implemented across The
 | `--color-ocean` / `bg-ocean` | `#0ea5e9` | Primary CTA buttons, active nav, focus rings, highlights | Primary accent (sky blue) |
 | `--color-forest` / `bg-forest` | `#047857` | Secondary accents, logo gradient (reserved for future) | Secondary accent (emerald) |
 
+### Danger & Errors
+
+| Token | Hex | Usage |
+|-------|-----|-------|
+| `--color-danger` / `text-danger` | `#dc2626` | Error text and icons |
+| `--color-danger-bg` / `bg-danger-bg` | `#fef2f2` | Error background surfaces |
+| `--color-danger-border` / `border-danger-border` | `#fecaca` | Error state borders |
+
+### Elevation & Depth
+
+| Token | CSS Variable | Usage |
+|-------|--------------|-------|
+| `shadow-sm` | `--shadow-sm` | Subtle elevation (1-2px) |
+| `shadow-md` | `--shadow-md` | Standard cards (4-12px) |
+| `shadow-lg` | `--shadow-lg` | Prominent elements (10-30px) |
+| `shadow-hover` | `--shadow-hover` | Interactive hover states (12-40px) |
+
 ## How to Use Tokens
 
 ### In CSS/Global Styles
@@ -211,3 +228,12 @@ This is a light-only palette. If dark mode is needed in the future:
 - **Build fails or colors look wrong?** Check `tailwind.config.ts` and `src/index.css` for conflicts.
 - **Need a color not in the palette?** Add it as a new token (see "Updating the Palette" above).
 - **Component colors still hardcoded?** Update to use semantic tokens. Search for `text-slate-`, `bg-sky-`, `border-gray-` etc. in component files.
+## CI Enforcement
+
+**Color Token Guard:** A GitHub Actions workflow (`.github/workflows/color-token-guard.yml`) automatically scans all source files on every PR and push to ensure no hardcoded Tailwind color utilities or inline hex values are introduced.
+
+**Violations will fail CI** with a detailed error message listing:
+- Files containing hardcoded colors (e.g., `text-slate-900`, `bg-blue-600`)
+- Files with inline hex colors (e.g., `style={{ color: '#dc2626' }}`)
+
+**Quick Reference:** See `docs/ALLOWED_COLOR_TOKENS.md` for the complete list of approved token classes and usage examples.
