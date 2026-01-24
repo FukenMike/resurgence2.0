@@ -27,7 +27,7 @@ export function ResourcesDirectory() {
   useEffect(() => {
     updatePageMeta({
       title: 'Resource Directory | The Father\'s Alliance',
-      description: 'Find verified organizations and programs offering support across a range of needs including legal services, housing, mental health, employment, and more.',
+      description: 'Find verified organizations and programs offering support across legal services, housing, mental health, employment, and more.',
       path: '/resources/directory',
     });
   }, []);
@@ -73,7 +73,7 @@ export function ResourcesDirectory() {
       <div className="mb-8">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Resource Directory</h1>
         <p className="text-lg text-gray-600">
-          Browse verified organizations and programs across a range of needs.
+          Browse verified organizations and programs across legal, housing, employment, and related needs.
         </p>
       </div>
 
@@ -121,7 +121,7 @@ export function ResourcesDirectory() {
             onChange={(e) => setShowWithWebsiteOnly(e.target.checked)}
             className="w-4 h-4 rounded border-gray-300"
           />
-          <span className="text-sm font-medium text-gray-700">Has website</span>
+          <span className="text-sm font-medium text-gray-700">Resources with a website</span>
         </label>
       </div>
 
@@ -155,7 +155,7 @@ export function ResourcesDirectory() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No resources match your search.</p>
+          <p className="text-gray-600 mb-4">No resources match the current filters.</p>
           <button
             onClick={handleResetFilters}
             className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
