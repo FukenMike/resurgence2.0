@@ -80,15 +80,6 @@ gtag('event', 'page_view', {
    - [ ] `/terms-of-service`
    - [ ] `/get-involved` ⭐ (previously not tagged)
 
-### Automated Coverage Test
-
-1. **Start dev server:** `npm run dev`
-2. **Open:** `http://localhost:5173` in browser
-3. **Open in new tab:** `test-ga-coverage.html` (or serve it separately)
-4. **Click "Run Full Test"** button
-5. **Watch console for:** `[GA] page_view sent ->` logs
-6. **Verify:** All 10 routes show green "✓ TAGGED"
-
 ### GA4 Realtime Verification
 
 1. **Open GA4:** [Google Analytics](https://analytics.google.com/)
@@ -163,7 +154,6 @@ Not tagged: 0 pages
 ## 📝 Files Changed
 
 - ✅ `src/app.tsx` - Updated RouteChangeTracker with explicit page_view events
-- ✅ `test-ga-coverage.html` - Created automated coverage test tool
 - ✅ `GA4_VERIFICATION_CHECKLIST.md` - This document
 
 **Commit:** `3b49552` - "Fix GA4 tagging: use explicit page_view events for all SPA routes"
