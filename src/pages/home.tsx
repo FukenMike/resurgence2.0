@@ -10,7 +10,7 @@ export default function Home() {
     updatePageMeta({
       title: "The Father's Alliance — Stability Support That Keeps Families Moving Forward",
       description:
-        "The Father's Alliance represents a role of protection, guidance, responsibility, and support—especially during times of need. We provide practical stability support to help households stay housed, mobile, and moving forward.",
+        "We provide practical stability support that keeps households housed, mobile, and moving forward—especially when standard assistance is slow or out of reach.",
       path: '/',
     });
     // Inject organization and website schema

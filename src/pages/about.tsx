@@ -9,7 +9,7 @@ export default function About() {
     updatePageMeta({
       title: "About The Father's Alliance - Our Mission and Philosophy",
       description:
-        "The Father's Alliance exists for the moments when a household is one problem away from falling behind. We focus on stabilizing families through practical, dignified support.",
+        "We step in when a single problem can push a household behind. We stabilize families through practical, dignified support.",
       path: '/about',
     });
   }, []);

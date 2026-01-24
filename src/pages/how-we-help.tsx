@@ -8,7 +8,7 @@ export default function HowWeHelp() {
     updatePageMeta({
       title: "How Support Works - The Father's Alliance",
       description:
-        'Our support process: intake and assessment, stability identification, rapid deployment of assistance, and connection to longer-term pathways.',
+        'Our process: intake and assessment, a stability check, rapid deployment of assistance, and connection to longer term pathways.',
       path: '/how-we-help',
     });
   }, []);

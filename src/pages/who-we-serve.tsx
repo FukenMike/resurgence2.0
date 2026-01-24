@@ -24,7 +24,7 @@ export default function WhoWeServe() {
       <section className="grid gap-4 md:grid-cols-3">
         {whoWeServeCopy.focusAreas.map((item) => (
           <Card key={item} title={item}>
-            <p className="text-muted">We meet families where they are and tailor support around their context.</p>
+            <p className="text-muted">We meet families where they are and tailor support to their situation.</p>
           </Card>
         ))}
       </section>
