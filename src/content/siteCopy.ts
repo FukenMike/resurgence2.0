@@ -11,11 +11,11 @@ export const navLinks = [
 export const homeCopy = {
   headline: 'Stability Support That Keeps Families Moving Forward.',
   subheadline:
-    "The Father's Alliance represents the role fathers are meant to play — protection, guidance, responsibility, and support — especially during times of need. We provide supplemental, practical stability support to help households stay stable when traditional help is delayed, unavailable, or incomplete—so a temporary setback doesn't become a long-term crisis.",
+    "The Father's Alliance represents the role fathers are meant to play — protection, guidance, responsibility, and support — especially during times of need. We provide supplemental, practical stability support to help households stay stable when traditional help is delayed, unavailable, or incomplete—so a temporary setback doesn't become a long term crisis.",
   mission:
     'To preserve household stability through timely, practical support—covering critical gaps, preventing avoidable crises, and helping families regain forward momentum.',
   vision:
-    'A country where families can access fast, dignified stability support that helps them stay housed, stay mobile, and keep moving toward self-sufficiency.',
+    'A country where families can access fast, dignified stability support that helps them stay housed, stay mobile, and keep moving toward self sufficiency.',
   coreValues: [
     'Stewardship: We protect resources, make disciplined decisions, and document outcomes with care.',
     'Dignity: We help without shame, judgment, or unnecessary barriers.',
@@ -27,7 +27,7 @@ export const homeCopy = {
 }
 
 export const whoWeServeCopy = {
-  headline: 'Serving Households Under Real-World Pressure',
+  headline: 'Serving Households Under Real World Pressure',
   body:
     'We serve fathers, caregivers, and families facing a stability threat—rent, utilities, transportation, or sudden financial strain—especially when traditional resources are delayed, unavailable, or already out of funding.',
   focusAreas: ['Fathers & Caregivers', 'Working Families Under Strain', 'Households Shut Out of Traditional Aid'],
@@ -45,7 +45,7 @@ export const programsCopy = {
         'A vehicle-repair assistance program framework designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
     },
     {
-      title: 'Household Stability Micro-Assistance',
+      title: 'Household Stability Micro Assistance',
       status: 'Designing',
       href: '',
       summary:
@@ -90,7 +90,7 @@ export const aboutCopy = {
   body:
     'The Father’s Alliance exists for the moments when a household is one problem away from falling behind—especially when traditional assistance is delayed, unavailable, or already out of funding. We focus on stabilizing families so they can stay independent and keep moving forward.',
   philosophy:
-    'We believe in “quiet support” that protects dignity. We aim for fast, responsible, real-world help—paired with clear pathways toward long-term stability and self-sufficiency.',
+    'We believe in "quiet support" that protects dignity. We aim for fast, responsible, real world help—paired with clear pathways toward long term stability and self sufficiency.',
 }
 
 export const resourcesCopy = {
