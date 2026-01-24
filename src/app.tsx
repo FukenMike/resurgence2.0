@@ -18,48 +18,72 @@ import TermsOfService from './pages/terms-of-service';
 function RouteChangeTracker() {
   const location = useLocation();
   const pendingPagePathRef = useRef<string | null>(null);
+  const lastSentPathRef = useRef<string | null>(null);
 
   useEffect(() => {
-    const sendPageView = (pathname: string) => {
+    const sendPageView = (pagePath: string) => {
       const gtag = (window as typeof window & { gtag?: (...args: unknown[]) => void }).gtag;
-      if (!gtag) {
-        pendingPagePathRef.current = pathname;
+      
+      // Avoid duplicate sends for the same path
+      if (lastSentPathRef.current === pagePath) {
         if (import.meta.env.DEV) {
-          console.log('[GA] gtag not yet available; buffered page_path:', pathname);
+          console.log('[GA] skipped duplicate page_view ->', pagePath);
         }
         return;
       }
 
-      gtag('config', 'G-622ZKH6HC1', { page_path: pathname });
-      if (import.meta.env.DEV) {
-        console.log('[GA] pageview ->', pathname);
+      if (!gtag) {
+        pendingPagePathRef.current = pagePath;
+        if (import.meta.env.DEV) {
+          console.log('[GA] buffered ->', pagePath);
+        }
+        return;
       }
+
+      // Send explicit page_view event with full context
+      gtag('event', 'page_view', {
+        page_path: pagePath,
+        page_location: window.location.href,
+        page_title: document.title
+      });
+
+      lastSentPathRef.current = pagePath;
       pendingPagePathRef.current = null;
+
+      if (import.meta.env.DEV) {
+        console.log('[GA] page_view sent ->', pagePath);
+      }
     };
 
     const pagePath = `${location.pathname}${location.search}`;
     sendPageView(pagePath);
 
-    // If there was a pending page_path and gtag is now available, send it
+    // Flush pending page_view if gtag became available
     if (pendingPagePathRef.current && pendingPagePathRef.current !== pagePath) {
       const gtag = (window as typeof window & { gtag?: (...args: unknown[]) => void }).gtag;
-      if (gtag) {
-        gtag('config', 'G-622ZKH6HC1', { page_path: pendingPagePathRef.current });
+      if (gtag && lastSentPathRef.current !== pendingPagePathRef.current) {
+        gtag('event', 'page_view', {
+          page_path: pendingPagePathRef.current,
+          page_location: window.location.origin + pendingPagePathRef.current,
+          page_title: document.title
+        });
+        lastSentPathRef.current = pendingPagePathRef.current;
         if (import.meta.env.DEV) {
-          console.log('[GA] flushed pending pageview ->', pendingPagePathRef.current);
+          console.log('[GA] flushed ->', pendingPagePathRef.current);
         }
         pendingPagePathRef.current = null;
       }
     }
   }, [location.pathname, location.search]);
 
-  // Dev-only: log when gtag becomes available
+  // Dev-only: log when gtag becomes available and route status
   useEffect(() => {
     if (import.meta.env.DEV) {
       const checkGtag = setInterval(() => {
         const gtag = (window as typeof window & { gtag?: (...args: unknown[]) => void }).gtag;
         if (gtag) {
           console.log('[GA] gtag loaded successfully');
+          console.log('[GA] Current route:', location.pathname, '| gtag available:', !!gtag);
           clearInterval(checkGtag);
         }
       }, 500);
