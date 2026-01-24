@@ -1,0 +1,1003 @@
+[
+    {
+        "id": "79079eaf-2196-4e06-9de7-08e1528e5ed6",
+        "cost": "free",
+        "slug": "988-crisis-lifeline",
+        "zips": [
+        ],
+        "hours": "24/7",
+        "title": "988 Suicide & Crisis Lifeline",
+        "access": "online",
+        "org_id": "21416fce-dbb8-4aed-ae5e-30237d61d21c",
+        "status": "active",
+        "details": "24/7 confidential support for people in distress and those supporting them.",
+        "summary": "Immediate crisis support by call, text, or chat.",
+        "category": "emergency",
+        "org_name": "988 Suicide & Crisis Lifeline",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public.",
+        "is_national": true,
+        "org_website": "https://988lifeline.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Call or text 988.",
+            "Use online chat if preferred.",
+            "If in immediate danger, call local emergency services."
+        ],
+        "requirements": [
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "1739b445-dfe4-4440-b17d-257858cdbf43",
+        "cost": "free",
+        "slug": "american-job-centers",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "American Job Center Finder",
+        "access": "online",
+        "org_id": "a20ecfd6-a7c6-4e42-b572-1198b69046af",
+        "status": "active",
+        "details": "Locate American Job Centers for job search help, training resources, and support services.",
+        "summary": "Find local job centers for employment and training support.",
+        "category": "employment",
+        "org_name": "American Job Center Finder",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public; services vary by location.",
+        "is_national": true,
+        "org_website": "https://www.careeronestop.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit CareerOneStop.",
+            "Use the Job Center Finder.",
+            "Contact the center to ask about services and scheduling."
+        ],
+        "requirements": [
+            "ID (sometimes)",
+            "Work history (optional)",
+            "Resume (optional)"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "7e263cb3-6b91-4ace-9a1d-f46b9e5abe74",
+        "cost": "free",
+        "slug": "food-assistance",
+        "zips": [
+            "30303"
+        ],
+        "hours": null,
+        "title": "Food Assistance",
+        "access": "walk_in",
+        "org_id": "9c5ddacb-5c78-44a9-97d2-bc29a9edb92e",
+        "status": "active",
+        "details": null,
+        "summary": "Find partner pantries and food distribution sites.",
+        "category": "food",
+        "org_name": "Atlanta Community Food Bank",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-10T14:37:50.693767+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": null,
+        "is_national": false,
+        "org_website": null,
+        "state_codes": [
+            "GA"
+        ],
+        "how_to_apply": [
+        ],
+        "requirements": [
+        ],
+        "verification": "unverified",
+        "service_areas": [
+            {
+                "zip": "30303",
+                "coverage": "zip",
+                "city_name": "Atlanta",
+                "state_code": "GA",
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "2df27459-a73c-475e-8f02-0970823e389e",
+        "cost": "free",
+        "slug": "benefits-gov",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "Benefits.gov Program Finder",
+        "access": "online",
+        "org_id": "08ce5eeb-983f-4446-836d-85990d3cf23f",
+        "status": "active",
+        "details": "Use guided questions to identify benefits related to food, healthcare, disability, housing, and more.",
+        "summary": "Find government benefits programs you may qualify for.",
+        "category": "emergency",
+        "org_name": "Benefits.gov",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Varies by program and state.",
+        "is_national": true,
+        "org_website": "https://www.benefits.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit Benefits.gov.",
+            "Answer the eligibility questionnaire.",
+            "Review matched programs and follow the application links."
+        ],
+        "requirements": [
+            "Personal info for screening (non-sensitive)",
+            "Program-specific documents if applying"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "5eeaf278-f9ad-4775-b656-d56dc04a89ac",
+        "cost": "free",
+        "slug": "federal-child-support",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "Child Support Program Information (OCSS)",
+        "access": "online",
+        "org_id": "ff3ff946-2270-487f-bbe4-4fe5acb16634",
+        "status": "active",
+        "details": "Federal overview and state agency links for child support services.",
+        "summary": "Information and links to state child support agencies and services.",
+        "category": "child_support",
+        "org_name": "Child Support (Federal OCSS)",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Varies by state.",
+        "is_national": true,
+        "org_website": "https://www.acf.hhs.gov/css",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit the OCSS site.",
+            "Select your state program.",
+            "Follow state instructions for services and applications."
+        ],
+        "requirements": [
+            "ID",
+            "Case details (if any)",
+            "State-specific forms"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "e3e66492-3d95-4caa-8f15-47de83f56581",
+        "cost": "free",
+        "slug": "disaster-assistance",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "Disaster Assistance Finder",
+        "access": "online",
+        "org_id": "16a3101f-0ec5-4f1d-8056-42eefeb6027e",
+        "status": "active",
+        "details": "Central portal to identify and apply for federal disaster assistance when available.",
+        "summary": "Find and apply for disaster assistance programs.",
+        "category": "emergency",
+        "org_name": "DisasterAssistance.gov",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Eligibility depends on declared disasters and program rules.",
+        "is_national": true,
+        "org_website": "https://www.disasterassistance.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit DisasterAssistance.gov.",
+            "Search or apply based on your situation.",
+            "Follow program instructions and provide required documents."
+        ],
+        "requirements": [
+            "Proof of address",
+            "ID",
+            "Disaster-related documentation (as applicable)"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "b77546ca-c8bc-44fb-8862-00455fc99677",
+        "cost": "free",
+        "slug": "feeding-america-locator",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "Feeding America Food Bank Locator",
+        "access": "online",
+        "org_id": "3a26e98a-db28-4cd1-a041-494315e672f5",
+        "status": "active",
+        "details": "Search by location to find local food banks and partner pantries.",
+        "summary": "Find food banks and food assistance near you.",
+        "category": "food",
+        "org_name": "Feeding America",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Eligibility varies by pantry/program.",
+        "is_national": true,
+        "org_website": "https://www.feedingamerica.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit FeedingAmerica.org.",
+            "Use the food bank locator for your area.",
+            "Contact the listed provider for hours and requirements."
+        ],
+        "requirements": [
+            "Location info",
+            "ID (sometimes)",
+            "Proof of residence (sometimes)"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "def8f9ce-d917-4b01-a055-250c78553580",
+        "cost": "free",
+        "slug": "findhelp-directory",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "FindHelp Local Programs Search",
+        "access": "online",
+        "org_id": "6736add2-613c-4564-a28d-eb911e63fe59",
+        "status": "active",
+        "details": "Browse community services by zip code and category.",
+        "summary": "Search local programs for food, housing, healthcare, work, and more.",
+        "category": "emergency",
+        "org_name": "FindHelp",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Varies by program.",
+        "is_national": true,
+        "org_website": "https://www.findhelp.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit FindHelp.org.",
+            "Enter your zip code.",
+            "Browse categories and contact providers."
+        ],
+        "requirements": [
+            "Location info",
+            "Program-specific documents if applying"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "ac9e5325-5b0d-49ff-8552-24e1a2a5dc5f",
+        "cost": "free",
+        "slug": "housing-help-hotline",
+        "zips": [
+            "30303"
+        ],
+        "hours": null,
+        "title": "Housing Help Hotline",
+        "access": "referral",
+        "org_id": "0510fd1d-222c-49b3-832f-866cfd6c1df3",
+        "status": "active",
+        "details": null,
+        "summary": "Guidance for housing instability, evictions, and tenant rights.",
+        "category": "housing",
+        "org_name": "Georgia Legal Aid",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-10T14:37:50.693767+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": null,
+        "is_national": false,
+        "org_website": null,
+        "state_codes": [
+            "GA"
+        ],
+        "how_to_apply": [
+        ],
+        "requirements": [
+        ],
+        "verification": "unverified",
+        "service_areas": [
+            {
+                "zip": "30303",
+                "coverage": "zip",
+                "city_name": "Atlanta",
+                "state_code": "GA",
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "04aa672b-5112-4a68-ae9a-8d6ffddd7843",
+        "cost": "free",
+        "slug": "legal-aid-general",
+        "zips": [
+            "30303"
+        ],
+        "hours": null,
+        "title": "Legal Aid (General)",
+        "access": "appointment",
+        "org_id": "0510fd1d-222c-49b3-832f-866cfd6c1df3",
+        "status": "active",
+        "details": null,
+        "summary": "Civil legal help for eligible individuals. Call or apply online.",
+        "category": "legal",
+        "org_name": "Georgia Legal Aid",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-10T14:37:50.693767+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": null,
+        "is_national": false,
+        "org_website": null,
+        "state_codes": [
+            "GA"
+        ],
+        "how_to_apply": [
+        ],
+        "requirements": [
+        ],
+        "verification": "unverified",
+        "service_areas": [
+            {
+                "zip": "30303",
+                "coverage": "zip",
+                "city_name": "Atlanta",
+                "state_code": "GA",
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "f434be39-6ea0-4f8d-a101-182592fe3e66",
+        "cost": "free",
+        "slug": "healthcare-gov",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "HealthCare.gov Coverage & Enrollment",
+        "access": "online",
+        "org_id": "19a38a00-b565-4ce2-86df-55bd1c0257f1",
+        "status": "active",
+        "details": "Marketplace information, enrollment steps, and eligibility guidance.",
+        "summary": "Find health coverage options and enrollment information.",
+        "category": "healthcare",
+        "org_name": "HealthCare.gov",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Varies by program/state marketplace.",
+        "is_national": true,
+        "org_website": "https://www.healthcare.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit HealthCare.gov.",
+            "Check eligibility and enrollment options.",
+            "Complete enrollment online or by phone if needed."
+        ],
+        "requirements": [
+            "Identity verification info",
+            "Income info (often)",
+            "Household details"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "f8ca34ae-b945-43da-9ba1-98c068089394",
+        "cost": "free",
+        "slug": "hud-housing-counseling",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "HUD Housing Counseling & Assistance",
+        "access": "online",
+        "org_id": "b0aa5699-5295-4eb3-a02d-194e246e2231",
+        "status": "active",
+        "details": "Start with HUD resources to locate counseling agencies and housing assistance pathways.",
+        "summary": "Find housing counseling and housing assistance guidance.",
+        "category": "housing",
+        "org_name": "HUD Housing Counseling",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Varies by program.",
+        "is_national": true,
+        "org_website": "https://www.hud.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit HUD housing resources.",
+            "Search for housing counseling agencies in your area.",
+            "Contact the agency to ask about eligibility and next steps."
+        ],
+        "requirements": [
+            "ID (often)",
+            "Proof of income (often)",
+            "Lease/mortgage documents if applicable"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "b8f9fbe6-c9cb-4c96-9a14-760807bb3605",
+        "cost": "free",
+        "slug": "irs-taxpayer-advocate",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "IRS Taxpayer Advocate Service",
+        "access": "online",
+        "org_id": "464fd757-3a29-4027-9d8d-dec7cf6829e5",
+        "status": "active",
+        "details": "Independent organization within the IRS to help taxpayers resolve persistent issues.",
+        "summary": "Help resolving IRS issues when normal channels aren't working.",
+        "category": "legal",
+        "org_name": "IRS Taxpayer Advocate Service",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Taxpayer situations vary.",
+        "is_national": true,
+        "org_website": "https://www.taxpayeradvocate.irs.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit the Taxpayer Advocate site.",
+            "Review eligibility for assistance.",
+            "Follow instructions to request help or contact your local office."
+        ],
+        "requirements": [
+            "Tax notices",
+            "Relevant correspondence",
+            "Identity verification info"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "455a1b8a-3932-411d-94c8-d1b245bc20e7",
+        "cost": "free",
+        "slug": "lsc-legal-aid-locator",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "Civil Legal Aid Locator (LSC)",
+        "access": "online",
+        "org_id": "c60cd42f-aab0-4cdf-ac85-cdb01ed57145",
+        "status": "active",
+        "details": "Locate local legal aid providers for civil matters; availability and scope vary.",
+        "summary": "Find civil legal aid organizations by location.",
+        "category": "legal",
+        "org_name": "Legal Services Corporation (LSC)",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Eligibility varies by provider; often income-based.",
+        "is_national": true,
+        "org_website": "https://www.lsc.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit LSC.gov.",
+            "Use the legal aid locator.",
+            "Contact the provider to confirm eligibility and services offered."
+        ],
+        "requirements": [
+            "ID (often)",
+            "Income documentation (often)",
+            "Case documents (if applicable)"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "03739e57-700a-421b-a4b0-edcf7457d666",
+        "cost": "free",
+        "slug": "nami-support",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "NAMI Support & Education",
+        "access": "online",
+        "org_id": "a4756fd6-e16c-48e1-b8e7-9661f3d9297d",
+        "status": "active",
+        "details": "Find local NAMI affiliates and educational/support options.",
+        "summary": "Mental health education, support groups, and affiliate resources.",
+        "category": "mental_health",
+        "org_name": "National Alliance on Mental Illness (NAMI)",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public; programs vary by location.",
+        "is_national": true,
+        "org_website": "https://www.nami.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit NAMI.org.",
+            "Find local affiliate resources.",
+            "Choose support groups or education programs and follow enrollment steps."
+        ],
+        "requirements": [
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "828dd0ca-bf0e-4bbe-94b9-c38b049c0984",
+        "cost": "free",
+        "slug": "ndrn-disability-advocacy",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "Disability Advocacy Locator (NDRN)",
+        "access": "online",
+        "org_id": "37bd677f-7015-4341-9189-05b26fc0634c",
+        "status": "active",
+        "details": "Connect with disability rights advocacy organizations and resources.",
+        "summary": "Find protection and advocacy services in your state/territory.",
+        "category": "legal",
+        "org_name": "National Disability Rights Network (NDRN)",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Varies by state P&A guidelines.",
+        "is_national": true,
+        "org_website": "https://www.ndrn.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit NDRN.org.",
+            "Find your state protection & advocacy organization.",
+            "Contact them with details and documents."
+        ],
+        "requirements": [
+            "Relevant records (as applicable)",
+            "ID (sometimes)"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "97413e76-4dd1-442d-8868-a8c690dd1304",
+        "cost": "free",
+        "slug": "national-dv-hotline",
+        "zips": [
+        ],
+        "hours": "24/7",
+        "title": "National Domestic Violence Hotline",
+        "access": "online",
+        "org_id": "2a9c4983-d06f-497d-9aff-f6f34a591099",
+        "status": "active",
+        "details": "Safety planning and help connecting to shelters, counseling, and local advocacy.",
+        "summary": "Confidential support and connection to local domestic violence services.",
+        "category": "emergency",
+        "org_name": "National Domestic Violence Hotline",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public.",
+        "is_national": true,
+        "org_website": "https://www.thehotline.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit the website or call the hotline.",
+            "Ask for local resources and safety planning support.",
+            "Follow guidance for next steps."
+        ],
+        "requirements": [
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "30d82d5a-9bf2-4bac-b454-5addca2556ed",
+        "cost": "free",
+        "slug": "human-trafficking-hotline",
+        "zips": [
+        ],
+        "hours": "24/7",
+        "title": "National Human Trafficking Hotline",
+        "access": "online",
+        "org_id": "5afddd33-e02d-40db-986d-dd60e4e3fa9d",
+        "status": "active",
+        "details": "Support, reporting options, and connection to local services.",
+        "summary": "24/7 confidential hotline and resources for trafficking situations.",
+        "category": "emergency",
+        "org_name": "National Human Trafficking Hotline",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public.",
+        "is_national": true,
+        "org_website": "https://humantraffickinghotline.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Call, text, or chat with the hotline.",
+            "Share location and situation details if safe.",
+            "Follow guidance and referral steps."
+        ],
+        "requirements": [
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "19d47fbc-b21a-4cee-8f90-280e65e88597",
+        "cost": "free",
+        "slug": "samhsa-findtreatment",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "FindTreatment.gov (SAMHSA)",
+        "access": "online",
+        "org_id": "cab5b71e-77ab-4b3b-9f4f-4745a095bded",
+        "status": "active",
+        "details": "Find treatment by location, payment options, and services offered.",
+        "summary": "Search for mental health and substance use treatment providers.",
+        "category": "mental_health",
+        "org_name": "SAMHSA Treatment Locator",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public; provider requirements vary.",
+        "is_national": true,
+        "org_website": "https://findtreatment.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit FindTreatment.gov.",
+            "Search by zip/city/state.",
+            "Call providers to confirm availability, cost, and intake requirements."
+        ],
+        "requirements": [
+            "Insurance info (if any)",
+            "ID (often)",
+            "Referral documents (sometimes)"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "30f1ff6f-4472-4dab-b895-6b9978a0c386",
+        "cost": "free",
+        "slug": "united-way-211",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "United Way 2-1-1 Resource Line",
+        "access": "online",
+        "org_id": "d7c21978-e7af-4330-9666-c855eb9ddf9b",
+        "status": "active",
+        "details": "Use the 2-1-1 network to find local organizations and programs by location and need.",
+        "summary": "Referrals to local help for housing, food, utilities, healthcare, and crisis support.",
+        "category": "emergency",
+        "org_name": "United Way 2-1-1",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public; availability varies by location.",
+        "is_national": true,
+        "org_website": "https://www.211.org",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Dial 2-1-1 from your phone (where available).",
+            "Or search the 211 website for your area.",
+            "Contact the listed provider and ask about eligibility and documents needed."
+        ],
+        "requirements": [
+            "Location information (zip/city)",
+            "Basic details about your need",
+            "Any relevant documents if requested"
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "d53b61e2-4d22-487b-a391-cffd0edfa08e",
+        "cost": "free",
+        "slug": "usa-gov",
+        "zips": [
+        ],
+        "hours": null,
+        "title": "USA.gov Service Navigation",
+        "access": "online",
+        "org_id": "a73aa31b-af71-4a89-a353-0fc9fe29728a",
+        "status": "active",
+        "details": "Find links and instructions for common government services and agencies.",
+        "summary": "Official portal to locate government services and contact information.",
+        "category": "emergency",
+        "org_name": "USA.gov",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Open to the public.",
+        "is_national": true,
+        "org_website": "https://www.usa.gov",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Visit USA.gov.",
+            "Search for the service you need.",
+            "Follow the official agency instructions."
+        ],
+        "requirements": [
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    },
+    {
+        "id": "01c36f50-576b-45a5-8bec-d47ddedc148d",
+        "cost": "free",
+        "slug": "veterans-crisis-line",
+        "zips": [
+        ],
+        "hours": "24/7",
+        "title": "Veterans Crisis Line",
+        "access": "online",
+        "org_id": "de5ce8a2-40f4-4263-8e17-685f610ef251",
+        "status": "active",
+        "details": "24/7 confidential support and connection to VA resources.",
+        "summary": "Crisis support specifically for veterans, service members, and their loved ones.",
+        "category": "emergency",
+        "org_name": "Veterans Crisis Line",
+        "org_email": null,
+        "org_phone": null,
+        "created_at": "2026-01-03T22:56:19.147761+00:00",
+        "updated_at": "2026-01-23T20:14:45.094425+00:00",
+        "eligibility": "Veterans/service members and loved ones.",
+        "is_national": true,
+        "org_website": "https://www.veteranscrisisline.net",
+        "state_codes": [
+        ],
+        "how_to_apply": [
+            "Call, text, or chat via the Veterans Crisis Line.",
+            "If urgent danger, call local emergency services.",
+            "Ask for follow-up resources if needed."
+        ],
+        "requirements": [
+        ],
+        "verification": "verified",
+        "service_areas": [
+            {
+                "zip": null,
+                "coverage": "national",
+                "city_name": null,
+                "state_code": null,
+                "county_fips": null
+            }
+        ],
+        "org_description": null,
+        "last_verified_at": null
+    }
+]

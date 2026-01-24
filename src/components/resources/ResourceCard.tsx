@@ -1,171 +1,88 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import type { Resource } from '../../lib/types';
-import { validateResourceListItem } from '../../lib/resourceGuards';
+import React from 'react';
+import type { ResourceLink } from '../../lib/resourceLinks';
 import { VerificationBadge } from './VerificationBadge';
+import type { VerificationStatus } from '../../lib/types';
 
 interface ResourceCardProps {
-  resource: Resource;
+  resource: ResourceLink;
 }
 
 /**
  * Compact resource card for directory listings
- * Shows key information and links to detail page
+ * Shows key information and links to external resource
  */
 export function ResourceCard({ resource }: ResourceCardProps) {
-  const [outcomeSummary, setOutcomeSummary] = useState<{ total: number; positive: number } | null>(null);
-
-  useEffect(() => {
-    // Load outcome summary from localStorage
-    const stored = localStorage.getItem(`resource-outcomes-${resource.id}`);
-    if (stored) {
-      try {
-        const outcomes = JSON.parse(stored);
-        const total = Object.values(outcomes).reduce((sum: number, count) => sum + (count as number), 0);
-        const positive = (outcomes.helped || 0) + (outcomes.partial || 0);
-        setOutcomeSummary({ total, positive });
-      } catch (e) {
-        console.error('Failed to parse outcomes', e);
-      }
-    }
-  }, [resource.id]);
-
   const getCategoryColor = (category: string) => {
     const colors: Record<string, string> = {
-      'Legal Services': 'bg-sand text-ocean',
-      'Housing Assistance': 'bg-sand text-forest',
-      'Mental Health': 'bg-sand text-forest',
-      'Employment Services': 'bg-sand text-ocean',
-      'Food & Basic Needs': 'bg-sand text-muted',
-      'Healthcare': 'bg-sand text-muted',
-      'Transportation': 'bg-sand text-ocean',
-      'Child Support': 'bg-sand text-forest',
-      'Education & Training': 'bg-sand text-forest',
-      'Emergency Services': 'bg-sand text-muted',
+      'Legal Services': 'bg-blue-100 text-blue-700',
+      'Housing Assistance': 'bg-green-100 text-green-700',
+      'Mental Health': 'bg-purple-100 text-purple-700',
+      'Employment Services': 'bg-orange-100 text-orange-700',
+      'Food & Basic Needs': 'bg-red-100 text-red-700',
+      'Healthcare': 'bg-pink-100 text-pink-700',
+      'Transportation': 'bg-yellow-100 text-yellow-700',
+      'Child Support': 'bg-cyan-100 text-cyan-700',
+      'Education & Training': 'bg-indigo-100 text-indigo-700',
+      'Emergency Services': 'bg-gray-100 text-gray-700',
     };
-    return colors[category] || 'bg-surface-muted text-muted';
+    return colors[category] || 'bg-gray-100 text-gray-700';
   };
 
-  // Get service area display
-  const getServiceAreaDisplay = (): string => {
-    if (!resource.service_areas || resource.service_areas.length === 0) {
-      return 'Coverage area not specified';
-    }
-
-    const sa = resource.service_areas[0];
-    if (sa.coverage === 'national') {
-      return 'National Coverage';
-    }
-    if (sa.city_name) {
-      return `${sa.city_name}${sa.state_code ? ', ' + sa.state_code : ''}`;
-    }
-    if (sa.state_code) {
-      return sa.state_code;
-    }
-    if (sa.zip) {
-      return `ZIP: ${sa.zip}`;
-    }
-    return 'Coverage area';
+  // Map resource verification to VerificationStatus type
+  const getVerificationStatus = (verification: string | null): VerificationStatus => {
+    if (verification === 'verified') return 'verified';
+    if (verification === 'stale') return 'stale';
+    return 'unverified';
   };
-
-  const validation = import.meta.env.DEV ? validateResourceListItem(resource) : { ok: true, issues: [] };
-  if (import.meta.env.DEV && !validation.ok) {
-    console.warn('[ResourceCard] invalid resource list item', { issues: validation.issues, resource });
-  }
-
-  const linkTarget = resource.slug || resource.id;
-  console.debug('[ResourceCard] link target', { id: resource.id, slug: resource.slug, target: linkTarget });
-
-  // If no valid link target, warn and fallback to directory
-  if (!linkTarget) {
-    console.warn('[ResourceCard] Resource has no slug or id', resource);
-    return (
-      <div className="block bg-surface border border-border-soft rounded-lg p-5 opacity-75">
-        <div className="flex items-start justify-between gap-3 mb-3">
-          <h3 className="text-xl font-semibold text-ink">
-            {resource.title || 'Untitled Resource'}
-          </h3>
-          <VerificationBadge
-            status={resource.verification}
-            lastVerified={resource.last_verified_at}
-            compact
-          />
-        </div>
-        <div className="bg-danger-bg border border-danger-border rounded p-2 mb-3">
-          <p className="text-xs text-danger">⚠️ Invalid resource data (missing ID)</p>
-          {import.meta.env.DEV && (
-            <span className="inline-block mt-1 text-[11px] text-danger bg-danger-bg px-2 py-0.5 rounded">
-              Missing link target
-            </span>
-          )}
-        </div>
-        <div className="flex items-center gap-2 mb-3">
-          <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(resource.category || 'Unknown')}`}>
-            {resource.category || 'Unknown'}
-          </span>
-          {resource.cost === 'free' && (
-            <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-sand text-forest border border-ocean">
-              Free
-            </span>
-          )}
-        </div>
-        <p className="text-muted mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
-      </div>
-    );
-  }
 
   return (
-    <Link
-      to={`/resources/directory/${linkTarget}`}
-      className="block bg-surface border border-border-soft rounded-lg p-5 shadow-sm hover:shadow-hover hover:border-ocean transition-all duration-200"
-    >
+    <div className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
       <div className="flex items-start justify-between gap-3 mb-3">
-        <h3 className="text-xl font-semibold text-ink hover:text-ocean transition-colors">
+        <h3 className="text-lg font-semibold text-gray-900 flex-1">
           {resource.title || 'Untitled Resource'}
         </h3>
         <VerificationBadge
-          status={resource.verification}
-          lastVerified={resource.last_verified_at}
+          status={getVerificationStatus(resource.verification)}
+          lastVerified={resource.last_verified_at || undefined}
           compact
         />
       </div>
 
-      <div className="flex items-center gap-2 mb-3">
-        <span className={`inline-block px-3 py-1 rounded-full text-sm font-medium ${getCategoryColor(resource.category || 'Unknown')}`}>
+      {/* Organization Name */}
+      <p className="text-sm text-gray-600 mb-2 font-medium">
+        {resource.org_name}
+      </p>
+
+      {/* Category Badge */}
+      <div className="mb-3">
+        <span className={`inline-block px-2 py-1 rounded text-xs font-medium ${getCategoryColor(resource.category || 'Unknown')}`}>
           {resource.category || 'Unknown'}
         </span>
-        {resource.cost === 'free' && (
-          <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-sand text-forest border border-ocean">
-            Free
-          </span>
-        )}
       </div>
 
-      <p className="text-muted mb-3 line-clamp-2">{resource.summary || 'Details available on open'}</p>
+      {/* Summary */}
+      <p className="text-sm text-gray-600 mb-3 flex-1 line-clamp-3">
+        {resource.summary || 'No description available'}
+      </p>
 
-      {/* Organization name if available */}
-      {resource.organization?.name ? (
-        <div className="mb-2 text-sm text-muted">
-          <span className="font-medium">By: {resource.organization.name}</span>
-        </div>
-      ) : (
-        <div className="mb-2 text-sm text-muted italic">
-          <span>Organization not listed</span>
-        </div>
-      )}
-
-      <div className="flex items-center justify-between text-sm text-muted pt-3 border-t border-border-soft">
-        <div>
-          <span className="font-medium">{getServiceAreaDisplay()}</span>
-        </div>
-        {outcomeSummary && outcomeSummary.total > 0 && (
-          <div className="flex items-center gap-1 text-xs">
-            <span className="text-forest">✓ {outcomeSummary.positive}</span>
-            <span className="text-border-soft">/</span>
-            <span className="text-muted">{outcomeSummary.total} reports</span>
-          </div>
+      {/* Coverage and Website Button */}
+      <div className="flex items-center justify-between pt-3 border-t border-gray-200">
+        <span className="text-xs text-gray-500 font-medium">
+          {resource.coverage}
+        </span>
+        {resource.url ? (
+          <a
+            href={resource.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-medium px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+          >
+            Visit
+          </a>
+        ) : (
+          <span className="text-xs text-gray-400 font-medium">No website</span>
         )}
       </div>
-    </Link>
+    </div>
   );
 }
