@@ -6,7 +6,7 @@ export default function PrivacyPolicy() {
     updatePageMeta({
       title: "Privacy Policy - The Father's Alliance",
       description:
-        'Privacy practices for how The Father’s Alliance collects, uses, and protects information across services and communications.',
+        'How we collect, use, and protect information across services and communications.',
       path: '/privacy-policy',
     });
   }, []);

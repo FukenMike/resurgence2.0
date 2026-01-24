@@ -6,7 +6,7 @@ export default function TermsOfService() {
     updatePageMeta({
       title: "Terms of Service - The Father's Alliance",
       description:
-        'Terms governing use of The Father’s Alliance site and services, including acceptable use, intellectual property, and limitations of liability.',
+        'Terms governing use of the site and services, including acceptable use, intellectual property, and liability limits.',
       path: '/terms-of-service',
     });
   }, []);
@@ -17,7 +17,7 @@ export default function TermsOfService() {
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean">Terms</p>
         <h1 className="text-4xl font-semibold text-ink">Terms of Service</h1>
         <p className="max-w-3xl text-lg text-muted">
-          These terms outline how you may use The Father’s Alliance site and services. Please review them carefully.
+          These terms govern use of The Father’s Alliance site and services. Please review them carefully.
         </p>
       </section>
 

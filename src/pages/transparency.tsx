@@ -8,7 +8,7 @@ export default function Transparency() {
     updatePageMeta({
       title: "Governance and Accountability - Transparency - The Father's Alliance",
       description:
-        "The Father's Alliance holds itself to the highest standards of financial and operational transparency. Learn about our governance and nonprofit registration status.",
+        "We hold ourselves to high standards of financial and operational transparency. Learn about governance and nonprofit registration.",
       path: '/transparency',
     });
   }, []);

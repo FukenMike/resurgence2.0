@@ -9,7 +9,7 @@ export default function Resources() {
     updatePageMeta({
       title: "Tools for Stability - Resources - The Father's Alliance",
       description:
-        'Practical tools and resources for stability planning, communication, and budgeting. Simple, accessible guidance for families navigating household stability.',
+        'Practical tools for stability planning, communication, and budgeting. Simple, accessible guidance for families.',
       path: '/resources',
     });
   }, []);
@@ -19,7 +19,7 @@ export default function Resources() {
       <section className="space-y-3">
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean">Resources</p>
         <h1 className="text-4xl font-semibold text-ink">{resourcesCopy.headline}</h1>
-        <p className="max-w-3xl text-lg text-muted">Practical tools that support stability, planning, and forward momentum.</p>
+        <p className="max-w-3xl text-lg text-muted">Practical tools that support stability, planning, and progress.</p>
       </section>
 
       <section className="grid gap-4 md:grid-cols-2">

@@ -9,7 +9,7 @@ export default function GetInvolved() {
     updatePageMeta({
       title: "Get Involved - Support The Father's Alliance",
       description:
-        "Support the work that fills the gaps—fund active infrastructure, contribute without money, and help strengthen what's being built.",
+        "Support the work—fund infrastructure, contribute time and skills, and help strengthen what is being built.",
       path: '/get-involved',
     });
   }, []);
