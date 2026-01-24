@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/home';
 import WhoWeServe from './pages/who-we-serve';
@@ -14,9 +15,24 @@ import ProgramMobilityStabilization from './pages/program-mobility-stabilization
 import PrivacyPolicy from './pages/privacy-policy';
 import TermsOfService from './pages/terms-of-service';
 
+function RouteChangeTracker() {
+  const location = useLocation();
+
+  useEffect(() => {
+    const gtag = (window as typeof window & { gtag?: (...args: unknown[]) => void }).gtag;
+    if (!gtag) return;
+
+    const { pathname, search } = window.location;
+    gtag('config', 'G-622ZKH6HC1', { page_path: `${pathname}${search}` });
+  }, [location.pathname, location.search]);
+
+  return null;
+}
+
 export default function App() {
   return (
     <Router>
+      <RouteChangeTracker />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
