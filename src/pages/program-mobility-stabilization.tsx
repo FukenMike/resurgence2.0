@@ -7,7 +7,7 @@ export default function ProgramMobilityStabilization() {
     updatePageMeta({
       title: "Mobility Stabilization Program (MSP) - The Father's Alliance",
       description:
-        'Vehicle-repair assistance program designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
+        'Vehicle repair assistance program designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
       path: '/programs/mobility-stabilization',
     });
   }, []);
@@ -18,7 +18,7 @@ export default function ProgramMobilityStabilization() {
         <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean">Program</p>
         <h1 className="text-4xl font-semibold text-ink">Mobility Stabilization Program (MSP)</h1>
         <p className="max-w-3xl text-lg text-muted">
-          A vehicle-repair assistance program framework designed to prevent stability harm when mechanical failure
+          A vehicle repair assistance program framework designed to prevent stability harm when mechanical failure
           threatens work, medical access, school, or caregiving.
         </p>
       </section>

@@ -10,7 +10,7 @@ export default function Programs() {
     updatePageMeta({
       title: "Stability Programs and Pilots - The Father's Alliance",
       description:
-        'Our programs focus on real-life pressure points that can knock a household off track. Includes Mobility Stabilization, Household Micro-Assistance, and Forward Pathways Bridge.',
+        'Our programs focus on real life pressure points that can knock a household off track. Includes Mobility Stabilization, Household Micro Assistance, and Forward Pathways Bridge.',
       path: '/programs',
     });
   }, []);

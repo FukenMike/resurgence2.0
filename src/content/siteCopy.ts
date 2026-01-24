@@ -35,28 +35,28 @@ export const whoWeServeCopy = {
 
 export const programsCopy = {
   headline: 'Stability Programs & Pilots',
-  body: 'Our programs focus on real-life pressure points that can knock a household off track—before they become crises.',
+  body: 'Our programs focus on real life pressure points that can knock a household off track—before they become crises.',
   programs: [
     {
       title: 'Mobility Stabilization Program (MSP)',
       status: 'In Development',
       href: '/programs/mobility-stabilization',
       summary:
-        'A vehicle-repair assistance program framework designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
+        'A vehicle repair assistance program framework designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
     },
     {
       title: 'Household Stability Micro Assistance',
       status: 'Designing',
       href: '',
       summary:
-        'Targeted short-term support for rent gaps, utility continuity, and emergency expenses when other resources are delayed or unavailable.',
+        'Targeted short term support for rent gaps, utility continuity, and emergency expenses when other resources are delayed or unavailable.',
     },
     {
       title: 'Forward Pathways Bridge',
       status: 'Planned',
       href: '',
       summary:
-        'A structured bridge into workforce and education pathways (including Vocational Rehabilitation where eligible), focused on removing short-term barriers that block progress.',
+        'A structured bridge into workforce and education pathways (including Vocational Rehabilitation where eligible), focused on removing short term barriers that block progress.',
     },
   ],
 }
