@@ -71,34 +71,12 @@ function RouteChangeTracker() {
   return null;
 }
 
-function LegacyURLRedirects() {
-  const location = useLocation();
 
-  useEffect(() => {
-    const pathname = location.pathname;
-
-    // Redirect legacy URLs
-    if (pathname === '/vision.html' || pathname === '/vision') {
-      if (import.meta.env.DEV) {
-        console.log('[GA] Legacy URL detected and redirected:', pathname, '-> /about');
-      }
-      window.location.replace('/about');
-    } else if (pathname === '/wall-of-truth') {
-      if (import.meta.env.DEV) {
-        console.log('[GA] Legacy URL detected and redirected:', pathname, '-> /transparency');
-      }
-      window.location.replace('/transparency');
-    }
-  }, [location.pathname]);
-
-  return null;
-}
 
 export default function App() {
   return (
     <Router>
       <RouteChangeTracker />
-      <LegacyURLRedirects />
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
