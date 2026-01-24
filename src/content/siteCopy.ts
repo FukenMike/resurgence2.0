@@ -11,7 +11,7 @@ export const navLinks = [
 export const homeCopy = {
   headline: 'Stability support that keeps families moving forward.',
   subheadline:
-    "The Father's Alliance strengthens the role fathers are meant to play—protection, guidance, responsibility, and support—when households face pressure. We provide supplemental, practical help to keep families stable when standard assistance is slow or out of reach, so a short setback does not become a long term crisis.",
+    "The Father's Alliance embodies the role fathers traditionally play: protection, guidance, responsibility, and support to help households stay steady. We provide supplemental, practical help to build families up when standard assistance is slow or out of reach so a short setback does not become a crisis.",
   mission:
     'We preserve household stability with timely, practical support that covers critical gaps, prevents avoidable crises, and restores forward momentum.',
   vision:
