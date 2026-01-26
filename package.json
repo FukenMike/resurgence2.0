@@ -8,7 +8,9 @@
     "build": "vite build",
     "build:resources": "node scripts/buildResourceLinks.mjs",
     "preview": "vite preview",
-    "lint": "tsc --noEmit"
+    "lint": "tsc --noEmit",
+    "test": "tsx src/routes/routeRegistry.test.ts",
+    "test:routes": "tsx src/routes/routeRegistry.test.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -17,6 +19,7 @@
     "react-router-dom": "^6.26.2"
   },
   "devDependencies": {
+    "@types/node": "^25.0.10",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.4",

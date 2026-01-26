@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function Providers() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "For Providers - The Father's Alliance",
-      description:
-        'Information for service providers, community organizations, and partners. Network membership, referral protocols, and collaboration opportunities.',
-      path: '/providers',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

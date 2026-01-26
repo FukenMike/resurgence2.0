@@ -1,14 +1,7 @@
-import { useEffect } from 'react';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function SupportPortal() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Support Portal - The Father's Alliance",
-      description: 'Provider and partner portal for case coordination, referrals, and network management.',
-      path: '/support-portal',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

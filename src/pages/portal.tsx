@@ -1,14 +1,7 @@
-import { useEffect } from 'react';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function Portal() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Family Portal - The Father's Alliance",
-      description: 'Access your family support account, view resources, and track progress.',
-      path: '/portal',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

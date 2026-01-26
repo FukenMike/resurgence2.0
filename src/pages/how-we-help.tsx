@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import { howWeHelpCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function HowWeHelp() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "How Support Works - The Father's Alliance",
-      description:
-        'Our process: intake and assessment, a stability check, rapid deployment of assistance, and connection to longer term pathways.',
-      path: '/how-we-help',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

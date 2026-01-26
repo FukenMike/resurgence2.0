@@ -4,7 +4,7 @@ import { updatePageMeta } from '../utils/seo';
 
 export default function NotFound() {
   useEffect(() => {
-    // 404 pages should not be indexed
+    // 404 needs custom noindex handling and dynamic path
     updatePageMeta({
       title: "Page Not Found - The Father's Alliance",
       description: 'The page you are looking for moved or no longer exists.',

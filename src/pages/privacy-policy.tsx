@@ -1,15 +1,7 @@
-import { useEffect } from 'react';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function PrivacyPolicy() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Privacy Policy - The Father's Alliance",
-      description:
-        'How we collect, use, and protect information across services and communications.',
-      path: '/privacy-policy',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

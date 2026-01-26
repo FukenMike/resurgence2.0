@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import { transparencyCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function Transparency() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Governance and Accountability - Transparency - The Father's Alliance",
-      description:
-        "We hold ourselves to high standards of financial and operational transparency. Learn about governance and nonprofit registration.",
-      path: '/transparency',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

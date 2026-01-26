@@ -1,16 +1,8 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function ProgramMobilityStabilization() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Mobility Stabilization Program (MSP) - The Father's Alliance",
-      description:
-        'Vehicle repair assistance program designed to prevent stability harm when mechanical failure threatens work, medical access, school, or caregiving.',
-      path: '/programs/mobility-stabilization',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

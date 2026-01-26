@@ -1,31 +1,22 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { routeRegistry } from '../routes/routeRegistry';
 
 export default function Navbar() {
   const { pathname } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Complete link list for all pages (header hamburger)
-  const allLinks = useMemo(
-    () => [
-      { label: 'Home', path: '/' },
-      { label: 'Who We Serve', path: '/who-we-serve' },
-      { label: 'Our Programs', path: '/programs' },
-      { label: 'FSIP', path: '/programs/fsip' },
-      { label: 'How We Help', path: '/how-we-help' },
-      { label: 'About', path: '/about' },
-      { label: 'Resources', path: '/resources' },
-      { label: 'Directory', path: '/resources/directory' },
-      { label: 'Get Involved', path: '/get-involved', highlight: true },
-      { label: 'Transparency', path: '/transparency' },
-      { label: 'Privacy Policy', path: '/privacy-policy' },
-      { label: 'Terms of Service', path: '/terms-of-service' },
-      // Include other active top-level routes
-      { label: 'FSIP (Direct)', path: '/fsip' },
-      { label: 'Providers', path: '/providers' },
-      { label: 'Family Portal', path: '/portal' },
-      { label: 'Provider Portal', path: '/support-portal' },
-    ],
+  // Build nav links from route registry (mobile menu)
+  const mobileLinks = useMemo(
+    () =>
+      routeRegistry
+        .filter((route) => route.nav.mobile && !route.redirectTo)
+        .sort((a, b) => a.nav.order - b.nav.order)
+        .map((route) => ({
+          label: route.nav.label,
+          path: route.path,
+          highlight: route.nav.highlight,
+        })),
     []
   );
 
@@ -107,7 +98,7 @@ export default function Navbar() {
               </button>
             </div>
             <div className="grid grid-cols-1 gap-1 p-3 md:grid-cols-2">
-              {allLinks.map(({ label, path, highlight }) => (
+              {mobileLinks.map(({ label, path, highlight }) => (
                 <NavLink
                   key={path}
                   to={path}

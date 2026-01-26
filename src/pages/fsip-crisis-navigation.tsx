@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function FSIPCrisisNavigation() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "FSIP Crisis Navigation - The Father's Alliance",
-      description:
-        'Immediate triage and support for families facing urgent stability threats. Quick assessment, connection to appropriate resources, and clear next steps.',
-      path: '/fsip/crisis-navigation',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

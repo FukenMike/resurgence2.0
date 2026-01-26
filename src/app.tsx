@@ -1,27 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
-import Home from './pages/home';
-import WhoWeServe from './pages/who-we-serve';
-import Programs from './pages/programs';
-import HowWeHelp from './pages/how-we-help';
-import About from './pages/about';
-import ResourcesTools from './pages/resources-tools';
-import { ResourcesDirectory } from './pages/resources-directory';
-import GetInvolved from './pages/get-involved';
-import Transparency from './pages/transparency';
-import NotFound from './pages/not-found';
-import ProgramMobilityStabilization from './pages/program-mobility-stabilization';
-import ProgramFSIP from './pages/program-fsip';
-import FSIPResourceHub from './pages/fsip-resource-hub';
-import FSIPCrisisNavigation from './pages/fsip-crisis-navigation';
-import FSIPFamilyRepair from './pages/fsip-family-repair';
-import FSIPProviderNetwork from './pages/fsip-provider-network';
-import Providers from './pages/providers';
-import Portal from './pages/portal';
-import SupportPortal from './pages/support-portal';
-import PrivacyPolicy from './pages/privacy-policy';
-import TermsOfService from './pages/terms-of-service';
+import { routeRegistry } from './routes/routeRegistry';
+import { renderRoutes } from './routes/renderRoutes';
 
 function RouteChangeTracker() {
   const location = useLocation();
@@ -111,29 +92,7 @@ export default function App() {
       <RouteChangeTracker />
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="who-we-serve" element={<WhoWeServe />} />
-          <Route path="programs" element={<Programs />} />
-          <Route path="programs/mobility-stabilization" element={<ProgramMobilityStabilization />} />
-          <Route path="programs/fsip" element={<ProgramFSIP />} />
-          <Route path="fsip" element={<ProgramFSIP />} />
-          <Route path="fsip/resource-hub" element={<FSIPResourceHub />} />
-          <Route path="fsip/crisis-navigation" element={<FSIPCrisisNavigation />} />
-          <Route path="fsip/family-repair" element={<FSIPFamilyRepair />} />
-          <Route path="fsip/provider-network" element={<FSIPProviderNetwork />} />
-          <Route path="providers" element={<Providers />} />
-          <Route path="portal" element={<Portal />} />
-          <Route path="support-portal" element={<SupportPortal />} />
-          <Route path="how-we-help" element={<HowWeHelp />} />
-          <Route path="about" element={<About />} />
-          {/* /resources restored to original tools layout; directory lives under /resources/directory */}
-          <Route path="resources" element={<ResourcesTools />} />
-          <Route path="resources/directory" element={<ResourcesDirectory />} />
-          <Route path="get-involved" element={<GetInvolved />} />
-          <Route path="transparency" element={<Transparency />} />
-          <Route path="privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="terms-of-service" element={<TermsOfService />} />
-          <Route path="*" element={<NotFound />} />
+          {renderRoutes(routeRegistry)}
         </Route>
       </Routes>
     </Router>

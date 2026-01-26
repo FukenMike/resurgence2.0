@@ -1,19 +1,11 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
 import { programsCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function Programs() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Stability Programs and Pilots - The Father's Alliance",
-      description:
-        'Our programs focus on real life pressure points that can knock a household off track. Includes Mobility Stabilization, Household Micro Assistance, and Forward Pathways Bridge.',
-      path: '/programs',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

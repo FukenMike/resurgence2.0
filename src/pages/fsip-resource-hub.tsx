@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function FSIPResourceHub() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "FSIP Resource Hub - The Father's Alliance",
-      description:
-        'Verified directory of community providers, support services, and resources organized by need type with current availability and clear access requirements.',
-      path: '/fsip/resource-hub',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import { whoWeServeCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function WhoWeServe() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Who We Serve - The Father's Alliance",
-      description:
-        "The Father's Alliance serves fathers, caregivers, and families facing stability threats including rent, utilities, transportation, or sudden financial strain.",
-      path: '/who-we-serve',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

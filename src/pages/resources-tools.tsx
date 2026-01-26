@@ -1,18 +1,10 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import { resourcesCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function Resources() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Tools for Stability - Resources - The Father's Alliance",
-      description:
-        'Practical tools for stability planning, communication, and budgeting. Simple, accessible guidance for families.',
-      path: '/resources',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

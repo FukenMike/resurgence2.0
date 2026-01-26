@@ -2,17 +2,10 @@ import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
 import { getInvolvedCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function GetInvolved() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Get Involved - Support The Father's Alliance",
-      description:
-        "Support the work—fund infrastructure, contribute time and skills, and help strengthen what is being built.",
-      path: '/get-involved',
-    });
-  }, []);
+  useRouteMetadata();
 
   // Load GoFundMe embed script if enabled
   useEffect(() => {

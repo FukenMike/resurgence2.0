@@ -1,18 +1,10 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
 import { aboutCopy } from '../content/siteCopy';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function About() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "About The Father's Alliance - Our Mission and Philosophy",
-      description:
-        "We step in when a single problem can push a household behind. We stabilize families through practical, dignified support.",
-      path: '/about',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

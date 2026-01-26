@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { resourceLinks } from '../lib/resourceLinks';
 import type { ResourceLink } from '../lib/resourceLinks';
 import { ResourceCard } from '../components/resources/ResourceCard';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 /**
  * Resource Directory listing page
@@ -10,6 +10,8 @@ import { updatePageMeta } from '../utils/seo';
  * backed by a local static JSON dataset (no network requests required).
  */
 export function ResourcesDirectory() {
+  useRouteMetadata();
+  
   const [filteredResources, setFilteredResources] = useState<ResourceLink[]>(resourceLinks);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -22,14 +24,6 @@ export function ResourcesDirectory() {
       if (r.category) unique.add(r.category);
     });
     return Array.from(unique).sort();
-  }, []);
-
-  useEffect(() => {
-    updatePageMeta({
-      title: 'Resource Directory | The Father\'s Alliance',
-      description: 'Find verified organizations and programs offering support across legal services, housing, mental health, employment, and more.',
-      path: '/resources/directory',
-    });
   }, []);
 
   // Apply filters locally on the static dataset

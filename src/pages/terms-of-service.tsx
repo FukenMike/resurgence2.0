@@ -1,15 +1,7 @@
-import { useEffect } from 'react';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function TermsOfService() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Terms of Service - The Father's Alliance",
-      description:
-        'Terms governing use of the site and services, including acceptable use, intellectual property, and liability limits.',
-      path: '/terms-of-service',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

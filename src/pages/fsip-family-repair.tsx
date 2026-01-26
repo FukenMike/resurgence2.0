@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function FSIPFamilyRepair() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "FSIP Family Repair - The Father's Alliance",
-      description:
-        'Structured support for households recovering from crisis or instability. Coordination of multiple services, follow-up check-ins, and pathways to long-term stability.',
-      path: '/fsip/family-repair',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

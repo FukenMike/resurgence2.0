@@ -1,17 +1,10 @@
-import { useEffect } from 'react';
+/** @jsxImportSource react */
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function ProgramFSIP() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "Family Stability Intervention Program (FSIP) - The Father's Alliance",
-      description:
-        'A coordinated support framework that helps families navigate crisis moments, repair household stability, and access verified resources through a trusted provider network.',
-      path: '/programs/fsip',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">

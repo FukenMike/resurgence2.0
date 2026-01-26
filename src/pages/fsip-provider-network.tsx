@@ -1,17 +1,9 @@
-import { useEffect } from 'react';
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
-import { updatePageMeta } from '../utils/seo';
+import { useRouteMetadata } from '../routes/meta';
 
 export default function FSIPProviderNetwork() {
-  useEffect(() => {
-    updatePageMeta({
-      title: "FSIP Provider Network - The Father's Alliance",
-      description:
-        'Trusted network of verified providers delivering consistent, quality support. Partnership criteria, provider benefits, and network membership information.',
-      path: '/fsip/provider-network',
-    });
-  }, []);
+  useRouteMetadata();
 
   return (
     <div className="flex flex-col gap-8">
