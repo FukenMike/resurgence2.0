@@ -84,8 +84,9 @@ export default function Navbar() {
             if (e.target === e.currentTarget) setMenuOpen(false);
           }}
         >
-          <nav className="container mt-2 border border-border-soft rounded-xl bg-surface shadow-lg">
-            <div className="flex items-center justify-between px-4 py-3 border-b border-border-soft">
+          <nav className="flex flex-col min-h-0 h-[100dvh] container mt-2 rounded-xl bg-surface shadow-lg">
+            {/* Header (fixed height) */}
+            <div className="flex items-center justify-between px-4 py-3 border-b border-border-soft flex-shrink-0">
               <div className="text-sm font-semibold uppercase tracking-[0.18em] text-muted">Navigation</div>
               <button
                 onClick={() => setMenuOpen(false)}
@@ -97,25 +98,28 @@ export default function Navbar() {
                 </svg>
               </button>
             </div>
-            <div className="grid grid-cols-1 gap-1 p-3 md:grid-cols-2">
-              {mobileLinks.map(({ label, path, highlight }) => (
-                <NavLink
-                  key={path}
-                  to={path}
-                  onClick={() => setMenuOpen(false)}
-                  className={({ isActive }) =>
-                    `block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                      highlight
-                        ? 'bg-ocean text-white hover:bg-ocean/90'
-                        : isActive || pathname === path
-                        ? 'bg-ink text-surface'
-                        : 'text-muted hover:bg-sand'
-                    }`
-                  }
-                >
-                  {label}
-                </NavLink>
-              ))}
+            {/* Link list (scrollable) */}
+            <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3">
+              <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
+                {mobileLinks.map(({ label, path, highlight }) => (
+                  <NavLink
+                    key={path}
+                    to={path}
+                    onClick={() => setMenuOpen(false)}
+                    className={({ isActive }) =>
+                      `block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                        highlight
+                          ? 'bg-ocean text-white hover:bg-ocean/90'
+                          : isActive || pathname === path
+                          ? 'bg-ink text-surface'
+                          : 'text-muted hover:bg-sand'
+                      }`
+                    }
+                  >
+                    {label}
+                  </NavLink>
+                ))}
+              </div>
             </div>
           </nav>
         </div>
