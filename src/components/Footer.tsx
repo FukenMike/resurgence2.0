@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { navLinks } from '../content/siteCopy';
+import { footerLinks } from '../content/siteCopy';
 
 export default function Footer() {
   return (
@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="mt-1 text-sm text-muted">Supporting stability. Strengthening families.</p>
         </div>
         <div className="hidden flex-wrap gap-3 text-sm text-muted md:flex">
-          {navLinks.map(({ label, path }) => (
+          {footerLinks.map(({ label, path }) => (
             <Link key={path} to={path} className="hover:text-ink">
               {label}
             </Link>

@@ -1,5 +1,13 @@
 export const navLinks = [
   { label: 'Home', path: '/' },
+  { label: 'Our Programs', path: '/programs' },
+  { label: 'FSIP', path: '/programs/fsip' },
+  { label: 'Resources', path: '/resources' },
+  { label: 'Transparency', path: '/transparency' },
+]
+
+export const footerLinks = [
+  { label: 'Home', path: '/' },
   { label: 'Who We Serve', path: '/who-we-serve' },
   { label: 'Our Programs', path: '/programs' },
   { label: 'How We Help', path: '/how-we-help' },
