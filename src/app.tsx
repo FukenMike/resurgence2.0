@@ -3,6 +3,13 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Layout from './components/Layout';
 import { routeRegistry } from './routes/routeRegistry';
 import { renderRoutes } from './routes/renderRoutes';
+import { getOrganizationSchema, injectStructuredData } from './utils/seo';
+
+// Inject Organization schema once at app root
+const organizationSchemaId = 'org-schema-root';
+if (!document.getElementById(organizationSchemaId)) {
+  injectStructuredData(getOrganizationSchema(), organizationSchemaId);
+}
 
 function RouteChangeTracker() {
   const location = useLocation();

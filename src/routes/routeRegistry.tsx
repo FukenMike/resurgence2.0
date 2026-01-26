@@ -71,6 +71,8 @@ export interface RouteDef {
   nav: RouteNav;
   /** Authentication requirements (optional) */
   auth?: RouteAuth;
+  /** Route status: 'live' (published), 'draft' (in progress), 'archived' (deprecated) */
+  status?: 'live' | 'draft' | 'archived';
 }
 
 /**

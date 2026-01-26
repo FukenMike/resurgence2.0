@@ -1,11 +1,19 @@
 # Robots.txt for The Father's Alliance
-# Allow public pages to be indexed; protect any admin or internal paths
+# Allows public pages to be indexed; protects portals, admin, and internal paths
 
 User-agent: *
 Allow: /
+
+# Disallow portal, provider, and admin areas
+Disallow: /portal/
+Disallow: /support-portal/
+Disallow: /providers/
 Disallow: /admin/
-Disallow: /internal/
+Disallow: /draft/
+
+# Disallow internal resources
 Disallow: /api/
+Disallow: /internal/
 Disallow: /*.json$
 Disallow: /node_modules/
 Disallow: /dist/

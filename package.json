@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node scripts/generateSitemap.mjs && vite build",
     "build:resources": "node scripts/buildResourceLinks.mjs",
+    "build:sitemap": "node scripts/generateSitemap.mjs",
     "preview": "vite preview",
     "lint": "tsc --noEmit",
     "test": "tsx src/routes/routeRegistry.test.ts",
