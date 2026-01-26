@@ -13,6 +13,11 @@ React + Vite + TypeScript + Tailwind single-page site with React Router v6.
 - `src/components` – shared UI (Navbar, Footer, Layout, Card, Button)
 - `src/pages` – routed pages
 
+## Documentation
+- [FSIP Scope](./docs/FSIP_SCOPE.md) – FSIP architecture, boundaries, and route map
+- [Scope Changelog](./docs/SCOPE_CHANGELOG.md) – Feature and architecture changes
+- [NEXT_STEPS](./NEXT_STEPS.md) – Resource directory maintenance guide
+
 ## Getting started
 1) `npm install`
 2) `npm run dev`
