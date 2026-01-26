@@ -38,6 +38,13 @@ export const programsCopy = {
   body: 'Our programs address pressure points that can push a household off track—before they become crises.',
   programs: [
     {
+      title: 'Family Stability Intervention Program (FSIP)',
+      status: 'Core Program',
+      href: '/programs/fsip',
+      summary:
+        'A coordinated support framework providing crisis navigation, a verified public resource hub, family repair pathways, and a national decentralized provider network. The Father\'s Alliance coordinates support but does not provide legal advice or clinical services.',
+    },
+    {
       title: 'Mobility Stabilization Program (MSP)',
       status: 'In Development',
       href: '/programs/mobility-stabilization',
