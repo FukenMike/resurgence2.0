@@ -12,6 +12,14 @@ import GetInvolved from './pages/get-involved';
 import Transparency from './pages/transparency';
 import NotFound from './pages/not-found';
 import ProgramMobilityStabilization from './pages/program-mobility-stabilization';
+import ProgramFSIP from './pages/program-fsip';
+import FSIPResourceHub from './pages/fsip-resource-hub';
+import FSIPCrisisNavigation from './pages/fsip-crisis-navigation';
+import FSIPFamilyRepair from './pages/fsip-family-repair';
+import FSIPProviderNetwork from './pages/fsip-provider-network';
+import Providers from './pages/providers';
+import Portal from './pages/portal';
+import SupportPortal from './pages/support-portal';
 import PrivacyPolicy from './pages/privacy-policy';
 import TermsOfService from './pages/terms-of-service';
 
@@ -107,6 +115,15 @@ export default function App() {
           <Route path="who-we-serve" element={<WhoWeServe />} />
           <Route path="programs" element={<Programs />} />
           <Route path="programs/mobility-stabilization" element={<ProgramMobilityStabilization />} />
+          <Route path="programs/fsip" element={<ProgramFSIP />} />
+          <Route path="fsip" element={<ProgramFSIP />} />
+          <Route path="fsip/resource-hub" element={<FSIPResourceHub />} />
+          <Route path="fsip/crisis-navigation" element={<FSIPCrisisNavigation />} />
+          <Route path="fsip/family-repair" element={<FSIPFamilyRepair />} />
+          <Route path="fsip/provider-network" element={<FSIPProviderNetwork />} />
+          <Route path="providers" element={<Providers />} />
+          <Route path="portal" element={<Portal />} />
+          <Route path="support-portal" element={<SupportPortal />} />
           <Route path="how-we-help" element={<HowWeHelp />} />
           <Route path="about" element={<About />} />
           {/* /resources restored to original tools layout; directory lives under /resources/directory */}
