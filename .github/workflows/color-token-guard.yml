@@ -23,49 +23,45 @@ jobs:
 
       - name: Scan for hardcoded Tailwind color utilities
         run: |
-          echo "🔍 Scanning for hardcoded Tailwind color utilities..."
+          echo "Scanning for hardcoded Tailwind color utilities..."
           
-          # Define the regex pattern for hardcoded Tailwind colors
-          # Matches: bg-slate-*, text-red-*, border-blue-*, ring-green-*, etc.
           PATTERN='(bg|text|border|ring)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(50|100|200|300|400|500|600|700|800|900|950)'
           
-          # Search for violations in source files (excluding node_modules, dist, etc.)
           VIOLATIONS=$(grep -rEn "$PATTERN" src/ --include="*.tsx" --include="*.ts" --include="*.css" || true)
           
           if [ -n "$VIOLATIONS" ]; then
-            echo "❌ FAIL: Hardcoded Tailwind color utilities detected!"
+            echo "FAIL: Hardcoded Tailwind color utilities detected!"
             echo ""
             echo "The following files contain hardcoded color utilities:"
             echo "$VIOLATIONS"
             echo ""
-            echo "⚠️  Please use semantic color tokens instead:"
+            echo "Please use semantic color tokens instead:"
             echo "   - text-ink, text-muted, text-ocean, text-forest, text-danger"
             echo "   - bg-sand, bg-surface, bg-surface-muted, bg-ocean, bg-danger-bg"
             echo "   - border-border-soft, border-border-muted, border-ocean, border-danger-border"
             echo "   - ring-ocean, ring-danger"
             echo ""
-            echo "📚 See docs/COLOR_TOKEN_SYSTEM.md for full token reference."
+            echo "See docs/COLOR_TOKEN_SYSTEM.md for full token reference."
             exit 1
           else
-            echo "✅ PASS: No hardcoded color utilities found."
+            echo "PASS: No hardcoded color utilities found."
             echo "All color usage follows the semantic token system."
           fi
 
       - name: Check for inline hex colors in TSX files
         run: |
-          echo "🔍 Scanning for inline hex color values..."
+          echo "Scanning for inline hex color values..."
           
-          # Search for hex colors in style attributes or backgroundColor properties
           HEX_VIOLATIONS=$(grep -rEn '(style=\{|backgroundColor:|color:).*#[0-9a-fA-F]{3,6}' src/ --include="*.tsx" --include="*.ts" || true)
           
           if [ -n "$HEX_VIOLATIONS" ]; then
-            echo "❌ FAIL: Inline hex color values detected!"
+            echo "FAIL: Inline hex color values detected!"
             echo ""
             echo "The following files contain inline hex colors:"
             echo "$HEX_VIOLATIONS"
             echo ""
-            echo "⚠️  Please use semantic color tokens via Tailwind classes or CSS variables."
+            echo "Please use semantic color tokens via Tailwind classes or CSS variables."
             exit 1
           else
-            echo "✅ PASS: No inline hex colors found."
+            echo "PASS: No inline hex colors found."
           fi
