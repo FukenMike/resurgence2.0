@@ -128,6 +128,10 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
   --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
   --shadow-hover: 0 4px 20px rgba(34, 211, 238, 0.3); /* Cyan glow on hover */
+  
+  /* Ops Theme Card Enhancement — Illuminated panels */
+  --color-card-ops-rgb: 35 42 60;      /* #232a3c - lighter than surface */
+  --color-card-ops: rgb(var(--color-card-ops-rgb));
 }
 
 * {
@@ -320,6 +324,35 @@ h4 {
 [data-theme="ops"] .surface-tone-danger {
   box-shadow: inset 0 0 0 1px rgba(248, 113, 113, 0.3);
   background-image: radial-gradient(circle at 100% 0%, rgba(248, 113, 113, 0.05), transparent 50%);
+}
+
+/* OPS THEME CARD ENHANCEMENTS — Illuminated panels with depth */
+[data-theme="ops"] .card-surface {
+  background: linear-gradient(135deg, var(--color-card-ops) 0%, rgba(35, 42, 60, 0.8) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.15);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(34, 211, 238, 0.1);
+}
+
+/* OPS THEME SURFACE DEFAULTS — Process-oriented panel styling */
+[data-theme="ops"] .surface-default {
+  background: linear-gradient(135deg, rgba(35, 42, 60, 0.6) 0%, rgba(26, 31, 46, 0.5) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  box-shadow: 
+    inset 0 1px 0 rgba(34, 211, 238, 0.08),
+    inset 0 0 20px rgba(34, 211, 238, 0.03);
+}
+
+[data-theme="ops"] .surface-muted {
+  background: linear-gradient(135deg, rgba(35, 42, 60, 0.7) 0%, rgba(26, 31, 46, 0.6) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.12);
+}
+
+[data-theme="ops"] .surface-accent {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.2);
+  box-shadow: inset 0 0 20px rgba(34, 211, 238, 0.05);
 }
 
 /* Link Focus States & Accessibility */
