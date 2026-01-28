@@ -8,44 +8,59 @@ The site now supports two themes:
 
 ## Theme Switching
 
-### Via JavaScript Console (Dev Testing)
-```javascript
-// Enable ops theme
-document.documentElement.dataset.theme = "ops"
-
-// Disable ops theme (back to default)
-delete document.documentElement.dataset.theme
-```
-
-### Via applyTheme() Function
+### Via applyTheme() — PERSISTENT Global Theme
 ```tsx
 import { applyTheme } from '../theme/applyTheme';
 
-// Global theme switch (persists to localStorage)
-applyTheme('ops');    // Enable ops theme
-applyTheme('default'); // Back to default
+// PERSISTENT: Writes to localStorage, affects all pages after reload
+applyTheme('ops');      // Enable ops theme globally
+applyTheme('default');  // Back to default theme globally
 ```
 
-### Via usePageTheme() Hook (Page-Scoped)
+**Important:** This function persists the preference to localStorage. Once called, the selected theme is the user's new default for all pages on this site.
+
+**Use case:** Theme toggle buttons in UI, user preference settings.
+
+### Via usePageTheme() — TEMPORARY Page Override
 ```tsx
 import { usePageTheme } from '../theme/usePageTheme';
 
 export default function MyDarkPage() {
-  // Apply ops theme on this page only; restore previous theme on unmount
+  // TEMPORARY: Does NOT write localStorage
+  // This page renders in ops theme
+  // Previous theme restored when user navigates away
   usePageTheme('ops');
   
-  return <div>This page renders in ops theme</div>;
+  return <div>Dark ops content</div>;
 }
+```
+
+**Important:** This hook does NOT persist the theme. It only affects the current page. When the user navigates away or refreshes, the page returns to their saved theme preference.
+
+**Use case:** Page-specific theming (e.g., FSIP program pages always render in ops theme, but user's global theme preference is unchanged).
+
+### Via JavaScript Console (Dev Testing)
+```javascript
+// Direct dataset manipulation (same as usePageTheme behavior)
+document.documentElement.dataset.theme = "ops"
+delete document.documentElement.dataset.theme  // Reset to default
+
+// NOTE: This does NOT write localStorage. Refresh the page and theme reverts.
 ```
 
 ### In React Component (Manual)
 ```tsx
-// Enable ops theme on mount
+// Manual temporary override (same behavior as usePageTheme)
 useEffect(() => {
+  const previousTheme = document.documentElement.dataset.theme;
   document.documentElement.dataset.theme = "ops";
   
   return () => {
-    delete document.documentElement.dataset.theme;
+    if (previousTheme === undefined) {
+      delete document.documentElement.dataset.theme;
+    } else {
+      document.documentElement.dataset.theme = previousTheme;
+    }
   };
 }, []);
 ```
@@ -55,6 +70,31 @@ useEffect(() => {
 <!-- Set on page load -->
 <html data-theme="ops">
 ```
+
+## Key Distinction: Persistent vs. Temporary
+
+| Aspect | `applyTheme()` | `usePageTheme()` |
+|--------|---|---|
+| **Storage** | ✅ Writes to localStorage | ❌ No storage write |
+| **Scope** | Global (all pages) | Current page only |
+| **Persistence** | Survives page reload | Reverts on navigation/reload |
+| **Use Case** | User preference settings | Page-specific themes |
+| **Example** | Theme toggle in navbar | FSIP ops theme |
+
+### Why This Matters
+
+**Scenario:** User navigates to FSIP program page (which uses `usePageTheme('ops')`)
+
+- ✅ Page displays in ops theme
+- ✅ localStorage is NOT modified
+- ✅ User's saved theme preference remains unchanged
+- ✅ User navigates to home page → back to their saved theme
+- ✅ User refreshes page → theme is as they set it, not ops
+
+If `usePageTheme()` used localStorage (old behavior):
+- ❌ Visiting FSIP would permanently change user's theme
+- ❌ Surprise: All other pages now in ops theme after refresh
+- ❌ User would need to manually switch theme back
 
 ## Color Tokens Overridden
 

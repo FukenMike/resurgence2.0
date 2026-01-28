@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import type { ThemeName } from './theme';
-import { applyTheme, getSavedTheme } from './applyTheme';
 
 /**
  * Hook to temporarily apply a theme to a page, restoring the previous theme on unmount.
- * Useful for pages that should display in a specific theme (e.g., dark mode for ops content).
+ * This hook does NOT persist the theme change to localStorage.
+ * Use this for page-scoped theme overrides only.
+ *
+ * For persistent theme switching, use applyTheme() instead.
  *
  * @param themeName - Optional theme to apply. If not provided, no theme change occurs.
  * @example
@@ -17,15 +19,24 @@ export function usePageTheme(themeName?: ThemeName): void {
   useEffect(() => {
     if (!themeName) return;
 
-    // Store the current theme before changing
-    const previousTheme = document.documentElement.dataset.theme || getSavedTheme();
+    const root = document.documentElement;
+    // Store the current dataset.theme value (or undefined if not set)
+    const previousDatasetTheme = root.dataset.theme;
 
-    // Apply the requested theme
-    applyTheme(themeName);
+    // Apply the requested theme WITHOUT touching localStorage
+    if (themeName === 'default') {
+      delete root.dataset.theme;
+    } else {
+      root.dataset.theme = themeName;
+    }
 
-    // Restore previous theme on unmount
+    // Restore previous dataset.theme on unmount (NOT touching localStorage)
     return () => {
-      applyTheme(previousTheme as ThemeName);
+      if (previousDatasetTheme === undefined) {
+        delete root.dataset.theme;
+      } else {
+        root.dataset.theme = previousDatasetTheme;
+      }
     };
   }, [themeName]);
 }
