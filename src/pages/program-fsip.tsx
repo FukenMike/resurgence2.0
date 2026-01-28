@@ -2,9 +2,11 @@
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
 import { useRouteMetadata } from '../routes/meta';
+import { usePageTheme } from '../theme/usePageTheme';
 
 export default function ProgramFSIP() {
   useRouteMetadata();
+  usePageTheme('ops');
 
   return (
     <div className="flex flex-col gap-8">
@@ -17,7 +19,7 @@ export default function ProgramFSIP() {
         </p>
       </section>
 
-      <SectionSurface variant="muted" edge="left" edgeTone="accent">
+      <SectionSurface variant="muted" edge="left" edgeTone="accent" tone="verified">
         <section className="grid gap-4 md:grid-cols-2">
           <Card eyebrow="Core Components" title="What FSIP Provides">
             <ul className="list-disc space-y-2 pl-5 text-muted">

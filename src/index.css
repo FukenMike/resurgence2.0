@@ -26,26 +26,45 @@
 
 :root {
   /* Text & Semantics */
-  --color-ink: #0f172a;           /* Primary text */
-  --color-muted: #475569;         /* Secondary text, muted paragraphs */
+  --color-ink-rgb: 15 23 42;           /* #0f172a */
+  --color-ink: rgb(var(--color-ink-rgb));
+  --color-muted-rgb: 71 85 105;        /* #475569 */
+  --color-muted: rgb(var(--color-muted-rgb));
   
   /* Backgrounds */
-  --color-sand: #f8fafc;          /* Page background */
-  --color-surface: #ffffff;       /* Card/white surface */
-  --color-surface-muted: #f1f5f9; /* Subtle surface alternative */
+  --color-sand-rgb: 248 250 252;       /* #f8fafc */
+  --color-sand: rgb(var(--color-sand-rgb));
+  --color-surface-rgb: 255 255 255;    /* #ffffff */
+  --color-surface: rgb(var(--color-surface-rgb));
+  --color-surface-muted-rgb: 241 245 249; /* #f1f5f9 */
+  --color-surface-muted: rgb(var(--color-surface-muted-rgb));
   
   /* Borders & Dividers */
-  --color-border-soft: #e2e8f0;   /* Light borders */
-  --color-border-muted: #cbd5e1;  /* Medium borders */
+  --color-border-soft-rgb: 226 232 240; /* #e2e8f0 */
+  --color-border-soft: rgb(var(--color-border-soft-rgb));
+  --color-border-muted-rgb: 203 213 225; /* #cbd5e1 */
+  --color-border-muted: rgb(var(--color-border-muted-rgb));
   
   /* Accents */
-  --color-ocean: #0ea5e9;         /* Primary accent (sky/blue) */
-  --color-forest: #047857;        /* Secondary accent (green/emerald) */
+  --color-ocean-rgb: 14 165 233;       /* #0ea5e9 */
+  --color-ocean: rgb(var(--color-ocean-rgb));
+  --color-forest-rgb: 4 120 87;        /* #047857 */
+  --color-forest: rgb(var(--color-forest-rgb));
   
   /* Danger & Errors */
-  --color-danger: #dc2626;        /* Error text and icons */
-  --color-danger-bg: #fef2f2;     /* Error background */
-  --color-danger-border: #fecaca; /* Error borders */
+  --color-danger-rgb: 220 38 38;       /* #dc2626 */
+  --color-danger: rgb(var(--color-danger-rgb));
+  --color-danger-bg-rgb: 254 242 242;  /* #fef2f2 */
+  --color-danger-bg: rgb(var(--color-danger-bg-rgb));
+  --color-danger-border-rgb: 254 202 202; /* #fecaca */
+  --color-danger-border: rgb(var(--color-danger-border-rgb));
+  
+  /* Inverse Surface (Dark Theme) */
+  --color-surface-inverse-dark: #1e293b;  /* Dark slate background */
+  --color-surface-inverse: #0f172a;       /* Deeper dark background */
+  --color-ink-inverse: #ffffff;           /* White text on dark */
+  --color-muted-inverse: #f1f5f9;         /* Light muted text on dark */
+  --color-border-inverse: rgba(71, 85, 105, 0.5); /* Border for dark surfaces */
   
   /* Elevation & Depth */
   --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
@@ -58,6 +77,59 @@
   --font-serif: "Source Serif 4", "DM Sans", serif;
 }
 
+/* ===================================================================
+   OPS THEME — Infrastructure Punk / Dark Mode
+   Usage: document.documentElement.dataset.theme = "ops"
+   =================================================================== */
+[data-theme="ops"] {
+  /* Text & Semantics — Inverted for dark background */
+  --color-ink-rgb: 240 242 245;        /* #f0f2f5 */
+  --color-ink: rgb(var(--color-ink-rgb));
+  --color-muted-rgb: 156 163 175;      /* #9ca3af */
+  --color-muted: rgb(var(--color-muted-rgb));
+  
+  /* Backgrounds — Dark ops palette */
+  --color-sand-rgb: 10 14 26;          /* #0a0e1a */
+  --color-sand: rgb(var(--color-sand-rgb));
+  --color-surface-rgb: 20 25 35;       /* #141923 */
+  --color-surface: rgb(var(--color-surface-rgb));
+  --color-surface-muted-rgb: 26 31 46; /* #1a1f2e */
+  --color-surface-muted: rgb(var(--color-surface-muted-rgb));
+  
+  /* Borders & Dividers — Subtle dark borders */
+  --color-border-soft-rgb: 37 43 58;   /* #252b3a */
+  --color-border-soft: rgb(var(--color-border-soft-rgb));
+  --color-border-muted-rgb: 55 65 81;  /* #374151 */
+  --color-border-muted: rgb(var(--color-border-muted-rgb));
+  
+  /* Accents — Neon/system colors for ops aesthetic */
+  --color-ocean-rgb: 34 211 238;       /* #22d3ee */
+  --color-ocean: rgb(var(--color-ocean-rgb));
+  --color-forest-rgb: 16 185 129;      /* #10b981 */
+  --color-forest: rgb(var(--color-forest-rgb));
+  
+  /* Danger & Errors — High contrast warnings */
+  --color-danger-rgb: 248 113 113;     /* #f87171 */
+  --color-danger: rgb(var(--color-danger-rgb));
+  --color-danger-bg-rgb: 45 22 23;     /* #2d1617 */
+  --color-danger-bg: rgb(var(--color-danger-bg-rgb));
+  --color-danger-border-rgb: 74 26 26; /* #4a1a1a */
+  --color-danger-border: rgb(var(--color-danger-border-rgb));
+  
+  /* Inverse Surface — Light panels on dark (rare edge case) */
+  --color-surface-inverse-dark: #e5e7eb;  /* Light gray */
+  --color-surface-inverse: #f9fafb;       /* Near-white */
+  --color-ink-inverse: #0f172a;           /* Dark text on light */
+  --color-muted-inverse: #6b7280;         /* Muted gray on light */
+  --color-border-inverse: rgba(209, 213, 219, 0.5); /* Light borders */
+  
+  /* Elevation & Depth — Glowing shadows for ops feel */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 4px 20px rgba(34, 211, 238, 0.3); /* Cyan glow on hover */
+}
+
 * {
   box-sizing: border-box;
 }
@@ -66,11 +138,18 @@ body {
   margin: 0;
   font-family: var(--font-sans);
   color: var(--color-ink);
+  background-color: var(--color-sand);
   background: radial-gradient(circle at 20% 20%, rgba(14, 165, 233, 0.08), transparent 35%),
     radial-gradient(circle at 80% 0%, rgba(4, 120, 87, 0.08), transparent 30%),
-    linear-gradient(180deg, #ffffff 0%, var(--color-sand) 100%);
+    linear-gradient(180deg, var(--color-surface) 0%, var(--color-sand) 100%);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+}
+
+[data-theme="ops"] body {
+  background: radial-gradient(circle at 20% 20%, rgba(34, 211, 238, 0.15), transparent 35%),
+    radial-gradient(circle at 80% 0%, rgba(16, 185, 129, 0.12), transparent 30%),
+    linear-gradient(180deg, var(--color-surface) 0%, var(--color-sand) 100%);
 }
 
 a {
@@ -156,21 +235,21 @@ h4 {
 }
 
 .surface-inverse {
-  background: linear-gradient(135deg, #1e293b, #0f172a);
-  border: 1px solid rgba(71, 85, 105, 0.5);
+  background: linear-gradient(135deg, var(--color-surface-inverse-dark), var(--color-surface-inverse));
+  border: 1px solid var(--color-border-inverse);
   padding: 1.5rem;
-  color: #f1f5f9;
+  color: var(--color-muted-inverse);
 }
 
 .surface-inverse h1,
 .surface-inverse h2,
 .surface-inverse h3,
 .surface-inverse h4 {
-  color: #ffffff;
+  color: var(--color-ink-inverse);
 }
 
 .surface-inverse p {
-  color: #cbd5e1;
+  color: var(--color-border-muted);
 }
 
 /* Surface Edge Accents */
@@ -209,6 +288,38 @@ h4 {
   .surface-inverse {
     padding: 2rem;
   }
+}
+
+/* Surface Tone Accents — semantic tones for subtle signal */
+.surface-tone-signal {
+  box-shadow: inset 0 0 0 1px rgba(14, 165, 233, 0.2);
+  background-image: radial-gradient(circle at 100% 0%, rgba(14, 165, 233, 0.03), transparent 50%);
+}
+
+.surface-tone-verified {
+  box-shadow: inset 0 0 0 1px rgba(4, 120, 87, 0.2);
+  background-image: radial-gradient(circle at 100% 0%, rgba(4, 120, 87, 0.03), transparent 50%);
+}
+
+.surface-tone-danger {
+  box-shadow: inset 0 0 0 1px rgba(220, 38, 38, 0.2);
+  background-image: radial-gradient(circle at 100% 0%, rgba(220, 38, 38, 0.03), transparent 50%);
+}
+
+/* Tone accents for ops theme */
+[data-theme="ops"] .surface-tone-signal {
+  box-shadow: inset 0 0 0 1px rgba(34, 211, 238, 0.3);
+  background-image: radial-gradient(circle at 100% 0%, rgba(34, 211, 238, 0.05), transparent 50%);
+}
+
+[data-theme="ops"] .surface-tone-verified {
+  box-shadow: inset 0 0 0 1px rgba(16, 185, 129, 0.3);
+  background-image: radial-gradient(circle at 100% 0%, rgba(16, 185, 129, 0.05), transparent 50%);
+}
+
+[data-theme="ops"] .surface-tone-danger {
+  box-shadow: inset 0 0 0 1px rgba(248, 113, 113, 0.3);
+  background-image: radial-gradient(circle at 100% 0%, rgba(248, 113, 113, 0.05), transparent 50%);
 }
 
 /* Link Focus States & Accessibility */

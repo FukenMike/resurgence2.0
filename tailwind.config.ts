@@ -5,19 +5,19 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        /* Semantic color tokens aligned with CSS variables in src/index.css */
-        ink: '#0f172a',
-        muted: '#475569',
-        sand: '#f8fafc',
-        surface: '#ffffff',
-        'surface-muted': '#f1f5f9',
-        'border-soft': '#e2e8f0',
-        'border-muted': '#cbd5e1',
-        ocean: '#0ea5e9',    /* Primary accent */
-        forest: '#047857',   /* Secondary accent */
-        danger: '#dc2626',         /* Error text and icons */
-        'danger-bg': '#fef2f2',    /* Error background */
-        'danger-border': '#fecaca', /* Error borders */
+        /* Semantic color tokens using CSS variables with opacity support */
+        ink: 'rgb(var(--color-ink-rgb) / <alpha-value>)',
+        muted: 'rgb(var(--color-muted-rgb) / <alpha-value>)',
+        sand: 'rgb(var(--color-sand-rgb) / <alpha-value>)',
+        surface: 'rgb(var(--color-surface-rgb) / <alpha-value>)',
+        'surface-muted': 'rgb(var(--color-surface-muted-rgb) / <alpha-value>)',
+        'border-soft': 'rgb(var(--color-border-soft-rgb) / <alpha-value>)',
+        'border-muted': 'rgb(var(--color-border-muted-rgb) / <alpha-value>)',
+        ocean: 'rgb(var(--color-ocean-rgb) / <alpha-value>)',
+        forest: 'rgb(var(--color-forest-rgb) / <alpha-value>)',
+        danger: 'rgb(var(--color-danger-rgb) / <alpha-value>)',
+        'danger-bg': 'rgb(var(--color-danger-bg-rgb) / <alpha-value>)',
+        'danger-border': 'rgb(var(--color-danger-border-rgb) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['DM Sans', 'system-ui', '-apple-system', 'sans-serif'],

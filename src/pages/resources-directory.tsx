@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { resourceLinks } from '../lib/resourceLinks';
 import type { ResourceLink } from '../lib/resourceLinks';
 import { ResourceCard } from '../components/resources/ResourceCard';
+import SectionSurface from '../components/SectionSurface';
 import { useRouteMetadata } from '../routes/meta';
 
 /**
@@ -65,69 +66,71 @@ export function ResourcesDirectory() {
     <div className="w-full max-w-6xl mx-auto px-4 md:px-6 lg:px-8 py-8 md:py-12">
       {/* Page Header */}
       <div className="mb-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Resource Directory</h1>
-        <p className="text-lg text-gray-600">
+        <h1 className="text-3xl md:text-4xl font-bold text-ink mb-3">Resource Directory</h1>
+        <p className="text-lg text-muted">
           Browse verified organizations and programs across legal, housing, employment, and related needs.
         </p>
       </div>
 
       {/* Filter Controls */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        {/* Search Input */}
-        <input
-          type="text"
-          placeholder="Search by name, organization, or keyword..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-
-        {/* Category Filter */}
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="All">All Categories</option>
-          {categories.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
-
-        {/* Verification Toggle */}
-        <label className="flex items-center gap-2 px-4 py-2 cursor-pointer">
+      <SectionSurface variant="muted" tone="signal" className="mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Search Input */}
           <input
-            type="checkbox"
-            checked={showVerifiedOnly}
-            onChange={(e) => setShowVerifiedOnly(e.target.checked)}
-            className="w-4 h-4 rounded border-gray-300"
+            type="text"
+            placeholder="Search by name, organization, or keyword..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="px-4 py-2 border border-border-soft rounded-lg focus:outline-none focus:ring-2 focus:ring-ocean"
           />
-          <span className="text-sm font-medium text-gray-700">Verified resources only</span>
-        </label>
 
-        {/* Website Filter Toggle */}
-        <label className="flex items-center gap-2 px-4 py-2 cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showWithWebsiteOnly}
-            onChange={(e) => setShowWithWebsiteOnly(e.target.checked)}
-            className="w-4 h-4 rounded border-gray-300"
-          />
-          <span className="text-sm font-medium text-gray-700">Resources with a website</span>
-        </label>
-      </div>
+          {/* Category Filter */}
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+            className="px-4 py-2 border border-border-soft rounded-lg focus:outline-none focus:ring-2 focus:ring-ocean"
+          >
+            <option value="All">All Categories</option>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </select>
+
+          {/* Verification Toggle */}
+          <label className="flex items-center gap-2 px-4 py-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showVerifiedOnly}
+              onChange={(e) => setShowVerifiedOnly(e.target.checked)}
+              className="w-4 h-4 rounded border-border-soft"
+            />
+            <span className="text-sm font-medium text-ink">Verified resources only</span>
+          </label>
+
+          {/* Website Filter Toggle */}
+          <label className="flex items-center gap-2 px-4 py-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showWithWebsiteOnly}
+              onChange={(e) => setShowWithWebsiteOnly(e.target.checked)}
+              className="w-4 h-4 rounded border-border-soft"
+            />
+            <span className="text-sm font-medium text-ink">Resources with a website</span>
+          </label>
+        </div>
+      </SectionSurface>
 
       {/* Filter Status and Reset */}
       {activeFilterCount > 0 && (
         <div className="mb-6 flex items-center justify-between text-sm">
-          <span className="text-gray-600">
+          <span className="text-muted">
             {activeFilterCount} filter{activeFilterCount !== 1 ? 's' : ''} applied
           </span>
           <button
             onClick={handleResetFilters}
-            className="text-blue-600 hover:text-blue-700 font-medium underline"
+            className="text-ocean hover:text-ocean/80 font-medium underline"
           >
             Clear all filters
           </button>
@@ -135,8 +138,8 @@ export function ResourcesDirectory() {
       )}
 
       {/* Results Count */}
-      <div className="mb-6 text-sm font-medium text-gray-700">
-        Showing <span className="font-bold text-gray-900">{filteredResources.length}</span> result
+      <div className="mb-6 text-sm font-medium text-muted">
+        Showing <span className="font-bold text-ink">{filteredResources.length}</span> result
         {filteredResources.length !== 1 ? 's' : ''}
       </div>
 
@@ -149,10 +152,10 @@ export function ResourcesDirectory() {
         </div>
       ) : (
         <div className="text-center py-12">
-          <p className="text-gray-600 mb-4">No resources match the current filters.</p>
+          <p className="text-muted mb-4">No resources match the current filters.</p>
           <button
             onClick={handleResetFilters}
-            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-medium"
+            className="px-4 py-2 bg-ocean text-white rounded-lg hover:bg-ocean/90 font-medium"
           >
             Reset filters
           </button>

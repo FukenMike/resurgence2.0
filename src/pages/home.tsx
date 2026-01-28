@@ -41,7 +41,7 @@ export default function Home() {
           </div>
         </div>
         <div className="card-surface relative overflow-hidden p-6 md:p-8">
-          <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-emerald-50" aria-hidden />
+          <div className="absolute inset-0 bg-gradient-to-br from-sand via-surface to-surface-muted" aria-hidden />
           <div className="relative space-y-4">
             <h2 className="text-xl font-semibold text-ink">Mission</h2>
             <p className="text-muted">{homeCopy.mission}</p>
@@ -51,7 +51,7 @@ export default function Home() {
         </div>
       </section>
 
-      <SectionSurface variant="muted" edge="left" edgeTone="accent">
+      <SectionSurface variant="muted" edge="left" edgeTone="accent" tone="verified">
         <section className="grid gap-6 md:grid-cols-2">
           <Card eyebrow="Core Values" title="How we show up">
             <ul className="mt-2 space-y-3 text-muted">

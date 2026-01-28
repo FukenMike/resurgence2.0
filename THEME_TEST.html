@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Switcher Test</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      padding: 2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .theme-switch {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: 2px solid #ccc;
+      background: white;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    button:hover {
+      background: #f0f0f0;
+    }
+    button.active {
+      background: #0ea5e9;
+      color: white;
+      border-color: #0ea5e9;
+    }
+    iframe {
+      width: 100%;
+      height: 80vh;
+      border: 2px solid #ccc;
+      border-radius: 0.5rem;
+    }
+    .instructions {
+      background: #f0f9ff;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      border-left: 4px solid #0ea5e9;
+      margin-bottom: 1rem;
+    }
+    code {
+      background: #1e293b;
+      color: #22d3ee;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.25rem;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <div class="instructions">
+    <h2>🎨 Theme Switcher Test</h2>
+    <p>Click the buttons below to switch between themes.</p>
+    <p><strong>Console command:</strong></p>
+    <code>document.documentElement.dataset.theme = "ops"</code>
+  </div>
+
+  <div class="theme-switch">
+    <button id="defaultBtn" class="active">Default</button>
+    <button id="opsBtn">Ops</button>
+  </div>
+
+  <iframe id="preview" src="/"></iframe>
+
+  <script>
+    const preview = document.getElementById('preview');
+    const defaultBtn = document.getElementById('defaultBtn');
+    const opsBtn = document.getElementById('opsBtn');
+
+    function setTheme(theme) {
+      // Wait for iframe to load
+      preview.addEventListener('load', function() {
+        const doc = preview.contentDocument || preview.contentWindow.document;
+        if (theme === 'ops') {
+          doc.documentElement.dataset.theme = 'ops';
+          opsBtn.classList.add('active');
+          defaultBtn.classList.remove('active');
+        } else {
+          delete doc.documentElement.dataset.theme;
+          defaultBtn.classList.add('active');
+          opsBtn.classList.remove('active');
+        }
+      }, { once: true });
+
+      // Reload iframe to apply theme
+      preview.src = preview.src;
+    }
+
+    defaultBtn.addEventListener('click', () => setTheme('default'));
+    opsBtn.addEventListener('click', () => setTheme('ops'));
+  </script>
+</body>
+</html>

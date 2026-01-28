@@ -228,12 +228,75 @@ This is a light-only palette. If dark mode is needed in the future:
 - **Build fails or colors look wrong?** Check `tailwind.config.ts` and `src/index.css` for conflicts.
 - **Need a color not in the palette?** Add it as a new token (see "Updating the Palette" above).
 - **Component colors still hardcoded?** Update to use semantic tokens. Search for `text-slate-`, `bg-sky-`, `border-gray-` etc. in component files.
-## CI Enforcement
 
-**Color Token Guard:** A GitHub Actions workflow (`.github/workflows/color-token-guard.yml`) automatically scans all source files on every PR and push to ensure no hardcoded Tailwind color utilities or inline hex values are introduced.
+## CI Enforcement: Theme Guardrails
 
-**Violations will fail CI** with a detailed error message listing:
-- Files containing hardcoded colors (e.g., `text-slate-900`, `bg-blue-600`)
-- Files with inline hex colors (e.g., `style={{ color: '#dc2626' }}`)
+### Local Linting
+Run locally before committing to catch violations early:
+```bash
+npm run lint:theme
+```
 
-**Quick Reference:** See `docs/ALLOWED_COLOR_TOKENS.md` for the complete list of approved token classes and usage examples.
+This checks for:
+1. **Hardcoded Tailwind palette utilities** in `.tsx` and `.ts` files:
+   - Forbidden: `text-gray-600`, `bg-blue-100`, `border-slate-200`, `from-sky-50`, `ring-red-500`, etc.
+   - Allowed: `text-ink`, `bg-ocean`, `border-border-soft`, `from-sand`, etc.
+
+2. **Hex color codes** in source files (excluding `src/index.css` token definitions):
+   - Forbidden: `#0f172a` in component files
+   - Allowed: CSS variables like `var(--color-ink)` or token classes like `text-ink`
+
+### GitHub Actions CI
+**Color Token Guard** workflow (`.github/workflows/color-token-guard.yml`) automatically validates every PR and push:
+- Runs on changes to `src/**`, `scripts/check-theme-violations.js`
+- Fails the check if violations are detected with details about each violation
+- Provides token reference and migration guidance
+
+### Output Example: Passing
+```
+✓ No hardcoded Tailwind palette utilities found
+✓ No hardcoded hex colors found
+✓ PASS: All colors use semantic tokens
+```
+
+### Output Example: Failing
+```
+✖ src/components/MyComponent.tsx:24
+  Hardcoded utility: text-gray-600
+  
+  SEMANTIC TOKEN REFERENCE:
+  • text-ink (primary text)
+  • text-muted (secondary text)
+  • text-ocean (informational)
+  • text-forest (verification/positive)
+  • text-danger (warnings/errors)
+```
+
+### Integration
+The `npm run lint:theme` script is included in:
+- **CI/CD pipelines** (`.github/workflows/ci.yml`)
+- **Pre-commit hooks** (recommended: configure in local git hooks)
+- **Local dev checks** (run anytime before pushing)
+
+See `scripts/check-theme-violations.js` for implementation details.
+
+## Quick Reference: Approved Token Classes
+
+All colors must use semantic tokens defined in `src/index.css` and mapped in `tailwind.config.ts`:
+
+**Text:**
+- `text-ink`, `text-muted`, `text-ocean`, `text-forest`, `text-danger`, `text-white`
+
+**Backgrounds:**
+- `bg-sand`, `bg-surface`, `bg-surface-muted`, `bg-ocean`, `bg-forest`, `bg-danger-bg`
+
+**Borders:**
+- `border-border-soft`, `border-border-muted`, `border-ocean`, `border-forest`, `border-danger-border`
+
+**Rings & Shadows:**
+- `ring-ocean`, `ring-danger`, `shadow-sm`, `shadow-md`, `shadow-lg`, `shadow-hover`
+
+**Gradients:**
+- `from-sand`, `via-surface`, `to-surface-muted`, `from-ocean`, `via-forest`, etc.
+
+For exhaustive details, see `docs/ALLOWED_COLOR_TOKENS.md`.
