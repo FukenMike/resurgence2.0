@@ -151,6 +151,11 @@ body {
 }
 
 [data-theme="ops"] body {
+  background-color: transparent;
+}
+
+/* App Shell — Main layout wrapper for OPS theme background */
+[data-theme="ops"] .app-shell {
   /* Blueprint grid + radial gradient base */
   background: 
     /* Fine grid (20px) using border-soft */
