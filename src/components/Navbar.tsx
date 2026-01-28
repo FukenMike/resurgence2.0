@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { routeRegistry } from '../routes/routeRegistry';
+import ThemeToggle from './ThemeToggle';
 
 export default function Navbar() {
   const { pathname } = useLocation();
@@ -54,6 +55,7 @@ export default function Navbar() {
         </Link>
         {/* Desktop inline links removed; single hamburger used across all sizes */}
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="rounded-lg p-2 text-muted hover:bg-sand transition"
