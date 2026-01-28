@@ -22,20 +22,21 @@ export default function ThemeToggle() {
   // Don't render until mounted to avoid hydration mismatch
   if (!mounted) return null;
 
-  const isOps = theme === 'ops';
-  const label = isOps ? 'Switch to Default Theme' : 'Switch to Ops Theme';
-  const displayText = isOps ? 'Ops' : 'Default';
+  const isLight = theme === 'default';
+  const emoji = isLight ? '☀️' : '🌙';
+  const themeLabel = isLight ? 'Light' : 'Dark';
+  const ariaLabel = `Toggle theme (currently ${themeLabel})`;
 
   return (
     <button
       onClick={handleToggle}
-      aria-label={label}
-      title={label}
+      aria-label={ariaLabel}
+      title={ariaLabel}
       className="rounded-lg px-3 py-2 text-xs font-medium text-muted hover:bg-sand transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ocean"
     >
-      <span className="hidden sm:inline">{displayText}</span>
-      <span className="sm:hidden">
-        {isOps ? '◐' : '◑'}
+      <span className="flex items-center gap-1.5">
+        <span className="hidden sm:inline">Theme</span>
+        <span role="img" aria-label={themeLabel}>{emoji}</span>
       </span>
     </button>
   );
