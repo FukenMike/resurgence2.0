@@ -37,7 +37,9 @@ export default function MyDarkPage() {
 
 **Important:** This hook does NOT persist the theme. It only affects the current page. When the user navigates away or refreshes, the page returns to their saved theme preference.
 
-**Use case:** Page-specific theming (e.g., FSIP program pages always render in ops theme, but user's global theme preference is unchanged).
+**Use case:** Page-specific theming experiments (e.g., A/B testing different themes on specific pages).
+
+**Note:** As of January 2026, the site now has a global theme toggle in the navbar. All pages, including FSIP, follow the user's chosen theme preference. The `usePageTheme()` hook remains available for future experimental or page-specific theme needs.
 
 ### Via JavaScript Console (Dev Testing)
 ```javascript
@@ -83,7 +85,7 @@ useEffect(() => {
 
 ### Why This Matters
 
-**Scenario:** User navigates to FSIP program page (which uses `usePageTheme('ops')`)
+**Scenario:** User navigates to a hypothetical experimental page that uses `usePageTheme('ops')`
 
 - ✅ Page displays in ops theme
 - ✅ localStorage is NOT modified
@@ -91,10 +93,12 @@ useEffect(() => {
 - ✅ User navigates to home page → back to their saved theme
 - ✅ User refreshes page → theme is as they set it, not ops
 
-If `usePageTheme()` used localStorage (old behavior):
-- ❌ Visiting FSIP would permanently change user's theme
+If `usePageTheme()` used localStorage (old buggy behavior):
+- ❌ Visiting the experimental page would permanently change user's theme
 - ❌ Surprise: All other pages now in ops theme after refresh
 - ❌ User would need to manually switch theme back
+
+**Current site behavior:** All pages, including FSIP, now follow the global theme set via the navbar toggle. No pages currently use `usePageTheme()` for overrides.
 
 ## Color Tokens Overridden
 
@@ -143,22 +147,24 @@ npm run dev
 
 ## Future Enhancements
 
-- Add theme toggle button in Navbar
+- ~~Add theme toggle button in Navbar~~ ✅ Done (persistent theme toggle added)
 - ~~Persist theme preference in localStorage~~ ✅ Done via `applyTheme()` and `getSavedTheme()`
 - Add transition animations for smoother theme switching
 - Create additional theme variants (high-contrast, sepia, etc.)
 
-## Demo Implementation
+## Demo Implementation (Historical)
 
-The FSIP program page ([program-fsip.tsx](../src/pages/program-fsip.tsx)) demonstrates the `usePageTheme` hook:
+**Previous implementation:** The FSIP program page originally demonstrated the `usePageTheme` hook with an ops theme override. As of January 2026, this has been removed in favor of the global theme toggle.
+
+**usePageTheme() remains available** for future page-specific theme experiments:
 
 ```tsx
 import { usePageTheme } from '../theme/usePageTheme';
 
-export default function ProgramFSIP() {
+export default function MyExperimentalPage() {
   usePageTheme('ops'); // ← Page renders in ops theme, reverts on navigation away
   // ... rest of component
 }
 ```
 
-Visit `/program-fsip` to see the ops theme in action.
+This hook is useful for A/B testing different themes on specific pages without affecting the user's global preference.

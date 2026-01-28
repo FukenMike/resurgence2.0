@@ -2,11 +2,9 @@
 import Card from '../components/Card';
 import SectionSurface from '../components/SectionSurface';
 import { useRouteMetadata } from '../routes/meta';
-import { usePageTheme } from '../theme/usePageTheme';
 
 export default function ProgramFSIP() {
   useRouteMetadata();
-  usePageTheme('ops');
 
   return (
     <div className="flex flex-col gap-8">
