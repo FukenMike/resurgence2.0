@@ -52,8 +52,7 @@ export default function Home() {
       </section>
 
       <section className="rounded-lg border border-border-soft bg-surface-muted p-6 md:p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.2em] text-ocean mb-2">About This Initiative</p>
-        <p className="text-lg text-ink leading-relaxed">
+        <p className="max-w-3xl text-base text-muted leading-relaxed">
           The Father's Alliance is a platform being built to operate as a fully functional humanitarian organization once the right people, funding, and partnerships are in place.
         </p>
       </section>
