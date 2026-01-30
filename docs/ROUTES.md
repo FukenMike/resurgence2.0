@@ -1,18 +1,25 @@
 # Routes
 
-Complete list of all application routes from the route registry, with paths, purposes, and navigation configuration.
+Complete list of all application routes from the route registry, with paths, purposes, access levels, and navigation configuration.
+
+**Last Updated**: January 30, 2026
 
 ---
 
 ## Route Registry Overview
 
-Routes are defined centrally in [src/routes/routeRegistry.tsx](../src/routes/routeRegistry.tsx) as a typed array. This document maps each route to its component and purpose.
+Routes are defined centrally in [src/routes/routeRegistry.tsx](../src/routes/routeRegistry.tsx) as a typed array. This document lists all routes with their paths, components, access requirements, and purposes.
 
 **Navigation Visibility**:
 - `header` — Shown in top navigation bar
 - `mobile` — Shown in mobile menu
 - `footer` — Shown in footer links
 - `order` — Sort priority (lower numbers appear first)
+
+**Access Levels**:
+- `public` — No authentication required
+- `gated (role)` — Authentication required with specific role (demo auth only)
+- `legacy redirect` — Redirects to another route (nav-hidden)
 
 ---
 
@@ -61,12 +68,38 @@ Routes are defined centrally in [src/routes/routeRegistry.tsx](../src/routes/rou
 
 ---
 
-## Portals (Auth Protected)
+## Resources
 
-| Path | File | Label | Header | Mobile | Footer | Role | Purpose |
-|------|------|-------|--------|--------|--------|------|---------|
-| `/portal` | [portal.tsx](../src/pages/portal.tsx) | Family Portal | ✗ | ✓ | ✗ | `family` | Secure family case access (placeholder; auth TBD) |
-| `/support-portal` | [support-portal.tsx](../src/pages/support-portal.tsx) | Provider Portal | ✗ | ✓ | ✗ | `provider` | Provider dashboard for case management (placeholder; auth TBD) |
+| Path | Component | Access | Header | Mobile | Footer | Purpose |
+|------|-----------|--------|--------|--------|--------|---------|
+| `/resources` | [resources-tools.tsx](../src/pages/resources-tools.tsx) | public | ✓ | ✓ | ✓ | Resources & tools landing; directory intro, quick links |
+| `/resources/directory` | [resources-directory.tsx](../src/pages/resources-directory.tsx) | public | ✗ | ✓ | ✗ | Searchable resource directory; categories, search, verification status |
+| `/resources/directory/:slug` | [resource-detail.tsx](../src/pages/resource-detail.tsx) | public | ✗ | ✗ | ✗ | Detail page for single resource; full info, feedback form |
+
+---
+
+## Portal Architecture
+
+### Portal Entry
+
+| Path | Component | Access | Header | Mobile | Footer | Purpose |
+|------|-----------|--------|--------|--------|--------|---------|
+| `/portals` | [portals.tsx](../src/pages/portals.tsx) | public | ✗ | ✗ | ✗ | Public entry page listing portal options; info about access |
+| `/login` | [login.tsx](../src/pages/login.tsx) | public | ✗ | ✗ | ✗ | Demo role selector (family, provider, admin); localStorage-based session |
+
+### Role-Gated Portals (Demo Auth)
+
+| Path | Component | Access | Role | Header | Mobile | Footer | Purpose |
+|------|-----------|--------|------|--------|--------|--------|---------|
+| `/family-portal` | [family-portal.tsx](../src/pages/family-portal.tsx) | gated | family | ✗ | ✓ | ✗ | Family case management portal (placeholder UI) |
+| `/provider-portal` | [provider-portal.tsx](../src/pages/provider-portal.tsx) | gated | provider | ✗ | ✓ | ✗ | Provider dashboard (placeholder UI) |
+
+### Legacy Redirects (Nav Hidden)
+
+| Path | Redirect Target | Access | Purpose |
+|------|-----------------|--------|---------|
+| `/portal` | `/family-portal` | public (no auth) | Legacy URL redirect (nav-hidden) |
+| `/support-portal` | `/provider-portal` | public (no auth) | Legacy URL redirect (nav-hidden) |
 
 ---
 
@@ -151,13 +184,36 @@ Same as header navigation, consolidated for space efficiency.
 
 ## Authentication Status
 
-**Current**: No authentication implemented.
+**Current**: Demo authentication (localStorage-based role sessions)
 
-**Auth Placeholders**:
-- `/portal` — Family portal (requires `family` role)
-- `/support-portal` — Provider portal (requires `provider` role)
+**How Route Gating Works**:
+- Routes with `auth.required: true` are wrapped in a `RequireAuth` component
+- User must have a session in localStorage with matching role
+- If not authenticated or role doesn't match: user is redirected to `/login?next=/original-path`
+- After successful login with correct role: user is redirected back to original path
 
-Both pages display placeholder UI. Auth integration (Supabase, etc.) is scaffolded in [src/lib/supabase/](../src/lib/supabase/) for future implementation.
+**Role-Gated Routes**:
+- `/family-portal` requires `family` role
+- `/provider-portal` requires `provider` role
+
+**Note**: Demo auth is not secure and is for development/testing only. See [AUTH.md](./AUTH.md) for full details.
+
+---
+
+## Sitemap & SEO
+
+**What is included in sitemap** (`public/sitemap.xml`):
+- All public routes (not gated, not redirects, not admin)
+- Example: `/`, `/who-we-serve`, `/resources/directory`, `/portals`, `/resources/directory/:slug` (all public resources)
+
+**What is excluded from sitemap**:
+- Auth-required routes (gated portals)
+- Admin/draft routes (reserved namespaces)
+- Legacy redirects
+- Login page
+
+**Generated by**: [scripts/generateSitemap.mjs](../scripts/generateSitemap.mjs)  
+**Run manually**: `npm run build:sitemap`
 
 ---
 
@@ -234,9 +290,12 @@ Tests in [src/routes/routeRegistry.test.ts](../src/routes/routeRegistry.test.ts)
 
 ## See Also
 
+- [STATUS.md](./STATUS.md) — Current platform status, staged features, boundaries
+- [AUTH.md](./AUTH.md) — Demo authentication model and login flow
+- [RESOURCE_DIRECTORY.md](./RESOURCE_DIRECTORY.md) — Resource data model and feedback components
 - [ARCHITECTURE.md](./ARCHITECTURE.md) — Routing strategy, route registry pattern
 - [CONTENT_GUIDE.md](./CONTENT_GUIDE.md) — Writing style and page composition patterns
-- [README.md](../README.md) — Quick reference and scripts
+- [README.md](../README.md) — Quick reference and setup
 
 ---
 

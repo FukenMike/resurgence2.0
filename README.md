@@ -1,20 +1,26 @@
 # The Father's Alliance
 
-A React + Vite + TypeScript static website for The Father's Alliance, a family stability support organization. The site provides information about programs (FSIP, Mobility Stabilization), resources, crisis navigation, and family repair pathways.
+A React + Vite + TypeScript static website for The Father's Alliance, a family stability support organization. The site provides information about programs, resources, phased portal infrastructure, and demo role-based access.
 
-**Status:** Live production site with core programs, resource directory, and provider information.
+**Status**: Active development with core programs live, portals in phased rollout, and demo authentication
 
 ---
 
 ## What We Do
 
-The Father's Alliance provides supplemental, practical stability support to families experiencing rent gaps, transportation failures, utilities disruption, or sudden financial strain—especially when standard assistance is slow, unavailable, or out of funds. We focus on outcomes-driven support that prevents crises and restores forward momentum.
+The Father's Alliance provides supplemental, practical stability support to families experiencing rent gaps, transportation failures, utilities disruption, or sudden financial strain. We focus on outcomes-driven support that prevents crises and restores forward momentum.
 
-**Key Programs:**
+**Key Programs**:
 - **FSIP (Family Stability Intervention Program)**: Coordinated support framework with crisis navigation, resource hub, family repair pathways, and provider network
 - **Mobility Stabilization Program (MSP)**: Vehicle repair assistance to prevent stability harm
 - **Household Stability Micro Assistance**: Targeted short-term rent, utility, and emergency support (in design)
 - **Forward Pathways Bridge**: Structured bridge into workforce and education pathways (planned)
+
+**Important**: The Father's Alliance is a coordinating and referring organization, not a direct service provider. We provide information and referrals but do not deliver legal, clinical, or guaranteed services.
+
+---
+
+## What's Implemented (Current)
 
 ---
 
@@ -30,6 +36,24 @@ The Father's Alliance provides supplemental, practical stability support to fami
 - **Package Manager**: npm
 
 ---
+
+## What's Implemented (Current)
+
+- ✓ Public information site: mission, programs, resources, transparency
+- ✓ Route-driven architecture with centralized navigation
+- ✓ Resource directory with search, categories, verification status
+- ✓ Demo authentication (localStorage-based roles: family, provider, admin)
+- ✓ Portal entry page and role-gated portals (placeholder UI)
+- ✓ Login page with role selector
+- ✓ Semantic color tokens and dual theme support
+- ✓ GA4 analytics with custom page tracking
+- ✓ SEO infrastructure: structured data, per-page metadata, sitemap generation
+- ✓ CI/CD pipeline: lint, type check, test, build
+- ✓ Route validation tests
+
+See [docs/STATUS.md](./docs/STATUS.md) for details on what is staged, planned, or not implemented.
+
+
 
 ## Local Dev Setup
 
@@ -178,8 +202,11 @@ npm run build
 
 ## Documentation
 
-- [**ARCHITECTURE.md**](./docs/ARCHITECTURE.md) — App structure, routing strategy, design system, data model
-- [**ROUTES.md**](./docs/ROUTES.md) — Complete route registry with paths, purposes, and nav config
+- [**STATUS.md**](./docs/STATUS.md) — Current platform status, phased features, boundaries, and roadmap
+- [**ROUTES.md**](./docs/ROUTES.md) — Complete route list with access levels, purposes, and gating rules
+- [**AUTH.md**](./docs/AUTH.md) — Demo authentication model, login flow, and security disclaimer
+- [**RESOURCE_DIRECTORY.md**](./docs/RESOURCE_DIRECTORY.md) — Resource data model, card/detail flow, feedback components
+- [**ARCHITECTURE.md**](./docs/ARCHITECTURE.md) — App structure, routing strategy, design system
 - [**CONTENT_GUIDE.md**](./docs/CONTENT_GUIDE.md) — Writing style, page patterns, tone, boundaries
 - [**WORKFLOWS.md**](./docs/WORKFLOWS.md) — CI overview, build commands, deployment flow
 - [**FSIP_SCOPE.md**](./docs/FSIP_SCOPE.md) — FSIP program architecture and boundaries
@@ -229,5 +256,5 @@ For questions or issues:
 
 ---
 
-**Last Updated**: January 2026  
-**Project Status**: Active development with core programs live
+**Last Updated**: January 30, 2026  
+**Project Status**: Active development with core programs live, demo portals, phased feature rollout
