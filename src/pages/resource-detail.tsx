@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { getResourceLinkBySlug } from '../lib/resourceLinks';
 import { VerificationBadge } from '../components/resources/VerificationBadge';
@@ -12,6 +12,7 @@ export default function ResourceDetail() {
   useRouteMetadata();
   const { slug } = useParams<{ slug: string }>();
   const resource = slug ? getResourceLinkBySlug(slug) : undefined;
+  const [showAdminForm, setShowAdminForm] = useState(false);
 
   // Map resource verification to VerificationStatus type
   const getVerificationStatus = (verification: string | null): VerificationStatus => {
@@ -65,96 +66,90 @@ export default function ResourceDetail() {
         className="inline-flex items-center gap-2 text-sm text-ocean hover:text-ocean/80 transition-colors"
       >
         <span>←</span>
-        <span>Back to Directory</span>
+        <span>Back to Resource Directory</span>
       </Link>
 
-      {/* Main Resource Details */}
+      {/* Main Resource Card */}
       <SectionSurface>
         <div className="space-y-6">
-          {/* Header with Title and Verification Badge */}
-          <div className="flex items-start justify-between gap-4 flex-wrap">
+          {/* Title Section with Verification Badge */}
+          <div className="flex items-start justify-between gap-4">
             <div className="flex-1">
-              <h1 className="text-3xl font-semibold text-ink mb-2">
+              <h1 className="text-3xl font-semibold text-ink mb-1">
                 {resource.title || 'Untitled Resource'}
               </h1>
-              <p className="text-lg text-muted font-medium">{resource.org_name}</p>
+              <p className="text-muted">{resource.org_name}</p>
             </div>
-            <VerificationBadge
-              status={getVerificationStatus(resource.verification)}
-              lastVerified={resource.last_verified_at || undefined}
-            />
-          </div>
-
-          {/* Category Badge */}
-          <div>
-            <span
-              className={`inline-block px-3 py-1.5 rounded text-sm font-medium ${getCategoryColor(
-                resource.category || 'Unknown'
-              )}`}
-            >
-              {resource.category || 'Unknown'}
-            </span>
-          </div>
-
-          {/* Coverage */}
-          <div>
-            <h2 className="text-sm font-semibold uppercase tracking-wide text-ocean mb-2">
-              Coverage Area
-            </h2>
-            <p className="text-ink">{resource.coverage}</p>
-          </div>
-
-          {/* Summary */}
-          {resource.summary && (
-            <div>
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ocean mb-2">
-                Description
-              </h2>
-              <p className="text-muted leading-relaxed">{resource.summary}</p>
+            <div className="flex-shrink-0">
+              <VerificationBadge
+                status={getVerificationStatus(resource.verification)}
+                lastVerified={resource.last_verified_at || undefined}
+              />
             </div>
-          )}
+          </div>
 
-          {/* Website Link */}
-          {resource.url && (
-            <div>
-              <h2 className="text-sm font-semibold uppercase tracking-wide text-ocean mb-2">
-                Website
-              </h2>
-              <a
-                href={resource.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 bg-ocean text-white rounded-lg font-medium hover:bg-ocean/90 transition-colors"
+          {/* Metadata Chips */}
+          <div className="flex flex-wrap gap-3">
+            {resource.category && (
+              <span
+                className={`inline-block px-3 py-1.5 rounded text-sm font-medium ${getCategoryColor(
+                  resource.category
+                )}`}
               >
-                <span>Visit Resource</span>
-                <span>→</span>
-              </a>
-            </div>
+                {resource.category}
+              </span>
+            )}
+            {resource.coverage && (
+              <span className="inline-block px-3 py-1.5 rounded text-sm font-medium bg-surface-muted text-ink">
+                {resource.coverage}
+              </span>
+            )}
+          </div>
+
+          {/* Summary Paragraph */}
+          {resource.summary && (
+            <p className="text-muted leading-relaxed">
+              {resource.summary}
+            </p>
           )}
-        </div>
-      </SectionSurface>
 
-      {/* Outcome Feedback */}
-      <SectionSurface>
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-ink">Share Your Experience</h2>
-          <p className="text-sm text-muted">
-            Help others by sharing your experience with this resource. Your feedback is anonymous and
-            helps improve the directory.
-          </p>
-          <OutcomeButtons resourceId={resource.slug} />
-        </div>
-      </SectionSurface>
+          {/* Primary Action Button */}
+          {resource.url && (
+            <a
+              href={resource.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-ocean text-white rounded-lg font-medium hover:bg-ocean/90 transition-colors"
+            >
+              <span>Visit Official Website</span>
+              <span>→</span>
+            </a>
+          )}
 
-      {/* Admin Note Form */}
-      <SectionSurface>
-        <div className="space-y-4">
-          <h2 className="text-xl font-semibold text-ink">Report an Issue</h2>
-          <p className="text-sm text-muted">
-            Notice incorrect information or have feedback for our team? Submit a private note for admin
-            review.
-          </p>
-          <AdminNoteForm resourceId={resource.slug} />
+          {/* Divider */}
+          <div className="border-t border-surface-muted" />
+
+          {/* Outcome Feedback Section */}
+          <div className="space-y-3">
+            <p className="text-sm font-semibold text-ink">Did this resource help you?</p>
+            <OutcomeButtons resourceId={resource.slug} />
+          </div>
+
+          {/* Admin Note Form Toggle */}
+          <div className="space-y-3">
+            <button
+              onClick={() => setShowAdminForm(!showAdminForm)}
+              className="inline-flex items-center gap-2 text-sm text-ocean hover:text-ocean/80 transition-colors font-medium"
+            >
+              <span>{showAdminForm ? '▼' : '▶'}</span>
+              <span>Report an issue with this resource</span>
+            </button>
+            {showAdminForm && (
+              <div className="mt-4 pt-4 border-t border-surface-muted">
+                <AdminNoteForm resourceId={resource.slug} />
+              </div>
+            )}
+          </div>
         </div>
       </SectionSurface>
     </div>
