@@ -1,6 +1,5 @@
 name: CI
-
-on:
+"on":
   push:
     branches: [main]
   pull_request:
@@ -14,33 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: "Checkout code"
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: "Setup Node.js"
         uses: actions/setup-node@v4
         with:
           node-version: "20"
           cache: npm
 
-      - name: Install dependencies
+      - name: "Install dependencies"
         run: npm ci
 
-      - name: Lint (if available)
+      - name: "Lint (if available)"
         run: npm run lint --if-present
         continue-on-error: true
 
-      - name: Lint: Theme violations (if available)
+      - name: "Lint: Theme violations (if available)"
         run: npm run lint:theme --if-present
         continue-on-error: true
 
-      - name: Type check (if available)
+      - name: "Type check (if available)"
         run: npm run typecheck --if-present
         continue-on-error: true
 
-      - name: Test (if available)
+      - name: "Test (if available)"
         run: npm test --if-present
         continue-on-error: true
 
-      - name: Build application
+      - name: "Build application"
         run: npm run build
