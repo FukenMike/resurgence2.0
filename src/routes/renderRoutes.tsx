@@ -1,5 +1,6 @@
 import { Route, Navigate } from 'react-router-dom';
 import type { RouteDef } from './routeRegistry';
+import { RequireAuth } from '../auth/RequireAuth';
 
 /**
  * Converts the route registry into React Router Route elements
@@ -32,6 +33,12 @@ export function renderRoutes(routes: RouteDef[]) {
     }
 
     // Standard route with element
-    return <Route key={route.id} path={route.path} element={route.element} />;
+    const element = route.auth?.required ? (
+      <RequireAuth requiredRole={route.auth.role}>{route.element}</RequireAuth>
+    ) : (
+      route.element
+    );
+
+    return <Route key={route.id} path={route.path} element={element} />;
   });
 }

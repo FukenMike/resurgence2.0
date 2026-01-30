@@ -1,4 +1,5 @@
 import type { ReactElement } from 'react';
+import { Navigate } from 'react-router-dom';
 import Home from '../pages/home';
 import WhoWeServe from '../pages/who-we-serve';
 import Programs from '../pages/programs';
@@ -6,6 +7,7 @@ import HowWeHelp from '../pages/how-we-help';
 import About from '../pages/about';
 import ResourcesTools from '../pages/resources-tools';
 import { ResourcesDirectory } from '../pages/resources-directory';
+import ResourceDetail from '../pages/resource-detail';
 import GetInvolved from '../pages/get-involved';
 import Transparency from '../pages/transparency';
 import NotFound from '../pages/not-found';
@@ -16,10 +18,12 @@ import FSIPCrisisNavigation from '../pages/fsip-crisis-navigation';
 import FSIPFamilyRepair from '../pages/fsip-family-repair';
 import FSIPProviderNetwork from '../pages/fsip-provider-network';
 import Providers from '../pages/providers';
-import Portal from '../pages/portal';
-import SupportPortal from '../pages/support-portal';
+import FamilyPortal from '../pages/family-portal';
+import Portals from '../pages/portals';
+import ProviderPortal from '../pages/provider-portal';
 import PrivacyPolicy from '../pages/privacy-policy';
 import TermsOfService from '../pages/terms-of-service';
+import Login from '../pages/login';
 
 /**
  * Route navigation configuration
@@ -312,12 +316,93 @@ export const routeRegistry: RouteDef[] = [
       order: 21,
     },
   },
+  {
+    id: 'resources-directory-detail',
+    path: '/resources/directory/:slug',
+    element: <ResourceDetail />,
+    title: 'Resource Details',
+    description: 'Detailed information about a specific family support resource.',
+    group: 'resources',
+    nav: {
+      header: false,
+      mobile: false,
+      footer: false,
+      label: 'Resource Detail',
+      order: 22,
+    },
+  },
+
+  // Portals Entry
+  {
+    id: 'portals',
+    path: '/portals',
+    element: <Portals />,
+    title: 'Portals',
+    description: 'Access secure portals for families and service providers.',
+    group: 'portals',
+    nav: {
+      header: false,
+      mobile: false,
+      footer: false,
+      label: 'Portals',
+      order: 39,
+    },
+  },
+
+  // Authentication
+  {
+    id: 'login',
+    path: '/login',
+    element: <Login />,
+    title: 'Login',
+    description: 'Sign in to access protected areas.',
+    group: 'system',
+    nav: {
+      header: false,
+      mobile: false,
+      footer: false,
+      label: 'Login',
+      order: 100,
+    },
+  },
+
+  // Legacy Portal Redirects
+  {
+    id: 'legacy-portal-redirect',
+    path: '/portal',
+    element: <Navigate to="/family-portal" replace />,
+    title: 'Family Portal Redirect',
+    description: 'Redirect from legacy portal URL.',
+    group: 'system',
+    nav: {
+      header: false,
+      mobile: false,
+      footer: false,
+      label: 'Legacy Portal',
+      order: 999,
+    },
+  },
+  {
+    id: 'legacy-support-portal-redirect',
+    path: '/support-portal',
+    element: <Navigate to="/provider-portal" replace />,
+    title: 'Provider Portal Redirect',
+    description: 'Redirect from legacy support portal URL.',
+    group: 'system',
+    nav: {
+      header: false,
+      mobile: false,
+      footer: false,
+      label: 'Legacy Support Portal',
+      order: 999,
+    },
+  },
 
   // Portals (Auth Required)
   {
-    id: 'portal',
-    path: '/portal',
-    element: <Portal />,
+    id: 'family-portal',
+    path: '/family-portal',
+    element: <FamilyPortal />,
     title: 'Family Portal',
     description: 'Secure access to family case information and resources.',
     group: 'portals',
@@ -334,9 +419,9 @@ export const routeRegistry: RouteDef[] = [
     },
   },
   {
-    id: 'support-portal',
-    path: '/support-portal',
-    element: <SupportPortal />,
+    id: 'provider-portal',
+    path: '/provider-portal',
+    element: <ProviderPortal />,
     title: 'Provider Portal',
     description: 'Provider dashboard for case management and coordination.',
     group: 'portals',

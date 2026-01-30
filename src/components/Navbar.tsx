@@ -1,11 +1,19 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { routeRegistry } from '../routes/routeRegistry';
 import ThemeToggle from './ThemeToggle';
+import { getSession, clearSession } from '../auth/auth';
 
 export default function Navbar() {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
+  const session = getSession();
+
+  const handleLogout = () => {
+    clearSession();
+    navigate('/');
+  };
 
   // Build nav links from route registry (mobile menu)
   const mobileLinks = useMemo(
@@ -56,6 +64,26 @@ export default function Navbar() {
         {/* Desktop inline links removed; single hamburger used across all sizes */}
         <div className="flex items-center gap-2">
           <ThemeToggle />
+          {session ? (
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-medium text-muted px-2 py-1 bg-surface-muted rounded">
+                Role: {session.role}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="text-xs font-medium text-ocean hover:text-ocean/80 transition-colors px-2 py-1"
+              >
+                Logout
+              </button>
+            </div>
+          ) : (
+            <Link
+              to="/login"
+              className="text-xs font-medium text-ocean hover:text-ocean/80 transition-colors px-2 py-1"
+            >
+              Login
+            </Link>
+          )}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="rounded-lg p-2 text-muted hover:bg-sand transition"

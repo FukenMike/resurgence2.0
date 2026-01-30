@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import type { ResourceLink } from '../../lib/resourceLinks';
 import { VerificationBadge } from './VerificationBadge';
 import type { VerificationStatus } from '../../lib/types';
@@ -39,7 +40,12 @@ export function ResourceCard({ resource }: ResourceCardProps) {
     <div className="bg-surface border border-border-soft rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow h-full flex flex-col">
       <div className="flex items-start justify-between gap-3 mb-3">
         <h3 className="text-lg font-semibold text-ink flex-1">
-          {resource.title || 'Untitled Resource'}
+          <Link
+            to={`/resources/directory/${resource.slug}`}
+            className="hover:text-ocean transition-colors"
+          >
+            {resource.title || 'Untitled Resource'}
+          </Link>
         </h3>
         <VerificationBadge
           status={getVerificationStatus(resource.verification)}
