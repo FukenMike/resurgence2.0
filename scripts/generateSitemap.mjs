@@ -62,9 +62,19 @@ function generateSitemap() {
     !route.path.startsWith('/draft')
   );
 
+  // De-duplicate by path (first occurrence wins)
+  const seenPaths = new Set();
+  const deduplicatedRoutes = publicRoutes.filter((route) => {
+    if (seenPaths.has(route.path)) {
+      return false;
+    }
+    seenPaths.add(route.path);
+    return true;
+  });
+
   // Generate XML
   const now = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-  const urls = publicRoutes
+  const urls = deduplicatedRoutes
     .map(
       (route) => `  <url>
     <loc>${DOMAIN}${route.path}</loc>
@@ -84,7 +94,7 @@ ${urls}
   fs.writeFileSync(sitemapPath, xml, 'utf8');
   
   console.log(`✅ Sitemap generated: ${sitemapPath}`);
-  console.log(`   - ${publicRoutes.length} routes included`);
+  console.log(`   - ${deduplicatedRoutes.length} routes included`);
   console.log(`   - Last modified: ${now}`);
 }
 
