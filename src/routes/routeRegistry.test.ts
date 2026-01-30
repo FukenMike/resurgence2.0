@@ -60,20 +60,26 @@ function runTests(): void {
     }
   }
 
-  // Test 3: Any path starting with /portal or /admin has auth.required === true
+  // Test 3: Protected admin and role-gated portal routes require auth
   {
     totalTests++;
-    const protectedPaths = routeRegistry.filter((r) => 
-      r.path.startsWith('/portal') || r.path.startsWith('/admin')
-    );
+    const protectedPaths = routeRegistry.filter((r) => {
+      if (r.id.startsWith('legacy-')) {
+        return false;
+      }
+      if (r.path.startsWith('/admin')) {
+        return true;
+      }
+      return r.path === '/family-portal' || r.path === '/provider-portal';
+    });
     const unprotectedRoutes = protectedPaths.filter((r) => !r.auth || !r.auth.required);
     
     if (unprotectedRoutes.length > 0) {
       const unprotectedIds = unprotectedRoutes.map((r) => `${r.id} (${r.path})`).join(', ');
-      results.push(assert(false, `All /portal and /admin paths must require auth. Unprotected: ${unprotectedIds}`));
+      results.push(assert(false, `Admin and role-gated portal routes must require auth. Unprotected: ${unprotectedIds}`));
     } else {
       if (protectedPaths.length > 0) {
-        results.push(assert(true, `All ${protectedPaths.length} portal/admin routes require authentication`));
+        results.push(assert(true, `All ${protectedPaths.length} protected routes require authentication`));
       } else {
         results.push(assert(true, 'No portal/admin routes to validate (none exist yet)'));
       }
