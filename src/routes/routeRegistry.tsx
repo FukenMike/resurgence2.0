@@ -347,6 +347,9 @@ export const routeRegistry: RouteDef[] = [
       label: 'Portals',
       order: 39,
     },
+    auth: {
+      required: true,
+    },
   },
 
   // Authentication
@@ -380,6 +383,9 @@ export const routeRegistry: RouteDef[] = [
       footer: false,
       label: 'Legacy Portal',
       order: 999,
+    },
+    auth: {
+      required: true,
     },
   },
   {
