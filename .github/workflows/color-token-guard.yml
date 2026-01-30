@@ -1,5 +1,5 @@
 name: Color Token Guard
-"on":
+on:
   pull_request:
     paths:
       - 'src/**/*.tsx'
