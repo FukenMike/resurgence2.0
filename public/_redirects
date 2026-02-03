@@ -1,0 +1,9 @@
+# Cloudflare Pages Redirects Configuration
+# Static file rules must come before the SPA fallback
+
+# Serve static files directly (never route through SPA)
+/sitemap.xml 200
+/robots.txt 200
+
+# SPA fallback: route all other requests to index.html
+/* /index.html 200

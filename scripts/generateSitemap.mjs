@@ -73,13 +73,13 @@ function generateSitemap() {
   });
 
   // Generate XML
-  const now = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+  const now = new Date().toISOString(); // Full UTC ISO datetime
   const urls = deduplicatedRoutes
     .map(
       (route) => `  <url>
     <loc>${DOMAIN}${route.path}</loc>
     <lastmod>${now}</lastmod>
-    <priority>${route.priority}</priority>
+    <priority>${Number(route.priority).toFixed(1)}</priority>
   </url>`
     )
     .join('\n');
