@@ -14,6 +14,10 @@ export default function MiniYouTubePlayer({
   const [isPlaying, setIsPlaying] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(min-width: 1024px)').matches;
+  });
   const containerRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLSpanElement>(null);
 
@@ -37,7 +41,26 @@ export default function MiniYouTubePlayer({
   }, []);
 
   useEffect(() => {
-    if (isPlaying || typeof window === 'undefined') return;
+    if (typeof window === 'undefined') return;
+
+    const breakpoint = window.matchMedia('(min-width: 1024px)');
+    const update = (event: MediaQueryListEvent | MediaQueryList) => {
+      setIsDesktop(event.matches);
+    };
+
+    setIsDesktop(breakpoint.matches);
+
+    if (typeof breakpoint.addEventListener === 'function') {
+      breakpoint.addEventListener('change', update);
+      return () => breakpoint.removeEventListener('change', update);
+    }
+
+    breakpoint.addListener(update);
+    return () => breakpoint.removeListener(update);
+  }, []);
+
+  useEffect(() => {
+    if (isPlaying || typeof window === 'undefined' || !isDesktop) return;
 
     const checkOverflow = () => {
       const labelContainer = containerRef.current;
@@ -78,7 +101,7 @@ export default function MiniYouTubePlayer({
         window.removeEventListener('resize', checkOverflow);
       }
     };
-  }, [title, isPlaying]);
+  }, [title, isPlaying, isDesktop]);
 
   useEffect(() => {
     if (!isPlaying) return;
@@ -92,6 +115,8 @@ export default function MiniYouTubePlayer({
   }, [isPlaying]);
 
   const displayTitle = title;
+  const showDesktop = isDesktop;
+  const showMobile = !isDesktop;
 
   return (
     <>
@@ -117,55 +142,58 @@ export default function MiniYouTubePlayer({
           animation-play-state: paused;
         }
       `}</style>
-      <div className="flex items-center lg:hidden">
-        <button
-          type="button"
-          onClick={() => setIsPlaying(true)}
-          className="rounded-full border border-border-soft bg-surface p-2 text-base text-muted transition hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
-          title={`Play "${title}" (YouTube)`}
-          aria-label={`Play intro track: ${title}`}
-        >
-          🎧
-        </button>
-        {isPlaying && (
-          <div
-            className="fixed inset-0 z-40 flex items-center justify-center bg-ink/80 px-4 py-10"
-            role="dialog"
-            aria-modal="true"
-            onClick={() => setIsPlaying(false)}
+      {showMobile && (
+        <div className="flex items-center lg:hidden">
+          <button
+            type="button"
+            onClick={() => setIsPlaying(true)}
+            className="rounded-full border border-border-soft bg-surface p-2 text-base text-muted transition hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+            title={`Play "${title}" (YouTube)`}
+            aria-label={`Play intro track: ${title}`}
           >
+            🎧
+          </button>
+          {isPlaying && (
             <div
-              className="w-full max-w-sm rounded-lg border border-border-soft bg-surface p-4 shadow-xl"
-              onClick={(event) => event.stopPropagation()}
+              className="fixed inset-0 z-40 flex items-center justify-center bg-ink/80 px-4 py-10"
+              role="dialog"
+              aria-modal="true"
+              onClick={() => setIsPlaying(false)}
             >
-              <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.12em] text-muted">
-                <span>{label}</span>
-                <button
-                  type="button"
-                  onClick={() => setIsPlaying(false)}
-                  className="rounded-full px-2 py-1 text-muted transition hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
-                  aria-label="Close intro track player"
-                >
-                  ✕
-                </button>
-              </div>
-              <div className="overflow-hidden rounded-md border border-border-soft/60 bg-ink/80">
-                <div className="aspect-video">
-                  <iframe
-                    src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
-                    title={title}
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="h-full w-full"
-                  />
+              <div
+                className="w-full max-w-sm rounded-lg border border-border-soft bg-surface p-4 shadow-xl"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+                  <span>{label}</span>
+                  <button
+                    type="button"
+                    onClick={() => setIsPlaying(false)}
+                    className="rounded-full px-2 py-1 text-muted transition hover:bg-sand focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                    aria-label="Close intro track player"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <div className="overflow-hidden rounded-md border border-border-soft/60 bg-ink/80">
+                  <div className="aspect-video">
+                    <iframe
+                      src={`https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`}
+                      title={title}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                      className="h-full w-full"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        )}
-      </div>
-      <div className="hidden items-center lg:flex">
-        {isPlaying ? (
+          )}
+        </div>
+      )}
+      {showDesktop && (
+        <div className="hidden items-center lg:flex">
+          {isPlaying ? (
           <div className="w-60 rounded-lg border border-border-soft bg-surface p-2 shadow-sm">
             <div className="mb-2 flex items-center justify-between text-xs font-semibold uppercase tracking-[0.12em] text-muted">
               <span>{label}</span>
@@ -221,8 +249,9 @@ export default function MiniYouTubePlayer({
             </div>
             <span aria-hidden>▶</span>
           </button>
-        )}
-      </div>
+          )}
+        </div>
+      )}
     </>
   );
 }
