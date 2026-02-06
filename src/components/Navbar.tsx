@@ -13,6 +13,7 @@ export default function Navbar() {
 
   const handleLogout = () => {
     clearSession();
+    setMenuOpen(false);
     navigate('/');
   };
 
@@ -69,27 +70,29 @@ export default function Navbar() {
             title="Scars Don't Mean You Lost"
             label="Intro Track"
           />
-          <ThemeToggle />
-          {session ? (
-            <div className="flex items-center gap-2">
-              <span className="text-xs font-medium text-muted px-2 py-1 bg-surface-muted rounded">
-                Role: {session.role}
-              </span>
-              <button
-                onClick={handleLogout}
-                className="text-xs font-medium text-ocean hover:text-ocean/80 transition-colors px-2 py-1"
+          <div className="hidden items-center gap-2 lg:flex">
+            <ThemeToggle />
+            {session ? (
+              <div className="flex items-center gap-2">
+                <span className="rounded bg-surface-muted px-2 py-1 text-xs font-medium text-muted">
+                  Role: {session.role}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="px-2 py-1 text-xs font-medium text-ocean transition-colors hover:text-ocean/80"
+                >
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="px-2 py-1 text-xs font-medium text-ocean transition-colors hover:text-ocean/80"
               >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <Link
-              to="/login"
-              className="text-xs font-medium text-ocean hover:text-ocean/80 transition-colors px-2 py-1"
-            >
-              Login
-            </Link>
-          )}
+                Login
+              </Link>
+            )}
+          </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="rounded-lg p-2 text-muted hover:bg-sand transition"
@@ -133,6 +136,38 @@ export default function Navbar() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
+            </div>
+            <div className="flex-shrink-0 border-b border-border-soft px-4 py-4 lg:hidden">
+              <div className="text-xs font-semibold uppercase tracking-[0.18em] text-muted">Quick Controls</div>
+              <div className="mt-3 space-y-2">
+                <div className="flex items-center justify-between rounded-lg border border-border-soft bg-surface px-4 py-3">
+                  <span className="text-sm font-medium text-muted">Theme</span>
+                  <ThemeToggle />
+                </div>
+                {session ? (
+                  <div className="rounded-lg border border-border-soft bg-surface px-4 py-3">
+                    <div className="text-xs font-semibold uppercase tracking-[0.12em] text-muted">Role</div>
+                    <div className="mt-2 flex items-center justify-between text-sm font-medium text-ink">
+                      <span>{session.role}</span>
+                      <button
+                        type="button"
+                        onClick={handleLogout}
+                        className="rounded px-3 py-1 text-sm font-semibold text-ocean transition hover:text-ocean/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean focus-visible:ring-offset-2 focus-visible:ring-offset-surface"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </div>
+                ) : (
+                  <Link
+                    to="/login"
+                    onClick={() => setMenuOpen(false)}
+                    className="block rounded-lg border border-border-soft bg-surface px-4 py-3 text-sm font-semibold text-ocean transition hover:bg-sand"
+                  >
+                    Login
+                  </Link>
+                )}
+              </div>
             </div>
             {/* Link list (scrollable) */}
             <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3">
