@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { routeRegistry } from '../routes/routeRegistry';
 import ThemeToggle from './ThemeToggle';
+import MiniYouTubePlayer from './MiniYouTubePlayer';
 import { getSession, clearSession } from '../auth/auth';
 
 export default function Navbar() {
@@ -63,6 +64,11 @@ export default function Navbar() {
         </Link>
         {/* Desktop inline links removed; single hamburger used across all sizes */}
         <div className="flex items-center gap-2">
+          <MiniYouTubePlayer
+            videoId="oUBmsKlCi1s"
+            title="Scars Don't Mean You Lost"
+            label="Intro Track"
+          />
           <ThemeToggle />
           {session ? (
             <div className="flex items-center gap-2">
