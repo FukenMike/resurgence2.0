@@ -1,9 +1,7 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-%YAML 1.2
----
 
 name: Color Token Guard
-on:
+"on":
   pull_request:
     paths:
       - 'src/**/*.tsx'
