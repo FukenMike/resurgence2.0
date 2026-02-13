@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './app';
 import './index.css';
 import { getSavedTheme, applyTheme } from './theme/applyTheme';
+import { AuthProvider } from './auth/AuthProvider';
 
 // Apply saved theme before rendering
 applyTheme(getSavedTheme());
@@ -15,6 +16,8 @@ if (!rootElement) {
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <App />
+    </AuthProvider>
   </React.StrictMode>
 );

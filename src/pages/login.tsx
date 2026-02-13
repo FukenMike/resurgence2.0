@@ -1,102 +1,142 @@
 import React, { useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
-import { setSession, type UserRole } from '../auth/auth';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import SectionSurface from '../components/SectionSurface';
 import { useRouteMetadata } from '../routes/meta';
+import { useAuth } from '../auth/AuthProvider';
 
 export default function Login() {
   useRouteMetadata();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const [selectedRole, setSelectedRole] = useState<UserRole>('family');
+  const { login, register, state } = useAuth();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const [mode, setMode] = useState<'login' | 'register'>('login');
+  const [error, setError] = useState<string | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const nextUrl = searchParams.get('next') || '/portals';
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Set the session with selected role
-    setSession(selectedRole);
-    
-    // Navigate to next URL if present, otherwise portals
-    const nextUrl = searchParams.get('next') || '/portals';
-    navigate(nextUrl);
+    setError(null);
+    setBusy(true);
+
+    try {
+      if (mode === 'login') {
+        await login(email.trim().toLowerCase(), password);
+      } else {
+        await register(email.trim().toLowerCase(), password);
+      }
+      navigate(nextUrl);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Something went wrong');
+    } finally {
+      setBusy(false);
+    }
   };
 
   return (
     <div className="max-w-2xl mx-auto">
       <SectionSurface>
         <div className="py-8">
-          <h1 className="text-3xl font-semibold text-ink mb-4">Demo Login</h1>
+          <h1 className="text-3xl font-semibold text-ink mb-2">
+            {mode === 'login' ? 'Login' : 'Create account'}
+          </h1>
           <p className="text-muted mb-8">
-            Select a role to access protected areas. This is a demonstration of role-based access
-            control.
+            {mode === 'login'
+              ? 'Sign in to access protected portal areas.'
+              : 'Create your account to access protected portal areas.'}
           </p>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          {state.status === 'authed' && (
+            <div className="mb-6 p-4 bg-sand rounded-lg">
+              <p className="text-sm text-ink">
+                You’re already signed in as <span className="font-semibold">{state.user.email}</span>.{' '}
+                <Link className="underline" to={nextUrl}>
+                  Continue
+                </Link>
+                .
+              </p>
+            </div>
+          )}
+
+          {error && (
+            <div className="mb-6 p-4 border border-border-soft rounded-lg bg-surface-muted">
+              <p className="text-sm text-ink">
+                <span className="font-semibold">Error:</span> {error}
+              </p>
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label className="block text-sm font-semibold text-ink mb-3">Select Role</label>
-              <div className="space-y-3">
-                <label className="flex items-center gap-3 p-4 border border-border-soft rounded-lg hover:bg-surface-muted cursor-pointer transition-colors">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="family"
-                    checked={selectedRole === 'family'}
-                    onChange={(e) => setSelectedRole(e.target.value as UserRole)}
-                    className="w-4 h-4 text-ocean"
-                  />
-                  <div className="flex-1">
-                    <div className="font-semibold text-ink">Family</div>
-                    <div className="text-sm text-muted">Access to Family Portal and case information</div>
-                  </div>
-                </label>
+              <label className="block text-sm font-semibold text-ink mb-2">Email</label>
+              <input
+                type="email"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-3 border border-border-soft rounded-lg bg-surface focus:outline-none focus:ring-2 focus:ring-ocean/40"
+                placeholder="you@example.com"
+                required
+              />
+            </div>
 
-                <label className="flex items-center gap-3 p-4 border border-border-soft rounded-lg hover:bg-surface-muted cursor-pointer transition-colors">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="provider"
-                    checked={selectedRole === 'provider'}
-                    onChange={(e) => setSelectedRole(e.target.value as UserRole)}
-                    className="w-4 h-4 text-ocean"
-                  />
-                  <div className="flex-1">
-                    <div className="font-semibold text-ink">Provider</div>
-                    <div className="text-sm text-muted">
-                      Access to Provider Portal and case management tools
-                    </div>
-                  </div>
-                </label>
-
-                <label className="flex items-center gap-3 p-4 border border-border-soft rounded-lg hover:bg-surface-muted cursor-pointer transition-colors">
-                  <input
-                    type="radio"
-                    name="role"
-                    value="admin"
-                    checked={selectedRole === 'admin'}
-                    onChange={(e) => setSelectedRole(e.target.value as UserRole)}
-                    className="w-4 h-4 text-ocean"
-                  />
-                  <div className="flex-1">
-                    <div className="font-semibold text-ink">Admin</div>
-                    <div className="text-sm text-muted">Full access to all areas and settings</div>
-                  </div>
-                </label>
-              </div>
+            <div>
+              <label className="block text-sm font-semibold text-ink mb-2">Password</label>
+              <input
+                type="password"
+                autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-3 border border-border-soft rounded-lg bg-surface focus:outline-none focus:ring-2 focus:ring-ocean/40"
+                placeholder="At least 8 characters"
+                required
+              />
             </div>
 
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-ocean text-white rounded-lg font-semibold hover:bg-ocean/90 transition-colors"
+              disabled={busy}
+              className="w-full px-6 py-3 bg-ocean text-white rounded-lg font-semibold hover:bg-ocean/90 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              Enter Demo
+              {busy ? 'Working…' : mode === 'login' ? 'Login' : 'Create account'}
             </button>
+
+            <div className="text-sm text-muted text-center">
+              {mode === 'login' ? (
+                <>
+                  Don’t have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => setMode('register')}
+                    className="text-ocean font-semibold hover:underline"
+                  >
+                    Create one
+                  </button>
+                </>
+              ) : (
+                <>
+                  Already have an account?{' '}
+                  <button
+                    type="button"
+                    onClick={() => setMode('login')}
+                    className="text-ocean font-semibold hover:underline"
+                  >
+                    Login instead
+                  </button>
+                </>
+              )}
+            </div>
           </form>
 
           <div className="mt-8 p-4 bg-sand rounded-lg">
             <p className="text-sm text-muted">
-              <span className="font-semibold text-ink">Note:</span> This is a demonstration login
-              system. In production, authentication would use secure OAuth providers or JWT tokens
-              with proper credential management.
+              <span className="font-semibold text-ink">Note:</span> Roles are assigned by the server. If you need a
+              provider/admin account, it must be granted (we’ll add an admin tool for that next).
             </p>
           </div>
         </div>
