@@ -1,7 +1,4 @@
 # yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
-%YAML 1.2
----
-
 name: CI
 on:
   push:
