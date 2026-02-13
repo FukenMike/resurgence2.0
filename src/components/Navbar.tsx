@@ -3,16 +3,16 @@ import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { routeRegistry } from '../routes/routeRegistry';
 import ThemeToggle from './ThemeToggle';
 import MiniYouTubePlayer from './MiniYouTubePlayer';
-import { getSession, clearSession } from '../auth/auth';
+
 
 export default function Navbar() {
+
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
-  const session = getSession();
-
+  // Session state should be managed via AuthProvider/useAuth
+  // Remove demo session logic
   const handleLogout = () => {
-    clearSession();
     setMenuOpen(false);
     navigate('/');
   };
