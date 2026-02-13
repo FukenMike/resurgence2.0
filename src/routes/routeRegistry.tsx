@@ -402,7 +402,7 @@ export const routeRegistry: RouteDef[] = [
   {
     id: 'family-portal',
     path: '/family-portal',
-    element: <FamilyPortal />,
+    element: <FamilyPortal />, 
     title: 'Family Portal',
     description: 'Secure access to family case information and resources.',
     group: 'portals',
@@ -421,7 +421,7 @@ export const routeRegistry: RouteDef[] = [
   {
     id: 'provider-portal',
     path: '/provider-portal',
-    element: <ProviderPortal />,
+    element: <ProviderPortal />, 
     title: 'Provider Portal',
     description: 'Provider dashboard for case management and coordination.',
     group: 'portals',
@@ -435,6 +435,26 @@ export const routeRegistry: RouteDef[] = [
     auth: {
       required: true,
       role: 'provider',
+    },
+  },
+  // Admin routes (example, add more as needed)
+  {
+    id: 'admin-dashboard',
+    path: '/admin/dashboard',
+    element: <Navigate to="/not-found" replace />, // Replace with actual admin dashboard component
+    title: 'Admin Dashboard',
+    description: 'Administrative dashboard for site management.',
+    group: 'system',
+    nav: {
+      header: false,
+      mobile: false,
+      footer: false,
+      label: 'Admin Dashboard',
+      order: 999,
+    },
+    auth: {
+      required: true,
+      role: 'admin',
     },
   },
 
