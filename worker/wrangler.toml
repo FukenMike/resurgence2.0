@@ -1,0 +1,11 @@
+name = "tfa-portal-api"
+main = "src/index.ts"
+compatibility_date = "2025-02-13"
+
+[vars]
+APP_ORIGIN = "http://localhost:5173"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "tfa_portal"
+database_id = "f0f48b84-47b6-4a80-b9b2-33c229631aad"
