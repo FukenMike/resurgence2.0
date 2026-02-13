@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently -n web,api \"npm run dev:web\" \"npm run dev:api\"",
     "build": "node scripts/generateSitemap.mjs && vite build",
     "build:resources": "node scripts/buildResourceLinks.mjs",
     "build:sitemap": "node scripts/generateSitemap.mjs",
@@ -13,7 +13,9 @@
     "lint:theme": "node scripts/check-theme-violations.js",
     "lint:all": "npm run lint && npm run lint:theme",
     "test": "tsx src/routes/routeRegistry.test.ts",
-    "test:routes": "tsx src/routes/routeRegistry.test.ts"
+    "test:routes": "tsx src/routes/routeRegistry.test.ts",
+    "dev:web": "vite",
+    "dev:api": "cd worker && npx wrangler dev --local --port 8787"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -27,6 +29,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "concurrently": "^9.2.1",
     "glob": "^10.5.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.14",

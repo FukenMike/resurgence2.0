@@ -199,16 +199,33 @@ export default {
       if (req.method === "POST" && url.pathname === "/api/auth/register") res = await handleRegister(env, req);
       else if (req.method === "POST" && url.pathname === "/api/auth/login") res = await handleLogin(env, req);
       else if (req.method === "POST" && url.pathname === "/api/auth/logout") res = await handleLogout(env, req);
-
+      else if (req.method === "POST" && url.pathname === "/api/admin/notes") res = await handleAdminNote(env, req);
       else if (req.method === "GET" && url.pathname === "/api/me") res = await handleMe(env, req);
-
       else res = json({ error: "Not found" }, { status: 404 });
-
     } catch {
-
       res = json({ error: "Server error" }, { status: 500 });
-
     }
+// Admin note submission handler
+async function handleAdminNote(env: Env, req: Request) {
+  const url = new URL(req.url);
+  const sid = getCookie(req, "tfa_session");
+  if (!sid) return json({ error: "Not authenticated" }, { status: 401 });
+  const t = now();
+  const user = (await env.DB.prepare(
+    `SELECT u.id, u.email, u.role FROM sessions s JOIN users u ON u.id = s.user_id WHERE s.id = ? AND s.expires_at > ?`
+  ).bind(sid, t).first()) as any;
+  if (!user) return json({ error: "Not authenticated" }, { status: 401 });
+  if (user.role !== "admin") return json({ error: "Forbidden" }, { status: 403 });
+  const body = (await req.json().catch(() => null)) as any;
+  const note = String(body?.note || "").trim();
+  const resourceId = String(body?.resourceId || "").trim();
+  if (!note || !resourceId) return json({ error: "Missing note or resourceId" }, { status: 400 });
+  const createdAt = now();
+  await env.DB.prepare(
+    "INSERT INTO admin_notes (user_id, resource_id, note, created_at) VALUES (?, ?, ?, ?)"
+  ).bind(user.id, resourceId, note, createdAt).run();
+  return json({ ok: true });
+}
 
 
 
