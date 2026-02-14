@@ -7,6 +7,8 @@ import MiniYouTubePlayer from './MiniYouTubePlayer';
 
 export default function Navbar() {
 
+  const { state, logout } = useAuth();
+  const session = state.status === "authed" ? state.user : null;
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const [menuOpen, setMenuOpen] = useState(false);
