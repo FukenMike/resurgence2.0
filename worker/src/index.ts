@@ -69,12 +69,12 @@ async function hashPassword(password: string): Promise<string> {
   const salt = crypto.getRandomValues(new Uint8Array(16));
   const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveBits"]);
   const bits = await crypto.subtle.deriveBits(
-    { name: "PBKDF2", salt, iterations: 200_000, hash: "SHA-256" },
+    { name: "PBKDF2", salt, iterations: 100_000, hash: "SHA-256" },
     keyMaterial,
     256
   );
   const hash = new Uint8Array(bits);
-  return `pbkdf2$200000$${toB64(salt)}$${toB64(hash)}`;
+  return `pbkdf2$100000$${toB64(salt)}$${toB64(hash)}`;
 }
 
 async function verifyPassword(password: string, stored: string): Promise<boolean> {
@@ -188,8 +188,7 @@ async function handleMe(env: Env, req: Request) {
 export default {
   async fetch(req: Request, env: Env): Promise<Response> {
     const url = new URL(req.url);
-
-    if (req.method === "OPTIONS") {
+if (req.method === "OPTIONS") {
       return new Response(null, { headers: cors(env, req) });
     }
 
@@ -202,7 +201,8 @@ export default {
       else if (req.method === "POST" && url.pathname === "/api/admin/notes") res = await handleAdminNote(env, req);
       else if (req.method === "GET" && url.pathname === "/api/me") res = await handleMe(env, req);
       else res = json({ error: "Not found" }, { status: 404 });
-    } catch {
+    } catch (err) {
+      console.error("TFA_WORKER_FATAL", req.method, url.pathname, err);
       res = json({ error: "Server error" }, { status: 500 });
     }
 // Admin note submission handler
