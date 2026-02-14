@@ -6,8 +6,11 @@ import { getSavedTheme, applyTheme } from './theme/applyTheme';
 import { AuthProvider } from './auth/AuthProvider';
 
 // Apply saved theme before rendering
-applyTheme(getSavedTheme());
-
+try {
+  applyTheme(getSavedTheme());
+} catch (err) {
+  console.warn("TFA_THEME_BOOT_FAIL", err);
+}
 const rootElement = document.getElementById('root');
 
 if (!rootElement) {
