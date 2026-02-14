@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { routeRegistry } from '../routes/routeRegistry';
+import { NAV_SECTIONS, NavRole } from '../routes/navStructure';
 import ThemeToggle from './ThemeToggle';
 import MiniYouTubePlayer from './MiniYouTubePlayer';
 
@@ -20,19 +20,21 @@ export default function Navbar() {
     navigate('/');
   };
 
-  // Build nav links from route registry (mobile menu)
-  const mobileLinks = useMemo(
-    () =>
-      routeRegistry
-        .filter((route) => route.nav.mobile && !route.redirectTo)
-        .sort((a, b) => a.nav.order - b.nav.order)
-        .map((route) => ({
-          label: route.nav.label,
-          path: route.path,
-          highlight: route.nav.highlight,
-        })),
-    []
-  );
+  // Determine auth and role
+  const authed = !!session;
+  const userRole: NavRole | undefined = authed ? session.role : undefined;
+
+  // Filter NAV_SECTIONS for mobile menu
+  const filteredSections = useMemo(() => {
+    return NAV_SECTIONS.map(section => {
+      const visibleItems = section.items.filter(item => {
+        if (!item.requireRole) return true;
+        if (!authed) return false;
+        return userRole === item.requireRole;
+      });
+      return { ...section, items: visibleItems };
+    }).filter(section => section.items.length > 0);
+  }, [authed, userRole]);
 
   // Close on Escape key
   useEffect(() => {
@@ -175,23 +177,32 @@ export default function Navbar() {
             {/* Link list (scrollable) */}
             <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain p-3">
               <div className="grid grid-cols-1 gap-1 md:grid-cols-2">
-                {mobileLinks.map(({ label, path, highlight }) => (
-                  <NavLink
-                    key={path}
-                    to={path}
-                    onClick={() => setMenuOpen(false)}
-                    className={({ isActive }) =>
-                      `block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-                        highlight
-                          ? 'bg-ocean text-white hover:bg-ocean/90'
-                          : isActive || pathname === path
-                          ? 'bg-ink text-surface'
-                          : 'text-muted hover:bg-sand'
-                      }`
-                    }
-                  >
-                    {label}
-                  </NavLink>
+                {filteredSections.map(section => (
+                  <div key={section.id} className="mb-4 w-full">
+                    <div className="px-2 pb-1 text-xs font-semibold uppercase tracking-[0.14em] text-muted">
+                      {section.label}
+                    </div>
+                    <div>
+                      {section.items.map(({ label, path, highlight }) => (
+                        <NavLink
+                          key={path}
+                          to={path}
+                          onClick={() => setMenuOpen(false)}
+                          className={({ isActive }) =>
+                            `block rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
+                              highlight
+                                ? 'bg-ocean text-white hover:bg-ocean/90'
+                                : isActive || pathname === path
+                                ? 'bg-ink text-surface'
+                                : 'text-muted hover:bg-sand'
+                            }`
+                          }
+                        >
+                          {label}
+                        </NavLink>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
