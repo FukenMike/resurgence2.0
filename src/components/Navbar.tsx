@@ -5,6 +5,7 @@ import ThemeToggle from './ThemeToggle';
 import MiniYouTubePlayer from './MiniYouTubePlayer';
 
 
+import { useAuth } from "../auth/AuthProvider";
 export default function Navbar() {
 
   const { state, logout } = useAuth();
