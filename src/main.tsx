@@ -1,26 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './app';
-import './index.css';
-import { getSavedTheme, applyTheme } from './theme/applyTheme';
-import { AuthProvider } from './auth/AuthProvider';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./app";
+import ErrorBoundary from "./ErrorBoundary";
+import "./index.css";
 
-// Apply saved theme before rendering
+import { applyTheme, getSavedTheme } from "./theme/applyTheme";
+
 try {
   applyTheme(getSavedTheme());
 } catch (err) {
   console.warn("TFA_THEME_BOOT_FAIL", err);
 }
-const rootElement = document.getElementById('root');
 
+const rootElement = document.getElementById("root");
 if (!rootElement) {
-  throw new Error('Root element not found');
+  throw new Error("Root element not found");
 }
 
 ReactDOM.createRoot(rootElement).render(
   <React.StrictMode>
-    <AuthProvider>
+    <ErrorBoundary>
       <App />
-    </AuthProvider>
+    </ErrorBoundary>
   </React.StrictMode>
 );
